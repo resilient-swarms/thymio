@@ -28,12 +28,13 @@ namespace argos {
    /****************************************/
    /****************************************/
 
+
    CQTOpenGLKheperaIV::CQTOpenGLKheperaIV() :
       m_unVertices(40) {
       /* Reserve the needed textures */
-      m_pcTextures[0] = MakeTexture("kheperaiv_texture_top.png");
-      m_pcTextures[1] = MakeTexture("kheperaiv_texture_bottom.png");
-      m_pcTextures[2] = MakeTexture("kheperaiv_texture_side.png");
+      // m_pcTextures[0] = MakeTexture("kheperaiv_texture_top.png");
+      // m_pcTextures[1] = MakeTexture("kheperaiv_texture_bottom.png");
+      // m_pcTextures[2] = MakeTexture("kheperaiv_texture_side.png");
       /* Reserve the needed display lists */
       m_unLists = glGenLists(2);
       /* Assign indices for better referencing (later) */
@@ -63,8 +64,13 @@ namespace argos {
    /****************************************/
 
    void CQTOpenGLKheperaIV::Draw(CKheperaIVEntity& c_entity) {
+      /* Draw the body */
+      glPushMatrix();
+      glScalef(THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT);
       /* Place the body */
       glCallList(m_unBaseList);
+      glPopMatrix();
+
       /* Place the LEDs */
       CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
       for(UInt32 i = 0; i < 3; i++) {
@@ -94,88 +100,160 @@ namespace argos {
 
    /****************************************/
    /****************************************/
+   void CQTOpenGLKheperaIV::SetWhitePlasticMaterial() {
+      const GLfloat pfColor[]     = {   1.0f, 1.0f, 1.0f, 1.0f };
+      const GLfloat pfSpecular[]  = {   0.9f, 0.9f, 0.9f, 1.0f };
+      const GLfloat pfShininess[] = { 100.0f                   };
+      const GLfloat pfEmission[]  = {   0.0f, 0.0f, 0.0f, 1.0f };
+      glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, pfColor);
+      glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,            pfSpecular);
+      glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,           pfShininess);
+      glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION,            pfEmission);
+   }
 
    void CQTOpenGLKheperaIV::RenderBase() {
-      glEnable(GL_TEXTURE_2D);
-      /* Used to precalculate the rotation */
-      CVector2 cRot(1.0, CRadians::TWO_PI / m_unVertices);
-      /* Top face is a disk */
-      m_pcTextures[0]->bind();
-      glBegin(GL_TRIANGLE_FAN);
-      glNormal3f(0.0, 0.0, 1.0);
-      glTexCoord2f(0.5, 0.5);
-      glVertex3f(0.0, 0.0, KHEPERAIV_BASE_TOP);
-      CVector2 cVert(1.0, 0.0);
-      glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-                   0.5 + 0.5 * cVert.GetY());
-      glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                 KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                 KHEPERAIV_BASE_TOP);
-      for(GLuint i = 1; i <= m_unVertices; ++i) {
-         cVert.Set(
-            cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
-            cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
-         glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-                      0.5 + 0.5 * cVert.GetY());
-         glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                    KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                    KHEPERAIV_BASE_TOP);
-      }
-      glEnd();
-      /* Used to precalculate the rotation */
-      cRot.FromPolarCoordinates(1.0, -CRadians::TWO_PI / m_unVertices);
-      /* Bottom face is a disk */
-      m_pcTextures[1]->bind();
-      glBegin(GL_TRIANGLE_FAN);
-      glNormal3f(0.0, 0.0, -1.0);
-      glTexCoord2f(0.5, 0.5);
-      glVertex3f(0.0, 0.0, 0.0);
-      cVert.Set(1.0, 0.0);
-      glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-                   0.5 + 0.5 * cVert.GetY());
-      glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                 KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                 KHEPERAIV_BASE_ELEVATION);
-      for(GLuint i = 1; i <= m_unVertices; ++i) {
-         cVert.Set(
-            cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
-            cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
-         glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-                      0.5 + 0.5 * cVert.GetY());
-         glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                    KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                    KHEPERAIV_BASE_ELEVATION);
-      }
-      glEnd();
+      // glEnable(GL_TEXTURE_2D);
+      // /* Used to precalculate the rotation */
+      // CVector2 cRot(1.0, CRadians::TWO_PI / m_unVertices);
+      // /* Top face is a disk */
+      // SetWhitePlasticMaterial();
+      // // m_pcTextures[0]->bind();
+      // glBegin(GL_TRIANGLE_FAN);
+      // glNormal3f(0.0, 0.0, 1.0);
+      // glTexCoord2f(0.5, 0.5);
+      // glVertex3f(0.0, 0.0, KHEPERAIV_BASE_TOP);
+      // CVector2 cVert(1.0, 0.0);
+      // glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
+      //              0.5 + 0.5 * cVert.GetY());
+      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //            KHEPERAIV_BASE_TOP);
+      // for(GLuint i = 1; i <= m_unVertices; ++i) {
+      //    cVert.Set(
+      //       cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
+      //       cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
+      //    glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
+      //                 0.5 + 0.5 * cVert.GetY());
+      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //               KHEPERAIV_BASE_TOP);
+      // }
+      // glEnd();
+
+      // /* Used to precalculate the rotation */
+      // cRot.FromPolarCoordinates(1.0, -CRadians::TWO_PI / m_unVertices);
+      // /* Bottom face is a disk */
+      // // m_pcTextures[1]->bind();
+      // glBegin(GL_TRIANGLE_FAN);
+      // glNormal3f(0.0, 0.0, -1.0);
+      // glTexCoord2f(0.5, 0.5);
+      // glVertex3f(0.0, 0.0, 0.0);
+      // cVert.Set(1.0, 0.0);
+      // glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
+      //              0.5 + 0.5 * cVert.GetY());
+      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //            KHEPERAIV_BASE_ELEVATION);
+      // for(GLuint i = 1; i <= m_unVertices; ++i)
+      // {
+      //    cVert.Set(
+      //       cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
+      //       cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
+      //    glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
+      //                 0.5 + 0.5 * cVert.GetY());
+      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //               KHEPERAIV_BASE_ELEVATION);
+      // }
+      // glEnd();
+
       /* Side face is a cylinder */
-      m_pcTextures[2]->bind();
-      glBegin(GL_QUAD_STRIP);
-      cVert.Set(1.0, 0.0);
-      glNormal3f(cVert.GetX(), cVert.GetY(), 0.0);
-      glTexCoord2f(0.5, 0.0);
-      glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                 KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                 KHEPERAIV_BASE_ELEVATION);
-      glTexCoord2f(0.5, 0.96875);
-      glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                 KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                 KHEPERAIV_BASE_TOP);
-      for(GLuint i = 1; i <= m_unVertices; ++i) {
-         cVert.Set(
-            cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
-            cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
-         glNormal3f(cVert.GetX(), cVert.GetY(), 0.0);
-         glTexCoord2f(0.5 + (GLfloat)i / m_unVertices, 0.0);
-         glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                    KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                    KHEPERAIV_BASE_ELEVATION);
-         glTexCoord2f(0.5 + (GLfloat)i / m_unVertices, 0.96875);
-         glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-                    KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-                    KHEPERAIV_BASE_TOP);
-      }
+      // m_pcTextures[2]->bind();
+      // glBegin(GL_QUAD_STRIP);
+      // cVert.Set(1.0, 0.0);
+      // glNormal3f(cVert.GetX(), cVert.GetY(), 0.0);
+      // glTexCoord2f(0.5, 0.0);
+      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //            KHEPERAIV_BASE_ELEVATION);
+      // glTexCoord2f(0.5, 0.96875);
+      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //            KHEPERAIV_BASE_TOP);
+      // for(GLuint i = 1; i <= m_unVertices; ++i)
+      // {
+      //    cVert.Set(
+      //       cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
+      //       cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
+      //    glNormal3f(cVert.GetX(), cVert.GetY(), 0.0);
+      //    glTexCoord2f(0.5 + (GLfloat)i / m_unVertices, 0.0);
+      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //               KHEPERAIV_BASE_ELEVATION);
+      //    glTexCoord2f(0.5 + (GLfloat)i / m_unVertices, 0.96875);
+      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
+      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
+      //               KHEPERAIV_BASE_TOP);
+      // }
+      // glEnd();
+      
+
+
+      glEnable(GL_NORMALIZE);
+
+      // const GLfloat pfSpecular[]  = {   0.9f, 0.9f, 0.9f, 1.0f };
+      // const GLfloat pfShininess[] = { 100.0f                   };
+      // const GLfloat pfEmission[]  = {   0.0f, 0.0f, 0.0f, 1.0f };
+      // glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, pfSpecular);
+      // glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, pfShininess);
+      // glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, pfEmission);
+
+      SetWhitePlasticMaterial();
+      glBegin(GL_QUADS);
+        /* Bottom face */
+        glNormal3f( 0.0f,  0.0f,-1.0f);
+        glVertex3f( 0.5f,  0.5f, 0.0f);
+        glVertex3f( 0.5f, -0.5f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, 0.0f);
+        glVertex3f(-0.5f,  0.5f, 0.0f);
+        /* Top face */
+        glNormal3f( 0.0f,  0.0f, 1.0f);
+        glVertex3f(-0.5f, -0.5f, 1.0f);
+        glVertex3f( 0.5f, -0.5f, 1.0f);
+        glVertex3f( 0.5f,  0.5f, 1.0f);
+        glVertex3f(-0.5f,  0.5f, 1.0f);
       glEnd();
-      glDisable(GL_TEXTURE_2D);
+
+      glBegin(GL_QUADS);
+        /* South face */
+        glNormal3f( 0.0f, -1.0f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, 1.0f);
+        glVertex3f(-0.5f, -0.5f, 0.0f);
+        glVertex3f( 0.5f, -0.5f, 0.0f);
+        glVertex3f( 0.5f, -0.5f, 1.0f);
+        /* East face */
+        glNormal3f( 1.0f,  0.0f, 0.0f);
+        glVertex3f( 0.5f, -0.5f, 1.0f);
+        glVertex3f( 0.5f, -0.5f, 0.0f);
+        glVertex3f( 0.5f,  0.5f, 0.0f);
+        glVertex3f( 0.5f,  0.5f, 1.0f);
+        /* North face */
+        glNormal3f( 0.0f,  1.0f, 0.0f);
+        glVertex3f( 0.5f,  0.5f, 1.0f);
+        glVertex3f( 0.5f,  0.5f, 0.0f);
+        glVertex3f(-0.5f,  0.5f, 0.0f);
+        glVertex3f(-0.5f,  0.5f, 1.0f);
+        /* West face */
+        glNormal3f(-1.0f,  0.0f, 0.0f);
+        glVertex3f(-0.5f,  0.5f, 1.0f);
+        glVertex3f(-0.5f,  0.5f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, 1.0f);
+      glEnd();
+
+      glDisable(GL_NORMALIZE);
+
+      // glDisable(GL_TEXTURE_2D);
    }
 
    /****************************************/

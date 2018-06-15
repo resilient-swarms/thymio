@@ -9,6 +9,11 @@
 /****************************************/
 /****************************************/
 
+const Real THYMIO_LENGHT 	= 0.11;
+const Real THYMIO_WIDTH 	= 0.112;
+const Real THYMIO_HEIGHT 	= 0.053;
+
+
 const Real KHEPERAIV_BASE_RADIUS    = 0.0704;
 const Real KHEPERAIV_BASE_ELEVATION = 0.0047;
 const Real KHEPERAIV_BASE_HEIGHT    = 0.053;

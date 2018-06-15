@@ -13,6 +13,10 @@
 
 using namespace argos;
 
+extern const Real THYMIO_HEIGHT;
+extern const Real THYMIO_WIDTH;
+extern const Real THYMIO_LENGHT;
+
 extern const Real KHEPERAIV_BASE_RADIUS;
 extern const Real KHEPERAIV_BASE_ELEVATION;
 extern const Real KHEPERAIV_BASE_HEIGHT;

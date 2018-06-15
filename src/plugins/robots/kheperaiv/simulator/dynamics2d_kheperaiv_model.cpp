@@ -41,7 +41,7 @@ namespace argos {
         /* Create the body with initial position and orientation */
 
         /* Get the size of the entity */
-        CVector3 cHalfSize = CVector3(KHEPERAIV_BASE_RADIUS,KHEPERAIV_BASE_RADIUS,KHEPERAIV_BASE_RADIUS) * 0.5f;
+        CVector3 cHalfSize = CVector3( THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT) * 0.5f;
         /* Create a polygonal object in the physics space */
         /* Start defining the vertices
            NOTE: points must be defined in a clockwise winding

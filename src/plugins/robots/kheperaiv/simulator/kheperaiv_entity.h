@@ -48,6 +48,7 @@ namespace argos {
       virtual void Destroy();
 
       virtual void UpdateComponents();
+
       
       inline CControllableEntity& GetControllableEntity() {
          return *m_pcControllableEntity;
@@ -96,6 +97,8 @@ namespace argos {
       virtual std::string GetTypeDescription() const {
          return "kheperaiv";
       }
+
+
 
    private:
 
