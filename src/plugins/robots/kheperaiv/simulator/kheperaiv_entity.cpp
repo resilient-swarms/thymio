@@ -18,12 +18,33 @@
 #include <argos3/plugins/simulator/entities/proximity_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/rab_equipped_entity.h>
 
-static CRadians ULTRASOUND_SENSOR_ANGLES[5] = {
+// static CRadians ULTRASOUND_SENSOR_ANGLES[5] = {
+//    CRadians::ZERO,
+//    CRadians::PI_OVER_FOUR,
+//    CRadians::PI_OVER_TWO,
+//    -CRadians::PI_OVER_TWO,
+//    -CRadians::PI_OVER_FOUR,
+// };
+
+static CRadians PROXIMITY_SENSOR_ANGLES[7] = {
    CRadians::ZERO,
-   CRadians::PI_OVER_FOUR,
-   CRadians::PI_OVER_TWO,
-   -CRadians::PI_OVER_TWO,
-   -CRadians::PI_OVER_FOUR,
+   CRadians(0.34906),
+   CRadians(-0.34906),
+   CRadians(0.69813),
+   CRadians(-0.69813),
+   -CRadians::PI,
+   -CRadians::PI
+};
+
+//measurements from https://github.com/enki-community/enki/blob/master/enki/robots/thymio2/Thymio2.cpp
+static CVector3 PROXIMITY_SENSOR_OFFSET[7] = {
+   CVector3(  0.0795  , 0       ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.075   , 0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.075   ,-0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.062   , 0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.062   ,-0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3( -0.0295  , 0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3( -0.0295  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
 };
 
 namespace argos {
@@ -39,7 +60,7 @@ namespace argos {
       m_pcLEDEquippedEntity(NULL),
       m_pcLightSensorEquippedEntity(NULL),
       m_pcProximitySensorEquippedEntity(NULL),
-      m_pcUltrasoundSensorEquippedEntity(NULL),
+      // m_pcUltrasoundSensorEquippedEntity(NULL),
       m_pcRABEquippedEntity(NULL),
       m_pcWheeledEntity(NULL),
       m_pcBatteryEquippedEntity(NULL) {
@@ -52,7 +73,7 @@ namespace argos {
                                       const std::string& str_controller_id,
                                       const CVector3& c_position,
                                       const CQuaternion& c_orientation,
-                                      Real f_rab_range,
+                                      Real  f_rab_range,
                                       size_t un_rab_data_size,
                                       const std::string& str_bat_model) :
       CComposableEntity(NULL, str_id),
@@ -62,7 +83,7 @@ namespace argos {
       m_pcLEDEquippedEntity(NULL),
       m_pcLightSensorEquippedEntity(NULL),
       m_pcProximitySensorEquippedEntity(NULL),
-      m_pcUltrasoundSensorEquippedEntity(NULL),
+      // m_pcUltrasoundSensorEquippedEntity(NULL),
       m_pcRABEquippedEntity(NULL),
       m_pcWheeledEntity(NULL),
       m_pcBatteryEquippedEntity(NULL) {
@@ -73,11 +94,13 @@ namespace argos {
          /* Embodied entity */
          m_pcEmbodiedEntity = new CEmbodiedEntity(this, "body_0", c_position, c_orientation);
          AddComponent(*m_pcEmbodiedEntity);
+
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);
          AddComponent(*m_pcWheeledEntity);
          m_pcWheeledEntity->SetWheel(0, CVector3(0.0f,  KHEPERAIV_HALF_WHEEL_DISTANCE, 0.0f), KHEPERAIV_WHEEL_RADIUS);
          m_pcWheeledEntity->SetWheel(1, CVector3(0.0f, -KHEPERAIV_HALF_WHEEL_DISTANCE, 0.0f), KHEPERAIV_WHEEL_RADIUS);
+
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
          AddComponent(*m_pcLEDEquippedEntity);
@@ -87,44 +110,25 @@ namespace argos {
                                        m_pcEmbodiedEntity->GetOriginAnchor());
          m_pcLEDEquippedEntity->AddLED(KHEPERAIV_LEDS_OFFSET[2],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
+
          /* Proximity sensor equipped entity */
-         m_pcProximitySensorEquippedEntity =
-            new CProximitySensorEquippedEntity(this,
-                                               "proximity");
+         m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this, "proximity");
          AddComponent(*m_pcProximitySensorEquippedEntity);
-         m_pcProximitySensorEquippedEntity->AddSensorRing(
-            CVector3(0.0f, 0.0f, KHEPERAIV_IR_SENSORS_RING_ELEVATION),
-            KHEPERAIV_IR_SENSORS_RING_RADIUS,
-            CRadians::ZERO,
-            KHEPERAIV_IR_SENSORS_RING_RANGE,
-            8,
-            m_pcEmbodiedEntity->GetOriginAnchor());
-         /* Ultrasound sensor equipped entity */
-         m_pcUltrasoundSensorEquippedEntity =
-            new CProximitySensorEquippedEntity(this,
-                                               "ultrasound");
-         AddComponent(*m_pcUltrasoundSensorEquippedEntity);
-         for(UInt32 i = 0; i < 5; ++i) {
-            m_pcUltrasoundSensorEquippedEntity->AddSensor(
-               CVector3(KHEPERAIV_ULTRASOUND_SENSORS_RING_RADIUS +
-                        KHEPERAIV_ULTRASOUND_SENSORS_RING_RANGE.GetMin(),
-                        CRadians::ZERO,
-                        ULTRASOUND_SENSOR_ANGLES[i]), // offset
-               CVector3(1.0,
-                        CRadians::ZERO,
-                        ULTRASOUND_SENSOR_ANGLES[i]), // direction
-               KHEPERAIV_ULTRASOUND_SENSORS_RING_RANGE.GetMax(),
+         for(UInt32 i = 0; i < 7; ++i) {
+            m_pcProximitySensorEquippedEntity->AddSensor(
+               PROXIMITY_SENSOR_OFFSET[i], // offset
+               CVector3(1.0 , CRadians::PI_OVER_TWO , PROXIMITY_SENSOR_ANGLES[i]), // direction
+                THYMIO_PROXIMITY_SENSOR_RANGE,
                m_pcEmbodiedEntity->GetOriginAnchor());
          }
+
          /* LIDAR sensor equipped entity */
-         m_pcLIDARSensorEquippedEntity =
-            new CProximitySensorEquippedEntity(this,
-                                               "lidar");
+         m_pcLIDARSensorEquippedEntity = new CProximitySensorEquippedEntity(this,"lidar");
+
          AddComponent(*m_pcLIDARSensorEquippedEntity);
          /* Light sensor equipped entity */
          m_pcLightSensorEquippedEntity =
-            new CLightSensorEquippedEntity(this,
-                                           "light_0");
+            new CLightSensorEquippedEntity(this,"light_0");
          AddComponent(*m_pcLightSensorEquippedEntity);
          m_pcLightSensorEquippedEntity->AddSensorRing(
             CVector3(0.0f, 0.0f, KHEPERAIV_IR_SENSORS_RING_ELEVATION),
@@ -133,10 +137,10 @@ namespace argos {
             KHEPERAIV_IR_SENSORS_RING_RANGE,
             8,
             m_pcEmbodiedEntity->GetOriginAnchor());
+         
+
          /* Ground sensor equipped entity */
-         m_pcGroundSensorEquippedEntity =
-            new CGroundSensorEquippedEntity(this,
-                                            "ground_0");
+         m_pcGroundSensorEquippedEntity = new CGroundSensorEquippedEntity(this,"ground_0");
          AddComponent(*m_pcGroundSensorEquippedEntity);
          m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[0],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
@@ -150,6 +154,8 @@ namespace argos {
          m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[3],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
+         
+
          /* RAB equipped entity */
          m_pcRABEquippedEntity =
             new CRABEquippedEntity(this,
@@ -192,11 +198,13 @@ namespace argos {
          m_pcEmbodiedEntity = new CEmbodiedEntity(this);
          AddComponent(*m_pcEmbodiedEntity);
          m_pcEmbodiedEntity->Init(GetNode(t_tree, "body"));
+
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);
          AddComponent(*m_pcWheeledEntity);
          m_pcWheeledEntity->SetWheel(0, CVector3(0.0f,  KHEPERAIV_HALF_WHEEL_DISTANCE, 0.0f), KHEPERAIV_WHEEL_RADIUS);
          m_pcWheeledEntity->SetWheel(1, CVector3(0.0f, -KHEPERAIV_HALF_WHEEL_DISTANCE, 0.0f), KHEPERAIV_WHEEL_RADIUS);
+
          /* LED equipped entity, with LEDs [0-11] and beacon [12] */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
          AddComponent(*m_pcLEDEquippedEntity);
@@ -206,40 +214,29 @@ namespace argos {
                                        m_pcEmbodiedEntity->GetOriginAnchor());
          m_pcLEDEquippedEntity->AddLED(KHEPERAIV_LEDS_OFFSET[2],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
+
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity =
             new CProximitySensorEquippedEntity(this,
                                                "proximity");
          AddComponent(*m_pcProximitySensorEquippedEntity);
-         m_pcProximitySensorEquippedEntity->AddSensorRing(
-            CVector3(0.0f, 0.0f, KHEPERAIV_IR_SENSORS_RING_ELEVATION),
-            KHEPERAIV_IR_SENSORS_RING_RADIUS,
-            CRadians::ZERO,
-            KHEPERAIV_IR_SENSORS_RING_RANGE,
-            8,
-            m_pcEmbodiedEntity->GetOriginAnchor());
-         /* Ultrasound sensor equipped entity */
-         m_pcUltrasoundSensorEquippedEntity =
-            new CProximitySensorEquippedEntity(this,
-                                               "ultrasound");
-         AddComponent(*m_pcUltrasoundSensorEquippedEntity);
-         for(UInt32 i = 0; i < 5; ++i) {
-            m_pcUltrasoundSensorEquippedEntity->AddSensor(
-               CVector3(KHEPERAIV_ULTRASOUND_SENSORS_RING_RADIUS +
-                        KHEPERAIV_ULTRASOUND_SENSORS_RING_RANGE.GetMin(),
-                        CRadians::PI_OVER_TWO,
-                        ULTRASOUND_SENSOR_ANGLES[i]), // offset
-               CVector3(1.0,
-                        CRadians::PI_OVER_TWO,
-                        ULTRASOUND_SENSOR_ANGLES[i]), // direction
-               KHEPERAIV_ULTRASOUND_SENSORS_RING_RANGE.GetMax(),
+
+
+        for(UInt32 i = 0; i < 7; ++i) {
+            m_pcProximitySensorEquippedEntity->AddSensor(
+               PROXIMITY_SENSOR_OFFSET[i], // offset
+               CVector3(1.0 , CRadians::PI_OVER_TWO , PROXIMITY_SENSOR_ANGLES[i]), // direction
+                THYMIO_PROXIMITY_SENSOR_RANGE,
                m_pcEmbodiedEntity->GetOriginAnchor());
          }
+
+
          /* LIDAR sensor equipped entity */
          m_pcLIDARSensorEquippedEntity =
             new CProximitySensorEquippedEntity(this,
                                                "lidar");
          AddComponent(*m_pcLIDARSensorEquippedEntity);
+
          /* Light sensor equipped entity */
          m_pcLightSensorEquippedEntity =
             new CLightSensorEquippedEntity(this,
@@ -252,10 +249,10 @@ namespace argos {
             KHEPERAIV_IR_SENSORS_RING_RANGE,
             8,
             m_pcEmbodiedEntity->GetOriginAnchor());
+
+
          /* Ground sensor equipped entity */
-         m_pcGroundSensorEquippedEntity =
-            new CGroundSensorEquippedEntity(this,
-                                            "ground_0");
+         m_pcGroundSensorEquippedEntity = new CGroundSensorEquippedEntity(this,"ground_0");
          AddComponent(*m_pcGroundSensorEquippedEntity);
          m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[0],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
@@ -269,6 +266,7 @@ namespace argos {
          m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[3],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
+
          /* RAB equipped entity */
          Real fRange = 3.0f;
          GetNodeAttributeOrDefault(t_tree, "rab_range", fRange, fRange);
@@ -283,6 +281,7 @@ namespace argos {
                                    *m_pcEmbodiedEntity,
                                    CVector3(0.0f, 0.0f, KHEPERAIV_BASE_TOP));
          AddComponent(*m_pcRABEquippedEntity);
+
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0");
          if(NodeExists(t_tree, "battery"))

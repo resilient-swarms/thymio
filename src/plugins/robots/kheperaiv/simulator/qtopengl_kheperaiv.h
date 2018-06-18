@@ -47,6 +47,8 @@ namespace argos {
       void RenderBase();
       /** A single LED of the ring */
       void RenderLED();
+      /** Renders a wheel */
+      void RenderWheel();
 
    private:
 
@@ -63,6 +65,9 @@ namespace argos {
 
       /** LED display list */
       GLuint m_unLEDList;
+
+      /* Wheel display list*/
+      GLuint m_unWheelList;
 
       /** Number of vertices to display the round parts
           (wheels, chassis, etc.) */

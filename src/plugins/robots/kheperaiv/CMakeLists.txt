@@ -8,7 +8,8 @@ set(ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_CONTROLINTERFACE
   control_interface/ci_kheperaiv_lidar_sensor.h
   control_interface/ci_kheperaiv_light_sensor.h
   control_interface/ci_kheperaiv_proximity_sensor.h
-  control_interface/ci_kheperaiv_ultrasound_sensor.h)
+  #control_interface/ci_kheperaiv_ultrasound_sensor.h
+  )
 if(BUZZ_FOUND)
   set(ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_CONTROLINTERFACE
     ${ARGOS3_HEADERS_PLUGINS_ROBOTS_KHEPERAIV_CONTROLINTERFACE}
@@ -24,7 +25,8 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/kheperaiv_ground_rotzonly_sensor.h
     simulator/kheperaiv_lidar_default_sensor.h
     simulator/kheperaiv_proximity_default_sensor.h
-    simulator/kheperaiv_ultrasound_default_sensor.h)
+    #simulator/kheperaiv_ultrasound_default_sensor.h
+    )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 # argos3/plugins/robots/kheperaiv/real_robot
 if(ARGOS_BUILD_FOR STREQUAL "khiv")
@@ -38,7 +40,8 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
     real_robot/real_kheperaiv_ground_sensor.h
     real_robot/real_kheperaiv_lidar_sensor.h
     real_robot/real_kheperaiv_proximity_sensor.h
-    real_robot/real_kheperaiv_ultrasound_sensor.h)
+    #real_robot/real_kheperaiv_ultrasound_sensor.h
+    )
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
 #
@@ -51,7 +54,8 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV
   control_interface/ci_kheperaiv_lidar_sensor.cpp
   control_interface/ci_kheperaiv_light_sensor.cpp
   control_interface/ci_kheperaiv_proximity_sensor.cpp
-  control_interface/ci_kheperaiv_ultrasound_sensor.cpp)
+  #control_interface/ci_kheperaiv_ultrasound_sensor.cpp
+  )
 if(BUZZ_FOUND)
   set(ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV
     ${ARGOS3_SOURCES_PLUGINS_ROBOTS_KHEPERAIV}
@@ -69,7 +73,8 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/kheperaiv_ground_rotzonly_sensor.cpp
     simulator/kheperaiv_lidar_default_sensor.cpp
     simulator/kheperaiv_proximity_default_sensor.cpp
-    simulator/kheperaiv_ultrasound_default_sensor.cpp)
+    #simulator/kheperaiv_ultrasound_default_sensor.cpp
+    )
   # Compile the graphical visualization only if the necessary libraries have been found
   include(ARGoSCheckQTOpenGL)
   if(ARGOS_COMPILE_QTOPENGL)
@@ -95,7 +100,8 @@ if(ARGOS_BUILD_FOR STREQUAL "khiv")
     real_robot/real_kheperaiv_ground_sensor.cpp
     real_robot/real_kheperaiv_lidar_sensor.cpp
     real_robot/real_kheperaiv_proximity_sensor.cpp
-    real_robot/real_kheperaiv_ultrasound_sensor.cpp)
+    #real_robot/real_kheperaiv_ultrasound_sensor.cpp
+    )
 endif(ARGOS_BUILD_FOR STREQUAL "khiv")
 
 #

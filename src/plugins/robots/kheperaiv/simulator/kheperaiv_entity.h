@@ -74,9 +74,6 @@ namespace argos {
          return *m_pcProximitySensorEquippedEntity;
       }
 
-      inline CProximitySensorEquippedEntity& GetUltrasoundSensorEquippedEntity() {
-         return *m_pcUltrasoundSensorEquippedEntity;
-      }
 
       inline CProximitySensorEquippedEntity& GetLIDARSensorEquippedEntity() {
          return *m_pcLIDARSensorEquippedEntity;
@@ -112,7 +109,7 @@ namespace argos {
       CLEDEquippedEntity*             m_pcLEDEquippedEntity;
       CLightSensorEquippedEntity*     m_pcLightSensorEquippedEntity;
       CProximitySensorEquippedEntity* m_pcProximitySensorEquippedEntity;
-      CProximitySensorEquippedEntity* m_pcUltrasoundSensorEquippedEntity;
+      // CProximitySensorEquippedEntity* m_pcUltrasoundSensorEquippedEntity;
       CProximitySensorEquippedEntity* m_pcLIDARSensorEquippedEntity;
       CRABEquippedEntity*             m_pcRABEquippedEntity;
       CWheeledEntity*                 m_pcWheeledEntity;

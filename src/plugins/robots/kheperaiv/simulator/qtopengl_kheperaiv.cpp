@@ -17,13 +17,13 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   static QOpenGLTexture* MakeTexture(const QString& str_fname) {
-      QString strPath =
-         QString(ARGOS_INSTALL_PREFIX) +
-         "/include/argos3/plugins/simulator/visualizations/qt-opengl/textures/" +
-         str_fname;
-      return new QOpenGLTexture(QImage(strPath));
-   }
+   // static QOpenGLTexture* MakeTexture(const QString& str_fname) {
+   //    QString strPath =
+   //       QString(ARGOS_INSTALL_PREFIX) +
+   //       "/include/argos3/plugins/simulator/visualizations/qt-opengl/textures/" +
+   //       str_fname;
+   //    return new QOpenGLTexture(QImage(strPath));
+   // }
 
    /****************************************/
    /****************************************/
@@ -36,10 +36,13 @@ namespace argos {
       // m_pcTextures[1] = MakeTexture("kheperaiv_texture_bottom.png");
       // m_pcTextures[2] = MakeTexture("kheperaiv_texture_side.png");
       /* Reserve the needed display lists */
-      m_unLists = glGenLists(2);
+      m_unLists = glGenLists(3);
       /* Assign indices for better referencing (later) */
-      m_unBaseList = m_unLists;
-      m_unLEDList  = m_unLists + 1;
+
+      m_unWheelList = m_unLists;
+      m_unBaseList  = m_unLists + 1;
+      m_unLEDList   = m_unLists + 2;
+
       /* Create the base display list */
       glNewList(m_unBaseList, GL_COMPILE);
       RenderBase();
@@ -48,6 +51,10 @@ namespace argos {
       glNewList(m_unLEDList, GL_COMPILE);
       RenderLED();
       glEndList();
+      /* Create the wheel display list */
+      glNewList(m_unWheelList, GL_COMPILE);
+      RenderWheel();
+      glEndList();
    }
 
    /****************************************/
@@ -55,9 +62,9 @@ namespace argos {
 
    CQTOpenGLKheperaIV::~CQTOpenGLKheperaIV() {
       glDeleteLists(m_unLists, 2);
-      delete m_pcTextures[0];
-      delete m_pcTextures[1];
-      delete m_pcTextures[2];
+      // delete m_pcTextures[0];
+      // delete m_pcTextures[1];
+      // delete m_pcTextures[2];
    }
 
    /****************************************/
@@ -70,7 +77,7 @@ namespace argos {
       /* Place the body */
       glCallList(m_unBaseList);
       glPopMatrix();
-
+            
       /* Place the LEDs */
       CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
       for(UInt32 i = 0; i < 3; i++) {
@@ -82,6 +89,16 @@ namespace argos {
          glCallList(m_unLEDList);
          glPopMatrix();
       }
+
+      /* Place the wheels */
+      glPushMatrix();
+      glTranslatef(0.0f, INTERWHEEL_DISTANCE*0.5f   , 0.0f);
+      glCallList(m_unWheelList);
+      glPopMatrix();
+      glPushMatrix();
+      glTranslatef(0.0f, -INTERWHEEL_DISTANCE*0.5f  , 0.0f);
+      glCallList(m_unWheelList);
+      glPopMatrix();
    }
 
    /****************************************/
@@ -303,6 +320,50 @@ namespace argos {
          c_visualization.DrawBoundingBox(c_entity.GetEmbodiedEntity());
       }
    };
+
+   void CQTOpenGLKheperaIV::RenderWheel() {
+      /* Set material */
+      SetWhitePlasticMaterial();
+      /* Right side */
+      CVector2 cVertex(WHEEL_RADIUS, 0.0f);
+      CRadians cAngle(CRadians::TWO_PI / m_unVertices);
+      CVector3 cNormal(-1.0f, -1.0f, 0.0f);
+      cNormal.Normalize();
+      glBegin(GL_POLYGON);
+      for(GLuint i = 0; i <= m_unVertices; i++) {
+         glNormal3f(cNormal.GetX(), cNormal.GetY(), cNormal.GetZ());
+         glVertex3f(cVertex.GetX(), -WHEEL_WIDTH*0.5, WHEEL_RADIUS + cVertex.GetY());
+         cVertex.Rotate(cAngle);
+         cNormal.RotateY(cAngle);
+      }
+      glEnd();
+      /* Left side */
+      cVertex.Set(WHEEL_RADIUS, 0.0f);
+      cNormal.Set(-1.0f, 1.0f, 0.0f);
+      cNormal.Normalize();
+      cAngle = -cAngle;
+      glBegin(GL_POLYGON);
+      for(GLuint i = 0; i <= m_unVertices; i++) {
+         glNormal3f(cNormal.GetX(), cNormal.GetY(), cNormal.GetZ());
+         glVertex3f(cVertex.GetX(), WHEEL_WIDTH*0.5f, WHEEL_RADIUS + cVertex.GetY());
+         cVertex.Rotate(cAngle);
+         cNormal.RotateY(cAngle);
+      }
+      glEnd();
+      /* Tire */
+      cNormal.Set(1.0f, 0.0f, 0.0f);
+      cVertex.Set(WHEEL_RADIUS, 0.0f);
+      cAngle = -cAngle;
+      glBegin(GL_QUAD_STRIP);
+      for(GLuint i = 0; i <= m_unVertices; i++) {
+         glNormal3f(cNormal.GetX(), cNormal.GetY(), cNormal.GetZ());
+         glVertex3f(cVertex.GetX(), -WHEEL_WIDTH*0.5f, WHEEL_RADIUS + cVertex.GetY());
+         glVertex3f(cVertex.GetX(),  WHEEL_WIDTH*0.5f, WHEEL_RADIUS + cVertex.GetY());
+         cVertex.Rotate(cAngle);
+         cNormal.RotateY(cAngle);
+      }
+      glEnd();
+   }
 
    REGISTER_QTOPENGL_ENTITY_OPERATION(CQTOpenGLOperationDrawNormal, CQTOpenGLOperationDrawKheperaIVNormal, CKheperaIVEntity);
 

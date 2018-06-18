@@ -15,7 +15,7 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   static const Real KHEPERAIV_MASS                = 0.5f;
+   static const Real KHEPERAIV_MASS                = 0.270f; //THYMIO is 270 grams
    static const Real KHEPERAIV_MAX_FORCE           = 1.5f;
    static const Real KHEPERAIV_MAX_TORQUE          = 1.5f;
 
