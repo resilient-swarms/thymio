@@ -142,16 +142,10 @@ namespace argos {
          /* Ground sensor equipped entity */
          m_pcGroundSensorEquippedEntity = new CGroundSensorEquippedEntity(this,"ground_0");
          AddComponent(*m_pcGroundSensorEquippedEntity);
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[0],
+         m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[0],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[1],
-                                                   CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
-                                                   m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[2],
-                                                   CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
-                                                   m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[3],
+         m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[1],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
          
@@ -216,12 +210,8 @@ namespace argos {
                                        m_pcEmbodiedEntity->GetOriginAnchor());
 
          /* Proximity sensor equipped entity */
-         m_pcProximitySensorEquippedEntity =
-            new CProximitySensorEquippedEntity(this,
-                                               "proximity");
+         m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this,"proximity");
          AddComponent(*m_pcProximitySensorEquippedEntity);
-
-
         for(UInt32 i = 0; i < 7; ++i) {
             m_pcProximitySensorEquippedEntity->AddSensor(
                PROXIMITY_SENSOR_OFFSET[i], // offset
@@ -254,18 +244,13 @@ namespace argos {
          /* Ground sensor equipped entity */
          m_pcGroundSensorEquippedEntity = new CGroundSensorEquippedEntity(this,"ground_0");
          AddComponent(*m_pcGroundSensorEquippedEntity);
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[0],
+         m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[0],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[1],
+         m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[1],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[2],
-                                                   CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
-                                                   m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcGroundSensorEquippedEntity->AddSensor(KHEPERAIV_IR_SENSORS_GROUND_OFFSET[3],
-                                                   CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
-                                                   m_pcEmbodiedEntity->GetOriginAnchor());
+
 
          /* RAB equipped entity */
          Real fRange = 3.0f;

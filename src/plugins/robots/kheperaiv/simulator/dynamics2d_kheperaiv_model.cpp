@@ -18,6 +18,7 @@ namespace argos {
    static const Real KHEPERAIV_MASS                = 0.270f; //THYMIO is 270 grams
    static const Real KHEPERAIV_MAX_FORCE           = 1.5f;
    static const Real KHEPERAIV_MAX_TORQUE          = 1.5f;
+   static const int  NUMBER_OF_VERTICIES           = 59;
 
    enum KHEPERAIV_WHEELS {
       KHEPERAIV_LEFT_WHEEL = 0,
@@ -46,20 +47,45 @@ namespace argos {
         /* Start defining the vertices
            NOTE: points must be defined in a clockwise winding
         */
-        cpVect tVertices[] = {
-           cpv(-cHalfSize.GetX(), -cHalfSize.GetY()),
-           cpv(-cHalfSize.GetX(),  cHalfSize.GetY()),
-           cpv( cHalfSize.GetX(),  cHalfSize.GetY()),
-           cpv( cHalfSize.GetX(), -cHalfSize.GetY())
-        };
+        // cpVect CurveVertices[] =
+        // {
+
+        // }
+        cpVect* tVertices = new cpVect[NUMBER_OF_VERTICIES];
+        tVertices[0] = cpv(-cHalfSize.GetX(), -cHalfSize.GetY());
+        std::cout<<"0) x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
+
+        tVertices[1] = cpv(-cHalfSize.GetX(),  cHalfSize.GetY());
+        std::cout<<"1) x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+
+        // cpVect tVertices[] = {
+        //    cpv(-cHalfSize.GetX(), -cHalfSize.GetY()),
+        //    cpv(-cHalfSize.GetX(),  cHalfSize.GetY()),
+        // };
+        int i = 2;
+        for(Real x = -5.5; x<=5.5; x = x + 0.2)
+        {
+          Real y = (-0.033)*x*x+2;
+          tVertices[i++] =  cpv( x/100, y/100+cHalfSize.GetY()) ;
+          std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100+cHalfSize.GetY()<<"\n";
+        }
+        std::cout<<"b1\n";
+       tVertices[57] = cpv( cHalfSize.GetX(),  cHalfSize.GetY());
+       std::cout<<"57) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+
+       tVertices[58] = cpv( cHalfSize.GetX(), -cHalfSize.GetY());
+       std::cout<<"58) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+       
 
         cpBody* ptBody =
               cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
                              cpBodyNew(KHEPERAIV_MASS,
                                        cpMomentForPoly(KHEPERAIV_MASS,
-                                                       4,
+                                                       NUMBER_OF_VERTICIES,
                                                        tVertices,
                                                        cpvzero)));
+              
+
 
         // cpBody* ptBody =
         //    cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
@@ -81,9 +107,10 @@ namespace argos {
         cpShape* ptShape =
             cpSpaceAddShape(GetDynamics2DEngine().GetPhysicsSpace(),
                             cpPolyShapeNew(ptBody,
-                                           4,
+                                           NUMBER_OF_VERTICIES,
                                            tVertices,
                                            cpvzero));
+
 
         ptShape->e = 0.0; // No elasticity
         ptShape->u = 0.7; // Lots of friction
