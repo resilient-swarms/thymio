@@ -233,12 +233,16 @@ namespace argos {
         glVertex3f( 0.5f, -0.5f, 0.0f);
         glVertex3f(-0.5f, -0.5f, 0.0f);
         glVertex3f(-0.5f,  0.5f, 0.0f);
+        
+
         /* Top face */
         glNormal3f( 0.0f,  0.0f, 1.0f);
         glVertex3f(-0.5f, -0.5f, 1.0f);
         glVertex3f( 0.5f, -0.5f, 1.0f);
         glVertex3f( 0.5f,  0.5f, 1.0f);
         glVertex3f(-0.5f,  0.5f, 1.0f);
+
+
       glEnd();
 
       glBegin(GL_QUADS);
@@ -248,6 +252,7 @@ namespace argos {
         glVertex3f(-0.5f, -0.5f, 0.0f);
         glVertex3f( 0.5f, -0.5f, 0.0f);
         glVertex3f( 0.5f, -0.5f, 1.0f);
+        
         /* East face */
         glNormal3f( 1.0f,  0.0f, 0.0f);
         glVertex3f( 0.5f, -0.5f, 1.0f);

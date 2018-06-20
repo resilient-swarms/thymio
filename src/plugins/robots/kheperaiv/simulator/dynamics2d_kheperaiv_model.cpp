@@ -53,10 +53,10 @@ namespace argos {
         // }
         cpVect* tVertices = new cpVect[NUMBER_OF_VERTICIES];
         tVertices[0] = cpv(-cHalfSize.GetX(), -cHalfSize.GetY());
-        std::cout<<"0) x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
+        // std::cout<<"0) x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
 
         tVertices[1] = cpv(-cHalfSize.GetX(),  cHalfSize.GetY());
-        std::cout<<"1) x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+        // std::cout<<"1) x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
 
         // cpVect tVertices[] = {
         //    cpv(-cHalfSize.GetX(), -cHalfSize.GetY()),
@@ -67,14 +67,14 @@ namespace argos {
         {
           Real y = (-0.033)*x*x+2;
           tVertices[i++] =  cpv( x/100, y/100+cHalfSize.GetY()) ;
-          std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100+cHalfSize.GetY()<<"\n";
+          // std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100+cHalfSize.GetY()<<"\n";
         }
         std::cout<<"b1\n";
        tVertices[57] = cpv( cHalfSize.GetX(),  cHalfSize.GetY());
-       std::cout<<"57) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+       // std::cout<<"57) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
 
        tVertices[58] = cpv( cHalfSize.GetX(), -cHalfSize.GetY());
-       std::cout<<"58) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+       // std::cout<<"58) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
        
 
         cpBody* ptBody =
