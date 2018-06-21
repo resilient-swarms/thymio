@@ -1,23 +1,35 @@
-Thymio
+#Thymio
+Is an open source simulator based on ARGoS for Thymio robot platform.
 
-To install:
+##To install:
 first create "build" directory using:
-$   mkdir build
+
+    mkdir build
+    
 Then move to this directory:
-$   cd build
+
+    cd build
+    
 Now execute:
-$   cmake -DCMAKE_BUILD_TYPE=Release ../src
+
+    cmake -DCMAKE_BUILD_TYPE=Release ../src
+    
 Now compile the code using:
-$   make
+
+    make
+    
 Now install from binaries using:
-$   sudo make install
+
+    sudo make install
+    
 You have now installed Thymio's simulator
 
 To execute the examples:
 Go to the parent directory of "build".
 
 execute:
-$ argos3 -c src/testing/testexperiment.argos
+
+    argos3 -c src/testing/testexperiment.argos
 
 
 
