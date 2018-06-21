@@ -28,7 +28,7 @@ namespace argos {
             m_pcProximityEntity->Enable();
          }
          catch(CARGoSException& ex) {
-            THROW_ARGOSEXCEPTION_NESTED("Can't set robot for the Khepera IV proximity default sensor", ex);
+            THROW_ARGOSEXCEPTION_NESTED("Can't set robot for the Thymio proximity default sensor", ex);
          }
       }
 
@@ -67,7 +67,7 @@ namespace argos {
          m_pcProximityImpl->SetRobot(c_entity);
       }
       catch(CARGoSException& ex) {
-         THROW_ARGOSEXCEPTION_NESTED("Can't set robot for the Khepera IV proximity default sensor", ex);
+         THROW_ARGOSEXCEPTION_NESTED("Can't set robot for the Thymio proximity default sensor", ex);
       }
    }
 

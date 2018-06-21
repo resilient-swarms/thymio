@@ -7,13 +7,19 @@
 #include "qtopengl_kheperaiv.h"
 #include "kheperaiv_entity.h"
 #include "kheperaiv_measures.h"
+
+#include <argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_user_functions.h>
 #include <argos3/core/simulator/entity/embodied_entity.h>
 #include <argos3/plugins/simulator/entities/led_equipped_entity.h>
 #include <argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_widget.h>
+#include <argos3/core/utility/datatypes/datatypes.h>
 #include <QImage>
 
 namespace argos {
 
+  static const Real HALF_CHASSIS_LENGHT = 0.056f;
+  static const Real HALF_CHASSIS_WIDTH  = 0.055f;
+  static const Real BODY_HEIGHT         = 0.053f; 
    /****************************************/
    /****************************************/
 
@@ -43,14 +49,16 @@ namespace argos {
       m_unBaseList  = m_unLists + 1;
       m_unLEDList   = m_unLists + 2;
 
-      /* Create the base display list */
+      /* Create the body display list */
       glNewList(m_unBaseList, GL_COMPILE);
-      RenderBase();
+      RenderBody();
       glEndList();
+
+
       /* Create the LED display list */
-      glNewList(m_unLEDList, GL_COMPILE);
-      RenderLED();
-      glEndList();
+      // glNewList(m_unLEDList, GL_COMPILE);
+      // RenderLED();
+      // glEndList();
       /* Create the wheel display list */
       glNewList(m_unWheelList, GL_COMPILE);
       RenderWheel();
@@ -73,7 +81,7 @@ namespace argos {
    void CQTOpenGLKheperaIV::Draw(CKheperaIVEntity& c_entity) {
       /* Draw the body */
       glPushMatrix();
-      glScalef(THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT);
+      // glScalef(THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT);
       /* Place the body */
       glCallList(m_unBaseList);
       glPopMatrix();
@@ -89,6 +97,9 @@ namespace argos {
          glCallList(m_unLEDList);
          glPopMatrix();
       }
+
+      // m_pcEmbodiedEntity& cEmbodiedEntity = c_entity.GetEmbodiedEntity();
+      
 
       /* Place the wheels */
       glPushMatrix();
@@ -128,152 +139,73 @@ namespace argos {
       glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION,            pfEmission);
    }
 
-   void CQTOpenGLKheperaIV::RenderBase() {
-      // glEnable(GL_TEXTURE_2D);
-      // /* Used to precalculate the rotation */
-      // CVector2 cRot(1.0, CRadians::TWO_PI / m_unVertices);
-      // /* Top face is a disk */
+   void CQTOpenGLKheperaIV::RenderBody() {
+    CQTOpenGLUserFunctions* qlfunc = new CQTOpenGLUserFunctions();
+      qlfunc->DrawBox(
+            CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
+            CQuaternion( ), //orientation
+            CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
+            CColor::RED
+            );
+    // CQTOpenGLUserFunctions::DrawBox(
+    //   CVector3(0,0,0), //position
+    //   CQuaternion( CVector3(0,0,0),CVector3(0,0,0)), //orientation
+    //   CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
+    //   CColor::WHITE
+    //   )
+
+
+      // glEnable(GL_NORMALIZE);
+
       // SetWhitePlasticMaterial();
-      // // m_pcTextures[0]->bind();
-      // glBegin(GL_TRIANGLE_FAN);
-      // glNormal3f(0.0, 0.0, 1.0);
-      // glTexCoord2f(0.5, 0.5);
-      // glVertex3f(0.0, 0.0, KHEPERAIV_BASE_TOP);
-      // CVector2 cVert(1.0, 0.0);
-      // glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-      //              0.5 + 0.5 * cVert.GetY());
-      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //            KHEPERAIV_BASE_TOP);
-      // for(GLuint i = 1; i <= m_unVertices; ++i) {
-      //    cVert.Set(
-      //       cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
-      //       cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
-      //    glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-      //                 0.5 + 0.5 * cVert.GetY());
-      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //               KHEPERAIV_BASE_TOP);
-      // }
-      // glEnd();
-
-      // /* Used to precalculate the rotation */
-      // cRot.FromPolarCoordinates(1.0, -CRadians::TWO_PI / m_unVertices);
-      // /* Bottom face is a disk */
-      // // m_pcTextures[1]->bind();
-      // glBegin(GL_TRIANGLE_FAN);
-      // glNormal3f(0.0, 0.0, -1.0);
-      // glTexCoord2f(0.5, 0.5);
-      // glVertex3f(0.0, 0.0, 0.0);
-      // cVert.Set(1.0, 0.0);
-      // glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-      //              0.5 + 0.5 * cVert.GetY());
-      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //            KHEPERAIV_BASE_ELEVATION);
-      // for(GLuint i = 1; i <= m_unVertices; ++i)
-      // {
-      //    cVert.Set(
-      //       cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
-      //       cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
-      //    glTexCoord2f(0.5 + 0.5 * cVert.GetX(),
-      //                 0.5 + 0.5 * cVert.GetY());
-      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //               KHEPERAIV_BASE_ELEVATION);
-      // }
-      // glEnd();
-
-      /* Side face is a cylinder */
-      // m_pcTextures[2]->bind();
-      // glBegin(GL_QUAD_STRIP);
-      // cVert.Set(1.0, 0.0);
-      // glNormal3f(cVert.GetX(), cVert.GetY(), 0.0);
-      // glTexCoord2f(0.5, 0.0);
-      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //            KHEPERAIV_BASE_ELEVATION);
-      // glTexCoord2f(0.5, 0.96875);
-      // glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //            KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //            KHEPERAIV_BASE_TOP);
-      // for(GLuint i = 1; i <= m_unVertices; ++i)
-      // {
-      //    cVert.Set(
-      //       cVert.GetX() * cRot.GetX() - cVert.GetY() * cRot.GetY(),
-      //       cVert.GetX() * cRot.GetY() + cVert.GetY() * cRot.GetX());
-      //    glNormal3f(cVert.GetX(), cVert.GetY(), 0.0);
-      //    glTexCoord2f(0.5 + (GLfloat)i / m_unVertices, 0.0);
-      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //               KHEPERAIV_BASE_ELEVATION);
-      //    glTexCoord2f(0.5 + (GLfloat)i / m_unVertices, 0.96875);
-      //    glVertex3f(KHEPERAIV_BASE_RADIUS * cVert.GetX(),
-      //               KHEPERAIV_BASE_RADIUS * cVert.GetY(),
-      //               KHEPERAIV_BASE_TOP);
-      // }
-      // glEnd();
-      
-
-
-      glEnable(GL_NORMALIZE);
-
-      // const GLfloat pfSpecular[]  = {   0.9f, 0.9f, 0.9f, 1.0f };
-      // const GLfloat pfShininess[] = { 100.0f                   };
-      // const GLfloat pfEmission[]  = {   0.0f, 0.0f, 0.0f, 1.0f };
-      // glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, pfSpecular);
-      // glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, pfShininess);
-      // glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, pfEmission);
-
-      SetWhitePlasticMaterial();
-      glBegin(GL_QUADS);
-        /* Bottom face */
-        glNormal3f( 0.0f,  0.0f,-1.0f);
-        glVertex3f( 0.5f,  0.5f, 0.0f);
-        glVertex3f( 0.5f, -0.5f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glVertex3f(-0.5f,  0.5f, 0.0f);
+      // glBegin(GL_QUADS);
+      //   /* Bottom face */
+      //   glNormal3f( 0.0f,  0.0f,-1.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
         
 
-        /* Top face */
-        glNormal3f( 0.0f,  0.0f, 1.0f);
-        glVertex3f(-0.5f, -0.5f, 1.0f);
-        glVertex3f( 0.5f, -0.5f, 1.0f);
-        glVertex3f( 0.5f,  0.5f, 1.0f);
-        glVertex3f(-0.5f,  0.5f, 1.0f);
+      //   /* Top face */
+      //   glNormal3f( 0.0f,  0.0f, 1.0f);
+      //   glVertex3f(-HALF_CHASSIS_WIDTH, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f( HALF_CHASSIS_WIDTH, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f( HALF_CHASSIS_WIDTH,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f(-HALF_CHASSIS_WIDTH,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
 
 
-      glEnd();
+      // glEnd();
 
-      glBegin(GL_QUADS);
-        /* South face */
-        glNormal3f( 0.0f, -1.0f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 1.0f);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glVertex3f( 0.5f, -0.5f, 0.0f);
-        glVertex3f( 0.5f, -0.5f, 1.0f);
+      // glBegin(GL_QUADS);
+      //   /* South face */
+      //   glNormal3f( 0.0f, -1.0f, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
         
-        /* East face */
-        glNormal3f( 1.0f,  0.0f, 0.0f);
-        glVertex3f( 0.5f, -0.5f, 1.0f);
-        glVertex3f( 0.5f, -0.5f, 0.0f);
-        glVertex3f( 0.5f,  0.5f, 0.0f);
-        glVertex3f( 0.5f,  0.5f, 1.0f);
-        /* North face */
-        glNormal3f( 0.0f,  1.0f, 0.0f);
-        glVertex3f( 0.5f,  0.5f, 1.0f);
-        glVertex3f( 0.5f,  0.5f, 0.0f);
-        glVertex3f(-0.5f,  0.5f, 0.0f);
-        glVertex3f(-0.5f,  0.5f, 1.0f);
-        /* West face */
-        glNormal3f(-1.0f,  0.0f, 0.0f);
-        glVertex3f(-0.5f,  0.5f, 1.0f);
-        glVertex3f(-0.5f,  0.5f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 1.0f);
-      glEnd();
+      //   /* East face */
+      //   glNormal3f( 1.0f,  0.0f, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   /* North face */
+      //   glNormal3f( 0.0f,  1.0f, 0.0f);
+      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   /* West face */
+      //   glNormal3f(-1.0f,  0.0f, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+      // glEnd();
 
-      glDisable(GL_NORMALIZE);
+      // glDisable(GL_NORMALIZE);
 
       // glDisable(GL_TEXTURE_2D);
    }
@@ -342,6 +274,7 @@ namespace argos {
          cNormal.RotateY(cAngle);
       }
       glEnd();
+
       /* Left side */
       cVertex.Set(WHEEL_RADIUS, 0.0f);
       cNormal.Set(-1.0f, 1.0f, 0.0f);
@@ -355,6 +288,7 @@ namespace argos {
          cNormal.RotateY(cAngle);
       }
       glEnd();
+
       /* Tire */
       cNormal.Set(1.0f, 0.0f, 0.0f);
       cVertex.Set(WHEEL_RADIUS, 0.0f);

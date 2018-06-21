@@ -91,6 +91,18 @@ namespace argos {
           return *m_pcBatteryEquippedEntity;
       }
 
+      // inline CBatteryEquippedEntity& GetPosition() {
+      //     return *m_pcBatteryEquippedEntity;
+      // }
+
+      // inline CBatteryEquippedEntity& GetOrientation() {
+      //     return *m_pcBatteryEquippedEntity;
+      // }
+
+      // inline CBatteryEquippedEntity& GetSize() {
+      //     return *m_pcBatteryEquippedEntity;
+      // }
+
       virtual std::string GetTypeDescription() const {
          return "kheperaiv";
       }

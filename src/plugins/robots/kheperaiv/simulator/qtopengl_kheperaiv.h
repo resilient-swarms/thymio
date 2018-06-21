@@ -44,7 +44,7 @@ namespace argos {
                           GLfloat f_blue);
 
       /** Renders the base */
-      void RenderBase();
+      void RenderBody();
       /** A single LED of the ring */
       void RenderLED();
       /** Renders a wheel */
