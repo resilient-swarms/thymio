@@ -9,14 +9,14 @@ include_directories(src/plugins/robots/kheperaiv/simulator)
 include_directories(src/testing)
 
 add_executable(argos3_kheperaiv_master
-        build_sim/plugins/robots/kheperaiv/argos3plugin_simulator_kheperaiv_autogen/mocs_compilation.cpp
-        build_sim/testing/kheperaiv_diffusion_autogen/mocs_compilation.cpp
-        build_sim/cmake_install.cmake
-        build_sim/CMakeCache.txt
-        build_sim/CPackConfig.cmake
-        build_sim/CPackSourceConfig.cmake
-        build_sim/install_manifest.txt
-        build_sim/Makefile
+        build/plugins/robots/kheperaiv/argos3plugin_simulator_kheperaiv_autogen/mocs_compilation.cpp
+        build/testing/kheperaiv_diffusion_autogen/mocs_compilation.cpp
+        build/cmake_install.cmake
+        build/CMakeCache.txt
+        build/CPackConfig.cmake
+        build/CPackSourceConfig.cmake
+        build/install_manifest.txt
+        build/Makefile
         cmake-build-debug/argos3_kheperaiv_master.cbp
         cmake-build-debug/cmake_install.cmake
         cmake-build-debug/CMakeCache.txt
