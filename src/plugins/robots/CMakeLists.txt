@@ -1,1 +1,1 @@
-add_subdirectory(kheperaiv)
+add_subdirectory(Thymio)

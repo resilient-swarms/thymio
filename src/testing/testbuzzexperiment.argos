@@ -16,18 +16,18 @@
   <!-- *************** -->
   <controllers>
 
-    <buzz_controller_kheperaiv id="khivbz">
+    <buzz_controller_Thymio id="khivbz">
       <actuators>
         <differential_steering implementation="default" />
         <leds                  implementation="default" medium="leds" />
         <range_and_bearing     implementation="default" />
       </actuators>
       <sensors>
-        <!-- <kheperaiv_ground     implementation="rot_z_only" /> -->
-        <kheperaiv_proximity  implementation="default" show_rays="true" />
-        <kheperaiv_light      implementation="rot_z_only" show_rays="true" />
-        <kheperaiv_ultrasound implementation="default" show_rays="true" />
-        <kheperaiv_lidar      implementation="default" show_rays="true" />
+        <!-- <Thymio_ground     implementation="rot_z_only" /> -->
+        <Thymio_proximity  implementation="default" show_rays="true" />
+        <Thymio_light      implementation="rot_z_only" show_rays="true" />
+        <Thymio_ultrasound implementation="default" show_rays="true" />
+        <Thymio_lidar      implementation="default" show_rays="true" />
         <range_and_bearing    implementation="medium" medium="rab" show_rays="true" noise_std_dev="0" />
         <positioning          implementation="default" />
       </sensors>
@@ -37,7 +37,7 @@
                        no_turn_angle_threshold="10"
                        max_speed="10" />
       </params>
-    </buzz_controller_kheperaiv>
+    </buzz_controller_Thymio>
 
   </controllers>
 
@@ -79,9 +79,9 @@
       <position method="uniform" min="-2,-2,0" max="2,2,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
       <entity quantity="1" max_trials="100">
-        <kheperaiv id="khiv">
+        <Thymio id="khiv">
           <controller config="khivbz" />
-        </kheperaiv>
+        </Thymio>
       </entity>
     </distribute>
 

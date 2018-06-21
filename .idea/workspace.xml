@@ -2,7 +2,7 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="argos3_kheperaiv_master" targetName="argos3_kheperaiv_master" />
+      <config projectName="argos3_Thymio_master" targetName="argos3_Thymio_master" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -32,8 +32,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kheperaiv_ground_rotzonly_sensor.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/kheperaiv_ground_rotzonly_sensor.h">
+      <file leaf-file-name="Thymio_ground_rotzonly_sensor.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/Thymio_ground_rotzonly_sensor.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
               <caret line="31" column="25" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="36" />
@@ -41,8 +41,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kheperaiv_ground_rotzonly_sensor.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/kheperaiv_ground_rotzonly_sensor.cpp">
+      <file leaf-file-name="Thymio_ground_rotzonly_sensor.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/Thymio_ground_rotzonly_sensor.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="504">
               <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
@@ -50,8 +50,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qtopengl_kheperaiv.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/qtopengl_kheperaiv.cpp">
+      <file leaf-file-name="qtopengl_Thymio.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/qtopengl_Thymio.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="686">
               <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
@@ -59,8 +59,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="qtopengl_kheperaiv.h" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/qtopengl_kheperaiv.h">
+      <file leaf-file-name="qtopengl_Thymio.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/qtopengl_Thymio.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
               <caret line="36" column="18" lean-forward="true" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />
@@ -102,42 +102,42 @@
         <subPane>
           <expand>
             <path>
-              <item name="argos3_kheperaiv_master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="argos3-kheperaiv-master" type="462c0819:PsiDirectoryNode" />
+              <item name="argos3_Thymio_master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="argos3-Thymio-master" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="argos3_kheperaiv_master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="argos3-kheperaiv-master" type="462c0819:PsiDirectoryNode" />
+              <item name="argos3_Thymio_master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="argos3-Thymio-master" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="argos3_kheperaiv_master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="argos3-kheperaiv-master" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="argos3_kheperaiv_master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="argos3-kheperaiv-master" type="462c0819:PsiDirectoryNode" />
+              <item name="argos3_Thymio_master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="argos3-Thymio-master" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="robots" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="argos3_kheperaiv_master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="argos3-kheperaiv-master" type="462c0819:PsiDirectoryNode" />
+              <item name="argos3_Thymio_master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="argos3-Thymio-master" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
               <item name="robots" type="462c0819:PsiDirectoryNode" />
-              <item name="kheperaiv" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="argos3_kheperaiv_master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="argos3-kheperaiv-master" type="462c0819:PsiDirectoryNode" />
+              <item name="argos3_Thymio_master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="argos3-Thymio-master" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="plugins" type="462c0819:PsiDirectoryNode" />
               <item name="robots" type="462c0819:PsiDirectoryNode" />
-              <item name="kheperaiv" type="462c0819:PsiDirectoryNode" />
+              <item name="Thymio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="argos3_Thymio_master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="argos3-Thymio-master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="robots" type="462c0819:PsiDirectoryNode" />
+              <item name="Thymio" type="462c0819:PsiDirectoryNode" />
               <item name="simulator" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -161,12 +161,12 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.argos3_kheperaiv_master">
+  <component name="RunManager" selected="Application.argos3_Thymio_master">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all" />
-    <configuration name="argos3_kheperaiv_master" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="argos3_kheperaiv_master" TARGET_NAME="argos3_kheperaiv_master" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="argos3_kheperaiv_master" RUN_TARGET_NAME="argos3_kheperaiv_master" />
+    <configuration name="argos3_Thymio_master" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="argos3_Thymio_master" TARGET_NAME="argos3_Thymio_master" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="argos3_Thymio_master" RUN_TARGET_NAME="argos3_Thymio_master" />
     <list>
       <item itemvalue="Application.Build All" />
-      <item itemvalue="Application.argos3_kheperaiv_master" />
+      <item itemvalue="Application.argos3_Thymio_master" />
     </list>
   </component>
   <component name="SvnConfiguration">
@@ -232,28 +232,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/kheperaiv_ground_rotzonly_sensor.h">
+    <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/Thymio_ground_rotzonly_sensor.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="31" column="25" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/kheperaiv_ground_rotzonly_sensor.cpp">
+    <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/Thymio_ground_rotzonly_sensor.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="21" column="45" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/qtopengl_kheperaiv.cpp">
+    <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/qtopengl_Thymio.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="686">
           <caret line="30" column="26" lean-forward="true" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/plugins/robots/kheperaiv/simulator/qtopengl_kheperaiv.h">
+    <entry file="file://$PROJECT_DIR$/src/plugins/robots/Thymio/simulator/qtopengl_Thymio.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
           <caret line="36" column="18" lean-forward="true" selection-start-line="36" selection-start-column="18" selection-end-line="36" selection-end-column="18" />

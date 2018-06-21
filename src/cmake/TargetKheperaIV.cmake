@@ -1,4 +1,4 @@
-# The KheperaIV is seen as generic Linux distribution
+# The Thymio is seen as generic Linux distribution
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 

@@ -26,14 +26,14 @@ if(NOT DEFINED ARGOS_BUILD_NATIVE)
 endif(NOT DEFINED ARGOS_BUILD_NATIVE)
 
 #
-# If building for real robot, check if location of Khepera IV libs has
+# If building for real robot, check if location of Thymio IV libs has
 # been given
 #
 if(NOT ARGOS_BUILD_FOR_SIMULATOR)
-  if(NOT DEFINED KHEPERAIV_LIBS)
-    message(FATAL_ERROR "Please specify the location of the Khepera IV libraries with -DKHEPERAIV_LIBS=PATH")
-  else(NOT DEFINED KHEPERAIV_LIBS)
-    include_directories(${KHEPERAIV_LIBS}/include)
-    link_directories(${KHEPERAIV_LIBS}/lib)
-  endif(NOT DEFINED KHEPERAIV_LIBS)
+  if(NOT DEFINED Thymio_LIBS)
+    message(FATAL_ERROR "Please specify the location of the Thymio IV libraries with -DThymio_LIBS=PATH")
+  else(NOT DEFINED Thymio_LIBS)
+    include_directories(${Thymio_LIBS}/include)
+    link_directories(${Thymio_LIBS}/lib)
+  endif(NOT DEFINED Thymio_LIBS)
 endif(NOT ARGOS_BUILD_FOR_SIMULATOR)

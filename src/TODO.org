@@ -12,7 +12,7 @@
 ** TODO Gripper
 
 * [9/12] Simulator
-** DONE Khepera IV entity
+** DONE Thymio IV entity
 ** DONE QtOpenGL model
 ** DONE Dynamics2D model
 ** DONE RGB LED Actuator
