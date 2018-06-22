@@ -14,9 +14,9 @@ namespace argos {
    class CThymioEntity;
    class CGroundSensorEquippedEntity;
    class CLEDEquippedEntity;
-   class CLightSensorEquippedEntity;
+   // class CLightSensorEquippedEntity;
    class CProximitySensorEquippedEntity;
-   class CRABEquippedEntity;
+   // class CRABEquippedEntity;
 }
 
 #include <argos3/core/simulator/entity/composable_entity.h>
@@ -39,9 +39,10 @@ namespace argos {
                        const std::string& str_controller_id,
                        const CVector3& c_position = CVector3(),
                        const CQuaternion& c_orientation = CQuaternion(),
-                       Real f_rab_range = 3.0f,
-                       size_t un_rab_data_size = 50,
-                       const std::string& str_bat_model = "");
+                       // Real f_rab_range = 3.0f,
+                       // size_t un_rab_data_size = 50,
+                       const std::string& str_bat_model = ""
+                       );
       
       virtual void Init(TConfigurationNode& t_tree);
       virtual void Reset();
@@ -66,22 +67,22 @@ namespace argos {
          return *m_pcLEDEquippedEntity;
       }
 
-      inline CLightSensorEquippedEntity& GetLightSensorEquippedEntity() {
-         return *m_pcLightSensorEquippedEntity;
-      }
+      // inline CLightSensorEquippedEntity& GetLightSensorEquippedEntity() {
+      //    return *m_pcLightSensorEquippedEntity;
+      // }
 
       inline CProximitySensorEquippedEntity& GetProximitySensorEquippedEntity() {
          return *m_pcProximitySensorEquippedEntity;
       }
 
 
-      inline CProximitySensorEquippedEntity& GetLIDARSensorEquippedEntity() {
-         return *m_pcLIDARSensorEquippedEntity;
-      }
+      // inline CProximitySensorEquippedEntity& GetLIDARSensorEquippedEntity() {
+      //    return *m_pcLIDARSensorEquippedEntity;
+      // }
 
-      inline CRABEquippedEntity& GetRABEquippedEntity() {
-         return *m_pcRABEquippedEntity;
-      }
+      // inline CRABEquippedEntity& GetRABEquippedEntity() {
+      //    return *m_pcRABEquippedEntity;
+      // }
 
       inline CWheeledEntity& GetWheeledEntity() {
          return *m_pcWheeledEntity;
@@ -119,11 +120,11 @@ namespace argos {
       CEmbodiedEntity*                m_pcEmbodiedEntity;
       CGroundSensorEquippedEntity*    m_pcGroundSensorEquippedEntity;
       CLEDEquippedEntity*             m_pcLEDEquippedEntity;
-      CLightSensorEquippedEntity*     m_pcLightSensorEquippedEntity;
+      // CLightSensorEquippedEntity*     m_pcLightSensorEquippedEntity;
       CProximitySensorEquippedEntity* m_pcProximitySensorEquippedEntity;
       // CProximitySensorEquippedEntity* m_pcUltrasoundSensorEquippedEntity;
-      CProximitySensorEquippedEntity* m_pcLIDARSensorEquippedEntity;
-      CRABEquippedEntity*             m_pcRABEquippedEntity;
+      // CProximitySensorEquippedEntity* m_pcLIDARSensorEquippedEntity;
+      // CRABEquippedEntity*             m_pcRABEquippedEntity;
       CWheeledEntity*                 m_pcWheeledEntity;
       CBatteryEquippedEntity*         m_pcBatteryEquippedEntity;
    };

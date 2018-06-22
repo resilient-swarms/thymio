@@ -9,16 +9,17 @@
 /****************************************/
 /****************************************/
 
-const Real THYMIO_LENGHT 	= 0.11;
-const Real THYMIO_WIDTH 	= 0.112;
-const Real THYMIO_HEIGHT 	= 0.053;
-const Real INTERWHEEL_DISTANCE = 0.1;
-const Real WHEEL_RADIUS		= 0.02;
-const Real WHEEL_WIDTH		= 0.01;
-const Real THYMIO_BASE_ELEVATION = 0.0047;
-const Real THYMIO_SENSORS_RING_RADIUS = 0.11;
+const Real THYMIO_LENGHT 	= 0.11;				//measured from Thymio CAD files
+const Real THYMIO_WIDTH 	= 0.085;			//measured from Thymio CAD files (Without the curve in the front)
+const Real THYMIO_HEIGHT 	= 0.04;				//measured from Thymio CAD files from base to top (elevation ignored)
+const Real INTERWHEEL_DISTANCE = 0.09;			//measured from Thymio CAD files (interwheel center to center distance)	
+const Real WHEEL_RADIUS		= 0.022;			//measured from Thymio CAD files
+const Real WHEEL_WIDTH		= 0.0195;			//measured from Thymio CAD files
+const Real THYMIO_BASE_ELEVATION = 0.011; 		//measured from Thymio CAD files
+const Real THYMIO_SENSORS_RING_RADIUS = 0.11;	
 const Real THYMIO_PROXIMITY_SENSOR_RANGE = 0.1; //10cm
-const Real THYMIO_PROXIMITY_SENSOR_HEIGHT = 0.034;
+const Real THYMIO_PROXIMITY_SENSOR_HEIGHT = 0.06 ; //measured from Thymio CAD files
+const Real THYMIO_XOFFSET				= (THYMIO_WIDTH/2)- 0.0285; //measured from Thymio CAD files (wheels distance from rear is 2.85cm)
 
 // const Real Thymio_BASE_RADIUS    = 0.0704;
 // const Real Thymio_BASE_ELEVATION = 0.0047;

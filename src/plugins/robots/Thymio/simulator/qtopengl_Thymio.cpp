@@ -103,11 +103,11 @@ namespace argos {
 
       /* Place the wheels */
       glPushMatrix();
-      glTranslatef(0.0f, INTERWHEEL_DISTANCE*0.5f   , 0.0f);
+      glTranslatef(-THYMIO_XOFFSET, INTERWHEEL_DISTANCE*0.5f   , 0.0f);
       glCallList(m_unWheelList);
       glPopMatrix();
       glPushMatrix();
-      glTranslatef(0.0f, -INTERWHEEL_DISTANCE*0.5f  , 0.0f);
+      glTranslatef(-THYMIO_XOFFSET, -INTERWHEEL_DISTANCE*0.5f  , 0.0f);
       glCallList(m_unWheelList);
       glPopMatrix();
    }
@@ -144,7 +144,7 @@ namespace argos {
       qlfunc->DrawBox(
             CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
             CQuaternion( ), //orientation
-            CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
+            CVector3(THYMIO_WIDTH,THYMIO_LENGHT,THYMIO_HEIGHT),//size
             CColor::RED
             );
     // CQTOpenGLUserFunctions::DrawBox(

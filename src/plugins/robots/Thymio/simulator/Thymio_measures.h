@@ -23,6 +23,7 @@ extern const Real THYMIO_BASE_ELEVATION;
 extern const Real THYMIO_SENSORS_RING_RADIUS;
 extern const Real THYMIO_PROXIMITY_SENSOR_RANGE;
 extern const Real THYMIO_PROXIMITY_SENSOR_HEIGHT;
+extern const Real THYMIO_XOFFSET;
 
 // extern const Real Thymio_BASE_RADIUS;
 // extern const Real Thymio_BASE_ELEVATION;

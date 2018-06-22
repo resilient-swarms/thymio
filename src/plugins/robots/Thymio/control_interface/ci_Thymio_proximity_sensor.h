@@ -10,11 +10,11 @@
  * 
  *      front
  * 
- * l      0      r
- * e    1   7    i
- * f  2       6  g
- * t    3   5    h
- *        4      t
+ * l      2      r
+ * e    1   3    i
+ * f  0       4  g
+ * t             h
+ *      6   5    t
  * 
  *       back   
  *

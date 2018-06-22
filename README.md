@@ -1,7 +1,9 @@
-#Thymio
+# Thymio
+
 Is an open source simulator based on ARGoS for Thymio robot platform.
 
-##To install:
+## To install:
+
 first create "build" directory using:
 
     mkdir build

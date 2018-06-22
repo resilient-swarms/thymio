@@ -18,7 +18,7 @@ namespace argos {
    static const Real Thymio_MASS                = 0.270f; //THYMIO is 270 grams
    static const Real Thymio_MAX_FORCE           = 1.5f;
    static const Real Thymio_MAX_TORQUE          = 1.5f;
-   static const int  NUMBER_OF_VERTICIES           = 59;
+   static const int  NUMBER_OF_VERTICIES        = 4;
 
    enum Thymio_WHEELS {
       Thymio_LEFT_WHEEL = 0,
@@ -42,7 +42,7 @@ namespace argos {
         /* Create the body with initial position and orientation */
 
         /* Get the size of the entity */
-        CVector3 cHalfSize = CVector3( THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT) * 0.5f;
+        CVector3 cHalfSize = CVector3( THYMIO_WIDTH, THYMIO_LENGHT, THYMIO_HEIGHT) * 0.5f;
         /* Create a polygonal object in the physics space */
         /* Start defining the vertices
            NOTE: points must be defined in a clockwise winding
@@ -53,28 +53,28 @@ namespace argos {
         // }
         cpVect* tVertices = new cpVect[NUMBER_OF_VERTICIES];
         tVertices[0] = cpv(-cHalfSize.GetX(), -cHalfSize.GetY());
-        // std::cout<<"0) x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
+        std::cout<<"0) x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
 
         tVertices[1] = cpv(-cHalfSize.GetX(),  cHalfSize.GetY());
-        // std::cout<<"1) x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+        std::cout<<"1) x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
 
         // cpVect tVertices[] = {
         //    cpv(-cHalfSize.GetX(), -cHalfSize.GetY()),
         //    cpv(-cHalfSize.GetX(),  cHalfSize.GetY()),
         // };
-        int i = 2;
-        for(Real x = -5.5; x<=5.5; x = x + 0.2)
-        {
-          Real y = (-0.033)*x*x+2;
-          tVertices[i++] =  cpv( x/100, y/100+cHalfSize.GetY()) ;
-          // std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100+cHalfSize.GetY()<<"\n";
-        }
+        // int i = 2;
+        // for(Real x = -5.5; x<=5.5; x = x + 0.2)
+        // {
+        //   Real y = (-0.033)*x*x+2.5;
+        //   tVertices[i++] =  cpv( x/100, y/100+cHalfSize.GetY()) ;
+        //   std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100+cHalfSize.GetY()<<"\n";
+        // }
         std::cout<<"b1\n";
-       tVertices[57] = cpv( cHalfSize.GetX(),  cHalfSize.GetY());
-       // std::cout<<"57) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+       tVertices[2] = cpv( cHalfSize.GetX(),  cHalfSize.GetY());
+       std::cout<<"57) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
 
-       tVertices[58] = cpv( cHalfSize.GetX(), -cHalfSize.GetY());
-       // std::cout<<"58) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+       tVertices[3] = cpv( cHalfSize.GetX(), -cHalfSize.GetY());
+       std::cout<<"58) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
        
 
         cpBody* ptBody =
@@ -84,8 +84,6 @@ namespace argos {
                                                        NUMBER_OF_VERTICIES,
                                                        tVertices,
                                                        cpvzero)));
-              
-
 
         // cpBody* ptBody =
         //    cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
