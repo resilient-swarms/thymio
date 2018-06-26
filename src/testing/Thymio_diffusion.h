@@ -63,7 +63,7 @@ private:
 
    /* Pointer to the differential steering actuator */
    CCI_DifferentialSteeringActuator* m_pcWheels;
-   /* Pointer to the Thymio IV proximity sensor */
+   /* Pointer to the Thymio proximity sensor */
    CCI_ThymioProximitySensor* m_pcProximity;
 
    /*

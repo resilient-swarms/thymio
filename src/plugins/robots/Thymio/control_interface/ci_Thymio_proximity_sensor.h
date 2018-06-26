@@ -18,7 +18,7 @@
  * 
  *       back   
  *
- * @author Carlo Pinciroli <ilpincy@gmail.com>
+ * @author 
  */
 
 #ifndef CCI_Thymio_PROXIMITY_SENSOR_H

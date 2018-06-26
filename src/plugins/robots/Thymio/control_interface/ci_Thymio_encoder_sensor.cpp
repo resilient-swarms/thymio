@@ -1,7 +1,7 @@
 /**
  * @file <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_encoder_sensor.cpp>
  *
- * @author Carlo Pinciroli - <ilpincy@gmail.com>
+ * @author 
  */
 
 #include "ci_Thymio_encoder_sensor.h"
@@ -39,13 +39,13 @@ namespace argos {
 
 #ifdef ARGOS_WITH_LUA
   void CCI_ThymioEncoderSensor::ReadingsToLuaState(lua_State* pt_lua_state) {
-    lua_getfield(pt_lua_state, -1, "wheels");
-    lua_getfield(pt_lua_state, -1, "encoder");
-    lua_pushnumber(pt_lua_state, m_sReading.CoveredDistanceLeftWheel);
-    lua_setfield(pt_lua_state, -2, "distance_left");
+    lua_getfield  (pt_lua_state, -1                                 , "wheels" );
+    lua_getfield  (pt_lua_state, -1                                 , "encoder");
+    lua_pushnumber(pt_lua_state, m_sReading.CoveredDistanceLeftWheel           );
+    lua_setfield  (pt_lua_state, -2                                 , "distance_left");
     lua_pushnumber(pt_lua_state, m_sReading.CoveredDistanceRightWheel);
-    lua_setfield(pt_lua_state, -2, "distance_right");
-    lua_pop(pt_lua_state, 2);
+    lua_setfield  (pt_lua_state, -2                                 , "distance_right");
+    lua_pop       (pt_lua_state,  2                                            );
   }
 #endif
 

@@ -3,7 +3,7 @@
  *
  * @brief This file provides the definition of the Thymio IV encoder sensor. It
 
- * This file provides the definition of the Thymio IV encoder sensor. It
+ * This file provides the definition of the Thymio encoder sensor. It
  * returns the distance covered by the wheels in the last control step.
  *
  * @author Carlo Pinciroli - <ilpincy@gmail.com>

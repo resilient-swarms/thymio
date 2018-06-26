@@ -18,14 +18,6 @@
 #include <argos3/plugins/simulator/entities/proximity_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/rab_equipped_entity.h>
 
-// static CRadians ULTRASOUND_SENSOR_ANGLES[5] = {
-//    CRadians::ZERO,
-//    CRadians::PI_OVER_FOUR,
-//    CRadians::PI_OVER_TWO,
-//    -CRadians::PI_OVER_TWO,
-//    -CRadians::PI_OVER_FOUR,
-// };
-
 static CRadians PROXIMITY_SENSOR_ANGLES[7] = {
    CRadians(0.69813),
    CRadians(0.34906),
@@ -58,10 +50,7 @@ namespace argos {
       m_pcEmbodiedEntity(NULL),
       m_pcGroundSensorEquippedEntity(NULL),
       m_pcLEDEquippedEntity(NULL),
-      // m_pcLightSensorEquippedEntity(NULL),
       m_pcProximitySensorEquippedEntity(NULL),
-      // m_pcUltrasoundSensorEquippedEntity(NULL),
-      // m_pcRABEquippedEntity(NULL),
       m_pcWheeledEntity(NULL),
       m_pcBatteryEquippedEntity(NULL) {
    }
@@ -73,18 +62,13 @@ namespace argos {
                                       const std::string& str_controller_id,
                                       const CVector3& c_position,
                                       const CQuaternion& c_orientation,
-                                      // Real  f_rab_range,
-                                      // size_t un_rab_data_size,
                                       const std::string& str_bat_model) :
       CComposableEntity(NULL, str_id),
       m_pcControllableEntity(NULL),
       m_pcEmbodiedEntity(NULL),
       m_pcGroundSensorEquippedEntity(NULL),
       m_pcLEDEquippedEntity(NULL),
-      // m_pcLightSensorEquippedEntity(NULL),
       m_pcProximitySensorEquippedEntity(NULL),
-      // m_pcUltrasoundSensorEquippedEntity(NULL),
-      // m_pcRABEquippedEntity(NULL),
       m_pcWheeledEntity(NULL),
       m_pcBatteryEquippedEntity(NULL) {
       try {
@@ -104,12 +88,10 @@ namespace argos {
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
          AddComponent(*m_pcLEDEquippedEntity);
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[0],
+         for(int i=0; i<39; i++){
+         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[1],
-                                       m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[2],
-                                       m_pcEmbodiedEntity->GetOriginAnchor());
+         }
 
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this, "proximity");
@@ -122,23 +104,6 @@ namespace argos {
                m_pcEmbodiedEntity->GetOriginAnchor());
          }
 
-         /* LIDAR sensor equipped entity */
-         // m_pcLIDARSensorEquippedEntity = new CProximitySensorEquippedEntity(this,"lidar");
-
-         // AddComponent(*m_pcLIDARSensorEquippedEntity);
-         /* Light sensor equipped entity */
-         // m_pcLightSensorEquippedEntity =
-         //    new CLightSensorEquippedEntity(this,"light_0");
-         // AddComponent(*m_pcLightSensorEquippedEntity);
-         // m_pcLightSensorEquippedEntity->AddSensorRing(
-         //    CVector3(0.0f, 0.0f, Thymio_IR_SENSORS_RING_ELEVATION),
-         //    Thymio_IR_SENSORS_RING_RADIUS,
-         //    CRadians::ZERO,
-         //    Thymio_IR_SENSORS_RING_RANGE,
-         //    8,
-         //    m_pcEmbodiedEntity->GetOriginAnchor());
-         
-
          /* Ground sensor equipped entity */
          m_pcGroundSensorEquippedEntity = new CGroundSensorEquippedEntity(this,"ground_0");
          AddComponent(*m_pcGroundSensorEquippedEntity);
@@ -148,18 +113,6 @@ namespace argos {
          m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[1],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
-         
-
-         /* RAB equipped entity */
-         // m_pcRABEquippedEntity =
-         //    new CRABEquippedEntity(this,
-         //                           "rab_0",
-         //                           un_rab_data_size,
-         //                           f_rab_range,
-         //                           m_pcEmbodiedEntity->GetOriginAnchor(),
-         //                           *m_pcEmbodiedEntity,
-         //                           CVector3(0.0f, 0.0f, THYMIO_BASE_TOP));
-         // AddComponent(*m_pcRABEquippedEntity);
 
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0", str_bat_model);
@@ -202,13 +155,10 @@ namespace argos {
 
          /* LED equipped entity, with LEDs [0-11] and beacon [12] */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
-         AddComponent(*m_pcLEDEquippedEntity);
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[0],
+         for(int i=0; i<39; i++){
+         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[1],
-                                       m_pcEmbodiedEntity->GetOriginAnchor());
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[2],
-                                       m_pcEmbodiedEntity->GetOriginAnchor());
+         }
 
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this,"proximity");
@@ -221,27 +171,6 @@ namespace argos {
                m_pcEmbodiedEntity->GetOriginAnchor());
          }
 
-
-         /* LIDAR sensor equipped entity */
-         // m_pcLIDARSensorEquippedEntity =
-         //    new CProximitySensorEquippedEntity(this,
-         //                                       "lidar");
-         // AddComponent(*m_pcLIDARSensorEquippedEntity);
-
-         /* Light sensor equipped entity */
-         // m_pcLightSensorEquippedEntity =
-         //    new CLightSensorEquippedEntity(this,
-         //                                   "light_0");
-         // AddComponent(*m_pcLightSensorEquippedEntity);
-         // m_pcLightSensorEquippedEntity->AddSensorRing(
-         //    CVector3(0.0f, 0.0f, Thymio_IR_SENSORS_RING_ELEVATION),
-         //    Thymio_IR_SENSORS_RING_RADIUS,
-         //    CRadians::ZERO,
-         //    Thymio_IR_SENSORS_RING_RANGE,
-         //    8,
-         //    m_pcEmbodiedEntity->GetOriginAnchor());
-
-
          /* Ground sensor equipped entity */
          m_pcGroundSensorEquippedEntity = new CGroundSensorEquippedEntity(this,"ground_0");
          AddComponent(*m_pcGroundSensorEquippedEntity);
@@ -251,22 +180,6 @@ namespace argos {
          m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[1],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
-
-
-         /* RAB equipped entity */
-         // Real fRange = 3.0f;
-         // GetNodeAttributeOrDefault(t_tree, "rab_range", fRange, fRange);
-         // UInt32 unDataSize = 10;
-         // GetNodeAttributeOrDefault(t_tree, "rab_data_size", unDataSize, unDataSize);
-         // m_pcRABEquippedEntity =
-         //    new CRABEquippedEntity(this,
-         //                           "rab_0",
-         //                           unDataSize,
-         //                           fRange,
-         //                           m_pcEmbodiedEntity->GetOriginAnchor(),
-         //                           *m_pcEmbodiedEntity,
-         //                           CVector3(0.0f, 0.0f, THYMIO_BASE_TOP));
-         // AddComponent(*m_pcRABEquippedEntity);
 
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0");
@@ -310,8 +223,6 @@ namespace argos {
    void CThymioEntity::UpdateComponents() {
       // if(m_pcLEDEquippedEntity->IsEnabled())
       //    m_pcLEDEquippedEntity->Update();
-      // if(m_pcRABEquippedEntity->IsEnabled())
-      //    m_pcRABEquippedEntity->Update();
       if(m_pcBatteryEquippedEntity->IsEnabled())
          m_pcBatteryEquippedEntity->Update();
    }
@@ -321,11 +232,11 @@ namespace argos {
    
    REGISTER_ENTITY(CThymioEntity,
                    "Thymio",
-                   "Carlo Pinciroli [ilpincy@gmail.com]",
+                   "Sina Sarparast [sina.sarparast@gmail.com]",
                    "1.0",
-                   "The Thymio IV robot.",
-                   "The Thymio IV is a commercial, extensible robot produced by K-Teams. More\n"
-                   "information is available at https://www.k-team.com/Thymio-iv.\n\n"
+                   "The Thymio robot.",
+                   "The Thymio is a commercial, extensible robot produced by Mobsya More\n"
+                   "information is available at https://www.thymio.org.\n\n"
                    "REQUIRED XML CONFIGURATION\n\n"
                    "  <arena ...>\n"
                    "    ...\n"

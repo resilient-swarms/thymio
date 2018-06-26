@@ -21,8 +21,8 @@ namespace argos {
    static const int  NUMBER_OF_VERTICIES        = 4;
 
    enum Thymio_WHEELS {
-      Thymio_LEFT_WHEEL = 0,
-      Thymio_RIGHT_WHEEL = 1
+      Thymio_LEFT_WHEEL   = 0,
+      Thymio_RIGHT_WHEEL  = 1
    };
 
    /****************************************/
@@ -47,34 +47,32 @@ namespace argos {
         /* Start defining the vertices
            NOTE: points must be defined in a clockwise winding
         */
-        // cpVect CurveVertices[] =
-        // {
 
-        // }
         cpVect* tVertices = new cpVect[NUMBER_OF_VERTICIES];
-        tVertices[0] = cpv(-cHalfSize.GetX(), -cHalfSize.GetY());
-        std::cout<<"0) x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
+        int i = 0;
+        tVertices[i++] = cpv(-cHalfSize.GetX(), -cHalfSize.GetY());
+        // std::cout<<i<<") x:"<<-cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
 
-        tVertices[1] = cpv(-cHalfSize.GetX(),  cHalfSize.GetY());
-        std::cout<<"1) x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+        tVertices[i++] = cpv(-cHalfSize.GetX(),  cHalfSize.GetY());
+        // std::cout<<i<<") x:"<<-cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
 
         // cpVect tVertices[] = {
         //    cpv(-cHalfSize.GetX(), -cHalfSize.GetY()),
         //    cpv(-cHalfSize.GetX(),  cHalfSize.GetY()),
         // };
-        // int i = 2;
-        // for(Real x = -5.5; x<=5.5; x = x + 0.2)
+        
+        // for(Real x = -4.25; x<=4.25; x = x + 0.2)
         // {
-        //   Real y = (-0.033)*x*x+2.5;
-        //   tVertices[i++] =  cpv( x/100, y/100+cHalfSize.GetY()) ;
-        //   std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100+cHalfSize.GetY()<<"\n";
+        //   Real y = (-0.069)*x*x+6.75;
+        //   tVertices[i++] =  cpv( x/100, y/100) ;
+        //   // std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
         // }
-        std::cout<<"b1\n";
-       tVertices[2] = cpv( cHalfSize.GetX(),  cHalfSize.GetY());
-       std::cout<<"57) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
 
-       tVertices[3] = cpv( cHalfSize.GetX(), -cHalfSize.GetY());
-       std::cout<<"58) x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+       tVertices[i++] = cpv( cHalfSize.GetX(),  cHalfSize.GetY());
+       // std::cout<<i<<") x:"<<cHalfSize.GetX()<<"\ty:"<<cHalfSize.GetY()<<"\n";
+
+       tVertices[i] = cpv( cHalfSize.GetX(), -cHalfSize.GetY());
+       // std::cout<<i<<") x:"<<cHalfSize.GetX()<<"\ty:"<<-cHalfSize.GetY()<<"\n";
        
 
         cpBody* ptBody =
@@ -85,13 +83,6 @@ namespace argos {
                                                        tVertices,
                                                        cpvzero)));
 
-        // cpBody* ptBody =
-        //    cpSpaceAddBody(GetDynamics2DEngine().GetPhysicsSpace(),
-        //                   cpBodyNew(Thymio_MASS,
-        //                             cpMomentForCircle(Thymio_MASS,
-        //                                               0.0f,
-        //                                               Thymio_BASE_RADIUS + Thymio_BASE_RADIUS,
-        //                                               cpvzero)));
 
         const CVector3& cPosition = GetEmbodiedEntity().GetOriginAnchor().Position;
 

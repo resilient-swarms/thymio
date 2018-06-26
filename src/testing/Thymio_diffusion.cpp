@@ -44,7 +44,7 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor    >("Thymio_proximity"  );
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
    /*
     * Parse the configuration file
     *

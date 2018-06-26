@@ -31,7 +31,7 @@ namespace argos {
             THROW_ARGOSEXCEPTION_NESTED("Can't set robot for the Thymio proximity default sensor", ex);
          }
       }
-
+      // needs to be modified for Thymio
       virtual Real CalculateReading(Real f_distance) {
          if(f_distance < 0.04) {
             return 1.0;
@@ -100,7 +100,7 @@ namespace argos {
 
    REGISTER_SENSOR(CThymioProximityDefaultSensor,
                    "Thymio_proximity", "default",
-                   "Carlo Pinciroli [ilpincy@gmail.com]",
+                   "",
                    "1.0",
                    "The Thymio IV proximity sensor.",
                    "This sensor accesses the Thymio IV proximity sensor. For a complete description\n"

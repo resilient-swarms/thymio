@@ -13,13 +13,16 @@
 #include <argos3/plugins/simulator/entities/led_equipped_entity.h>
 #include <argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_widget.h>
 #include <argos3/core/utility/datatypes/datatypes.h>
+#include <argos3/core/utility/math/vector2.h>
 #include <QImage>
 
 namespace argos {
 
   static const Real HALF_CHASSIS_LENGHT = 0.056f;
   static const Real HALF_CHASSIS_WIDTH  = 0.055f;
-  static const Real BODY_HEIGHT         = 0.053f; 
+  static const Real BODY_HEIGHT         = 0.053f;
+  static const int  NUMBER_OF_VERTICIES = 46;
+
    /****************************************/
    /****************************************/
 
@@ -89,8 +92,8 @@ namespace argos {
       /* Place the LEDs */
       CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
       for(UInt32 i = 0; i < 3; i++) {
-         const CColor& cColor = cLEDEquippedEntity.GetLED(i).GetColor();
-         const CVector3& cOffset = cLEDEquippedEntity.GetLEDOffset(i);
+         const CColor&     cColor      = cLEDEquippedEntity.GetLED(i).GetColor();
+         const CVector3&   cOffset     = cLEDEquippedEntity.GetLEDOffset(i);
          SetLEDMaterial(cColor.GetRed(), cColor.GetGreen(), cColor.GetBlue());
          glPushMatrix();
          glTranslatef(cOffset.GetX(), cOffset.GetY(), cOffset.GetZ());
@@ -139,14 +142,36 @@ namespace argos {
       glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION,            pfEmission);
    }
 
+
    void CQTOpenGLThymio::RenderBody() {
     CQTOpenGLUserFunctions* qlfunc = new CQTOpenGLUserFunctions();
       qlfunc->DrawBox(
             CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
-            CQuaternion( ), //orientation
+            CQuaternion( ), //orientation CQuaternion(CRadians::PI_OVER_TWO, CVector3::Z)
             CVector3(THYMIO_WIDTH,THYMIO_LENGHT,THYMIO_HEIGHT),//size
             CColor::RED
             );
+      
+      /* renders physical engine
+      std::vector<CVector2> tVertices;
+      int i = 0;
+      tVertices.push_back(CVector2( -0.0425, -0.055 ));
+      for(Real x = -5.5; x<=5.5; x = x + 0.2)
+      {
+       Real y = (-0.082)*x*x + 6.75;
+       tVertices.push_back( CVector2( y/100, x/100  ) );
+       std::cout<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
+      }
+      tVertices.push_back( CVector2( -0.0425, 0.055) );
+      qlfunc->DrawPolygon(
+               CVector3(0,0,BODY_HEIGHT+THYMIO_BASE_ELEVATION), //position
+               CQuaternion(), //orientation
+               tVertices,
+               CColor::WHITE,
+               true
+               );
+      */
+
     // CQTOpenGLUserFunctions::DrawBox(
     //   CVector3(0,0,0), //position
     //   CQuaternion( CVector3(0,0,0),CVector3(0,0,0)), //orientation
