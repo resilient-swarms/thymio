@@ -32,7 +32,8 @@ extern const Real Thymio_WHEEL_DISTANCE;
 extern const Real Thymio_HALF_WHEEL_DISTANCE;
 
 extern const CVector2 THYMIO_IR_SENSORS_GROUND_OFFSET[2];
-
+extern const CRadians PROXIMITY_SENSOR_ANGLES[7];
+extern const CVector3 PROXIMITY_SENSOR_OFFSET[7];
 extern const CVector3 Thymio_LEDS_OFFSET[35];
 
 #endif

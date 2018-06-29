@@ -147,30 +147,41 @@ namespace argos {
     CQTOpenGLUserFunctions* qlfunc = new CQTOpenGLUserFunctions();
       qlfunc->DrawBox(
             CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
-            CQuaternion( ), //orientation CQuaternion(CRadians::PI_OVER_TWO, CVector3::Z)
+            CQuaternion( ), 
             CVector3(THYMIO_WIDTH,THYMIO_LENGHT,THYMIO_HEIGHT),//size
-            CColor::RED
+            CColor::WHITE
             );
       
-      /* renders physical engine
+      //orientation CQuaternion(CRadians::PI_OVER_TWO, CVector3::Z)
+       // renders physical engine
       std::vector<CVector2> tVertices;
       int i = 0;
-      tVertices.push_back(CVector2( -0.0425, -0.055 ));
+      tVertices.push_back(CVector2(  -0.055, -0.0425));
       for(Real x = -5.5; x<=5.5; x = x + 0.2)
       {
        Real y = (-0.082)*x*x + 6.75;
-       tVertices.push_back( CVector2( y/100, x/100  ) );
+       tVertices.push_back( CVector2(  x/100,y/100  ) );
        std::cout<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
       }
-      tVertices.push_back( CVector2( -0.0425, 0.055) );
+      tVertices.push_back( CVector2( 0.055, -0.0425) );
+
       qlfunc->DrawPolygon(
-               CVector3(0,0,BODY_HEIGHT+THYMIO_BASE_ELEVATION), //position
-               CQuaternion(), //orientation
+               CVector3(0,0,THYMIO_BASE_TOP), //position
+               CQuaternion(-CRadians::PI_OVER_TWO, CVector3::Z), //orientation
                tVertices,
                CColor::WHITE,
                true
                );
-      */
+
+      // qlfunc->DrawPolygon(
+      //          CVector3(0,0,THYMIO_BASE_ELEVATION), //position
+      //          CQuaternion(), //orientation
+      //          tVertices,
+      //          CColor::RED,
+      //          true
+      //          );
+
+
 
     // CQTOpenGLUserFunctions::DrawBox(
     //   CVector3(0,0,0), //position
@@ -178,9 +189,6 @@ namespace argos {
     //   CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
     //   CColor::WHITE
     //   )
-
-
-      // glEnable(GL_NORMALIZE);
 
       // SetWhitePlasticMaterial();
       // glBegin(GL_QUADS);

@@ -28,8 +28,29 @@ const Real Thymio_WHEEL_DISTANCE      = 0.1054;
 const Real Thymio_HALF_WHEEL_DISTANCE = Thymio_WHEEL_DISTANCE * 0.5;
 
 const CVector2 THYMIO_IR_SENSORS_GROUND_OFFSET[2] = {
-   CVector2(0.0115,  0.072),
-   CVector2(0.0115,  0.072),
+   CVector2(   0.072, 0.0115),
+   CVector2(  -0.072,-0.0115),
+};
+
+const CRadians PROXIMITY_SENSOR_ANGLES[7] = {
+   CRadians(0.69813),
+   CRadians(0.34906),
+   CRadians::ZERO,
+   CRadians(-0.34906),
+   CRadians(-0.69813),
+   -CRadians::PI,
+   -CRadians::PI
+};
+
+//measurements from https://github.com/enki-community/enki/blob/master/enki/robots/thymio2/Thymio2.cpp
+const CVector3 PROXIMITY_SENSOR_OFFSET[7] = {
+   CVector3(  0.062   , 0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.075   , 0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.0795  , 0       ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.075   ,-0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3(  0.062   ,-0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3( -THYMIO_WIDTH/2  , 0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+   CVector3( -THYMIO_WIDTH/2  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
 };
 
 const CVector3 Thymio_LEDS_OFFSET[35] = {

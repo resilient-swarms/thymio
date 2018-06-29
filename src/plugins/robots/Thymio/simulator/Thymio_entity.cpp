@@ -18,26 +18,6 @@
 #include <argos3/plugins/simulator/entities/proximity_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/rab_equipped_entity.h>
 
-static CRadians PROXIMITY_SENSOR_ANGLES[7] = {
-   CRadians(0.69813),
-   CRadians(0.34906),
-   CRadians::ZERO,
-   CRadians(-0.34906),
-   CRadians(-0.69813),
-   -CRadians::PI,
-   -CRadians::PI
-};
-
-//measurements from https://github.com/enki-community/enki/blob/master/enki/robots/thymio2/Thymio2.cpp
-static CVector3 PROXIMITY_SENSOR_OFFSET[7] = {
-   CVector3(  0.062   , 0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-   CVector3(  0.075   , 0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-   CVector3(  0.0795  , 0       ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-   CVector3(  0.075   ,-0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-   CVector3(  0.062   ,-0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-   CVector3( -THYMIO_WIDTH/2  , 0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-   CVector3( -THYMIO_WIDTH/2  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-};
 
 namespace argos {
 
@@ -249,12 +229,12 @@ namespace argos {
                    "The 'id' attribute is necessary and must be unique among the entities. If two\n"
                    "entities share the same id, initialization aborts.\n"
                    "The 'body/position' attribute specifies the position of the pucktom point of the\n"
-                   "Thymio IV in the arena. When the robot is untranslated and unrotated, the\n"
+                   "Thymio  in the arena. When the robot is untranslated and unrotated, the\n"
                    "pucktom point is in the origin and it is defined as the middle point between\n"
                    "the two wheels on the XY plane and the lowest point of the robot on the Z\n"
                    "axis, that is the point where the wheels touch the floor. The attribute values\n"
                    "are in the X,Y,Z order.\n"
-                   "The 'body/orientation' attribute specifies the orientation of the Thymio IV.\n"
+                   "The 'body/orientation' attribute specifies the orientation of the Thymio.\n"
                    "All rotations are performed with respect to the pucktom point. The order of the\n"
                    "angles is Z,Y,X, which means that the first number corresponds to the rotation\n"
                    "around the Z axis, the second around Y and the last around X. This reflects\n"
@@ -262,11 +242,11 @@ namespace argos {
                    "that order. Angles are expressed in degrees. When the robot is unrotated, it\n"
                    "is oriented along the X axis.\n"
                    "The 'controller/config' attribute is used to assign a controller to the\n"
-                   "Thymio IV. The value of the attribute must be set to the id of a previously\n"
+                   "Thymio . The value of the attribute must be set to the id of a previously\n"
                    "defined controller. Controllers are defined in the <controllers> XML subtree.\n\n"
                    "OPTIONAL XML CONFIGURATION\n\n"
                    "You can set the emission range of the range-and-bearing system. By default, a\n"
-                   "message sent by a Thymio IV can be received up to 3m. By using the 'rab_range'\n"
+                   "message sent by a Thymio  can be received up to 3m. By using the 'rab_range'\n"
                    "attribute, you can change it to, i.e., 4m as follows:\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
