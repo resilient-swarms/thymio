@@ -60,32 +60,32 @@ const CVector3 Thymio_LEDS_OFFSET[35] = {
    // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    //circular ring leds 
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
 
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    //RGB top led
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //RGB botom right led
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //RGB botom left led
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //buttons leds
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // //RGB botom right led
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // //RGB botom left led
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // //buttons leds
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    //horizontal proximity leds
    //may need to swap x and ys
    CVector3( 0.015, 0.078, THYMIO_BASE_TOP),
@@ -99,14 +99,14 @@ const CVector3 Thymio_LEDS_OFFSET[35] = {
    CVector3( 0.021, 0.023, THYMIO_BASE_TOP),
    //vertical proximity LEDs
    CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //RC LED
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //sound
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //temperature
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    CVector3( 0.04, -0.025, THYMIO_BASE_TOP)
+   //RC LED
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   //sound
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   //temperature
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP)
 };
 
 /****************************************/

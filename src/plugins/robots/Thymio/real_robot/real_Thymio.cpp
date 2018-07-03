@@ -27,10 +27,10 @@ CRealThymio::~CRealThymio() {
 void CRealThymio::InitRobot() {
    /* Initialize Thymio */
    if(kh4_init(0,NULL) != 0) {
-      THROW_ARGOSEXCEPTION("Error initializing the Thymio IV subsystem (kh4_init)");
+      THROW_ARGOSEXCEPTION("Error initializing the Thymio subsystem (kh4_init)");
    }
    /* Open robot socket and store the handle in its pointer */
-   m_ptDSPic = knet_open("Thymio4:dsPic", KNET_BUS_I2C, 0, NULL);
+   m_ptDSPic = knet_open("Thymio:dsPic", KNET_BUS_I2C, 0, NULL);
    if(m_ptDSPic == NULL) {
       THROW_ARGOSEXCEPTION("Error initializing communication with Thymio IV dsPic (knet_open)");
    }
