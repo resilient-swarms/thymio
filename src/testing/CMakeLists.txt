@@ -1,13 +1,13 @@
 find_package( Qt5Core REQUIRED )
- if(ARGOS_BUILD_FOR_SIMULATOR)
+if(ARGOS_BUILD_FOR_SIMULATOR AND NOT BUILD_FOR_THYMIO)
    add_library(
         Thymio_diffusion MODULE
         Thymio_diffusion.h
         Thymio_diffusion.cpp
         )
-endif(ARGOS_BUILD_FOR_SIMULATOR)
+endif(ARGOS_BUILD_FOR_SIMULATOR AND NOT BUILD_FOR_THYMIO)
 
-if(ARGOS_BUILD_FOR STREQUAL "thymio")
+if(BUILD_FOR_THYMIO)
   add_executable( Thymio_diffusion
   	Thymio_diffusion.h
   	Thymio_diffusion.cpp
@@ -15,7 +15,7 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
     
   	)
 
-endif(ARGOS_BUILD_FOR STREQUAL "thymio")
+endif(BUILD_FOR_THYMIO)
 
 target_link_libraries( Thymio_diffusion
   	argos3core_${ARGOS_BUILD_FOR}

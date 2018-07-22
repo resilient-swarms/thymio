@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
     * Parse the command line
     */
     QCoreApplication a(argc,argv);
-   std::cout<< "executed the code";
+
    std::string strARGoSFName;
    std::string strControllerId;
    CCommandLineArgParser cCLAP;
@@ -24,23 +24,28 @@ int main(int argc, char* argv[]) {
       "--controller-id",
       "the id of the controller to run",
       strControllerId);
+   std::cout<< "executed the code";
    try {
       cCLAP.Parse(argc, argv);
-      
-       // * Initialize the robot
-       
-      CRealThymio* pcRobot = new CRealThymio();
-      pcRobot->Init(strARGoSFName, strControllerId);
-      /*
-       * Perform the main loop
-       */
-      pcRobot->Execute();
    }
    catch(CARGoSException& ex) {
       /* A fatal error occurred: dispose of data, print error and exit */
-      // LOGERR << ex.what() << std::endl;
+       LOGERR << "Couln't Parse Args!" << std::endl;
       return 1;
    }
+       // * Initialize the robot
+   try {
+       CRealThymio* pcRobot = new CRealThymio();
+       pcRobot->Init(strARGoSFName, strControllerId);
+       /*
+        * Perform the main loop
+        */
+       pcRobot->Execute();
+   } catch (CARGoSException& ex) {
+       LOGERR << "Couln't Init Robot!" << std::endl;
+       return 1;
+   }
+
    /* All done (should never get here) */
    return a.exec();
 }
