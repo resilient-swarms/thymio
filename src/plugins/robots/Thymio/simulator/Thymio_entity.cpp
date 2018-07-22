@@ -68,10 +68,12 @@ namespace argos {
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
          AddComponent(*m_pcLEDEquippedEntity);
-         for(int i=0; i<39; i++){
-         m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
+         for(int i=0; i<7; i++){
+         m_pcLEDEquippedEntity->AddLED(PROXIMITY_SENSOR_OFFSET[i],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
+         m_pcLEDEquippedEntity->SetLEDOffset(i,PROXIMITY_SENSOR_OFFSET[i]);
          }
+
 
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this, "proximity");

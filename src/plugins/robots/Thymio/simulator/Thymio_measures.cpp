@@ -53,7 +53,7 @@ const CVector3 PROXIMITY_SENSOR_OFFSET[7] = {
    CVector3( -THYMIO_WIDTH/2  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
 };
 
-const CVector3 Thymio_LEDS_OFFSET[35] = {
+const CVector3 Thymio_LEDS_OFFSET[8] = {
 	//missing
    // CVector3( 0.04,  0.025, THYMIO_BASE_TOP),
    // CVector3(-0.05,  0.000, THYMIO_BASE_TOP),
@@ -87,19 +87,19 @@ const CVector3 Thymio_LEDS_OFFSET[35] = {
    // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    //horizontal proximity leds
-   //may need to swap x and ys
-   CVector3( 0.015, 0.078, THYMIO_BASE_TOP),
-   CVector3( 0.054, 0.043, THYMIO_BASE_TOP),
-   CVector3( 0.104, 0.026, THYMIO_BASE_TOP),
-   CVector3( 0.015, 0.026, THYMIO_BASE_TOP),
+   //may need to swap x and ys -> swapped them for horizontal LEDs
+   CVector3( 0.078, 0.015, THYMIO_BASE_TOP),
+   CVector3( 0.043, 0.054, THYMIO_BASE_TOP),
+   CVector3( 0.026, 0.104, THYMIO_BASE_TOP),
+   CVector3( 0.023, 0.040, THYMIO_BASE_TOP),
 
-   CVector3( 0.020, 0.043, THYMIO_BASE_TOP),
-   CVector3( 0.024, 0.078, THYMIO_BASE_TOP),
-   CVector3( 0.040, 0.023, THYMIO_BASE_TOP),
-   CVector3( 0.021, 0.023, THYMIO_BASE_TOP),
+   CVector3(-0.043, 0.020, THYMIO_BASE_TOP),
+   CVector3(-0.078, 0.024, THYMIO_BASE_TOP),
+   CVector3(-0.026,-0.015, THYMIO_BASE_TOP),
+   CVector3(-0.023, 0.021, THYMIO_BASE_TOP),
    //vertical proximity LEDs
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP)
+//   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
+//   CVector3( 0.04, -0.025, THYMIO_BASE_TOP)
    //RC LED
    // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
    //sound

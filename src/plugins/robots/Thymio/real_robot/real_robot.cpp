@@ -2,10 +2,12 @@
 #include <argos3/core/utility/logging/argos_log.h>
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/core/utility/plugins/factory.h>
+#include <argos3/core/utility/plugins/factory_impl.h>
 #include <signal.h>
 #include <unistd.h>
-
+#include <iostream>
 #include "real_robot.h"
+
 using namespace argos;
 
 /****************************************/
@@ -30,13 +32,6 @@ void CRealRobot::Init(const std::string& str_conf_fname,
    /* Parse the .argos file */
    m_tConfiguration.LoadFile(str_conf_fname);
    m_tConfRoot = *m_tConfiguration.FirstChildElement();
-   /*
-    * Install signal handlers
-    */
-   // ::signal(SIGINT, Cleanup);
-   // ::signal(SIGQUIT, Cleanup);
-   // ::signal(SIGABRT, Cleanup);
-   // ::signal(SIGTERM, Cleanup);
    /*
     * Get the control rate
     */
@@ -64,6 +59,17 @@ void CRealRobot::Init(const std::string& str_conf_fname,
       THROW_ARGOSEXCEPTION("Can't find controller with id \"" << str_controller_id << "\"");
    }
    /*
+    * get connection to Thymio
+    */
+   try{
+       ThymioInterface = new Aseba::DBusInterface();
+   }
+   catch(CARGoSException& e)
+   {
+      THROW_ARGOSEXCEPTION("Error initializing communication with Thymio Interface");
+   }
+
+   /*
     * Initialize the robot
     */
    LOG << "[INFO] Robot initialization start" << std::endl;
@@ -74,8 +80,8 @@ void CRealRobot::Init(const std::string& str_conf_fname,
     * Initialize the controller
     */
    LOG << "[INFO] Controller type '" << strControllerTag << "', id '" << str_controller_id << "' initialization start" << std::endl;
-   //CThymioDiffusion* x = New(strControllerTag);
-   m_pcController = new CCI_Controller(); //ControllerMaker(strControllerTag);
+   m_pcController = CFactory<CCI_Controller>::New(strControllerTag);
+
 
    /* Set the controller id using the machine hostname */
    char pchHostname[256];
@@ -116,6 +122,8 @@ void CRealRobot::Init(const std::string& str_conf_fname,
    /* Configure the controller */
    m_pcController->Init(GetNode(*m_ptControllerConfRoot, "params"));
    LOG << "[INFO] Controller type '" << strControllerTag << "', id '" << str_controller_id << "' initialization done" << std::endl;
+   /* Start the robot */
+//   state = 1;
 }
 
 /****************************************/
@@ -141,7 +149,7 @@ void CRealRobot::Execute() {
    CRate cRate(m_fRate);
    /* Main loop */
    LOG << "[INFO] Control loop running" << std::endl;
-   while(1) {
+   while(true) {
       /* Do useful work */
       Sense();
       Control();
@@ -155,6 +163,7 @@ void CRealRobot::Execute() {
 /****************************************/
 
 void CRealRobot::Cleanup(int) {
+
    LOG << "[INFO] Stopping controller" << std::endl;
    if(m_pcInstance != NULL) {
       m_pcInstance->Destroy();
@@ -166,5 +175,4 @@ void CRealRobot::Cleanup(int) {
 
 /****************************************/
 /****************************************/
-
 

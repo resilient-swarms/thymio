@@ -1,25 +1,11 @@
 #include "real_Thymio.h"
-#include "real_Thymio_differential_steering_actuator.h"
-// #include "real_Thymio_leds_actuator.h"
-// #include "real_Thymio_battery_sensor.h"
-// #include "real_Thymio_ground_sensor.h"
-// #include "real_Thymio_lidar_sensor.h"
-#include "real_Thymio_proximity_sensor.h"
-#include <argos3/core/utility/logging/argos_log.h>
+
 
 /****************************************/
 /****************************************/
 
 CRealThymio::CRealThymio()
 {
-    try{
-       ThymioInterface = new Aseba::DBusInterface();
-       //CRealThymioDevice Thymio = new CRealThymioDevice(ThymioInterface);
-    }
-    catch(CARGoSException& e)
-    {
-       THROW_ARGOSEXCEPTION("Error initializing communication with Thymio Interface");
-    }
 }
 
 /****************************************/
@@ -33,7 +19,6 @@ CRealThymio::~CRealThymio() {
 
 void CRealThymio::InitRobot() {
    /* Initialize Thymio */
-
 
    /* Make sure to start from a clean state */
    /* It's weird to call Destroy() here, but all it does is making
@@ -52,6 +37,8 @@ void CRealThymio::Destroy() {
    // kh4_SetRGBLeds(0,0,0,0,0,0,0,0,0, m_ptDSPic);
    // /* Switch ultrasound sensor off */
    // kh4_activate_us(0, m_ptDSPic);
+    ThymioInterface->setVariable("thymio-II", "motor.left.target",  {0} );
+    ThymioInterface->setVariable("thymio-II", "motor.right.target", {0} );
 }
 
 /****************************************/

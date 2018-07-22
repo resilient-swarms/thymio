@@ -21,7 +21,7 @@ namespace argos {
   static const Real HALF_CHASSIS_LENGHT = 0.056f;
   static const Real HALF_CHASSIS_WIDTH  = 0.055f;
   static const Real BODY_HEIGHT         = 0.053f;
-  static const int  NUMBER_OF_VERTICIES = 46;
+//  static const int  NUMBER_OF_VERTICIES = 46;
 
    /****************************************/
    /****************************************/
@@ -40,16 +40,13 @@ namespace argos {
 
    CQTOpenGLThymio::CQTOpenGLThymio() :
       m_unVertices(40) {
-      /* Reserve the needed textures */
-      // m_pcTextures[0] = MakeTexture("Thymio_texture_top.png");
-      // m_pcTextures[1] = MakeTexture("Thymio_texture_bottom.png");
-      // m_pcTextures[2] = MakeTexture("Thymio_texture_side.png");
+
       /* Reserve the needed display lists */
       m_unLists = glGenLists(3);
-      /* Assign indices for better referencing (later) */
 
-      m_unWheelList = m_unLists;
-      m_unBaseList  = m_unLists + 1;
+      /* Assign indices for better referencing (later) */
+      m_unBaseList  = m_unLists;
+      m_unWheelList = m_unLists + 1;
       m_unLEDList   = m_unLists + 2;
 
       /* Create the body display list */
@@ -57,22 +54,22 @@ namespace argos {
       RenderBody();
       glEndList();
 
-
-      /* Create the LED display list */
-      // glNewList(m_unLEDList, GL_COMPILE);
-      // RenderLED();
-      // glEndList();
       /* Create the wheel display list */
       glNewList(m_unWheelList, GL_COMPILE);
       RenderWheel();
       glEndList();
+
+      /* Create the LED display list */
+       glNewList(m_unLEDList, GL_COMPILE);
+       RenderLED();
+       glEndList();
    }
 
    /****************************************/
    /****************************************/
 
    CQTOpenGLThymio::~CQTOpenGLThymio() {
-      glDeleteLists(m_unLists, 2);
+      glDeleteLists(m_unLists, 3);
       // delete m_pcTextures[0];
       // delete m_pcTextures[1];
       // delete m_pcTextures[2];
@@ -82,19 +79,32 @@ namespace argos {
    /****************************************/
 
    void CQTOpenGLThymio::Draw(CThymioEntity& c_entity) {
-      /* Draw the body */
-      glPushMatrix();
-      // glScalef(THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT);
-      /* Place the body */
-      glCallList(m_unBaseList);
-      glPopMatrix();
+       /* Draw the body */
+       glPushMatrix();
+       // glScalef(THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT);
+       /* Place the body */
+       glCallList(m_unBaseList);
+       glPopMatrix();
+
+       /* Place the wheels */
+       glPushMatrix();
+       glTranslatef(-THYMIO_XOFFSET, INTERWHEEL_DISTANCE*0.5f   , 0.0f);
+       glCallList(m_unWheelList);
+       glPopMatrix();
+       glPushMatrix();
+       glTranslatef(-THYMIO_XOFFSET, -INTERWHEEL_DISTANCE*0.5f  , 0.0f);
+       glCallList(m_unWheelList);
+       glPopMatrix();
+
             
       /* Place the LEDs */
       CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
-      for(UInt32 i = 0; i < 3; i++) {
+      for(UInt32 i = 0; i < 7; i++) {
          const CColor&     cColor      = cLEDEquippedEntity.GetLED(i).GetColor();
          const CVector3&   cOffset     = cLEDEquippedEntity.GetLEDOffset(i);
+         std::cout<<"LED Offsets: "<<cOffset.GetX()<<"\t"<<cOffset.GetY()<<"\t"<<cOffset.GetZ()<<"\n";
          SetLEDMaterial(cColor.GetRed(), cColor.GetGreen(), cColor.GetBlue());
+
          glPushMatrix();
          glTranslatef(cOffset.GetX(), cOffset.GetY(), cOffset.GetZ());
          glCallList(m_unLEDList);
@@ -104,15 +114,7 @@ namespace argos {
       // m_pcEmbodiedEntity& cEmbodiedEntity = c_entity.GetEmbodiedEntity();
       
 
-      /* Place the wheels */
-      glPushMatrix();
-      glTranslatef(-THYMIO_XOFFSET, INTERWHEEL_DISTANCE*0.5f   , 0.0f);
-      glCallList(m_unWheelList);
-      glPopMatrix();
-      glPushMatrix();
-      glTranslatef(-THYMIO_XOFFSET, -INTERWHEEL_DISTANCE*0.5f  , 0.0f);
-      glCallList(m_unWheelList);
-      glPopMatrix();
+
    }
 
    /****************************************/
@@ -131,6 +133,7 @@ namespace argos {
 
    /****************************************/
    /****************************************/
+
    void CQTOpenGLThymio::SetWhitePlasticMaterial() {
       const GLfloat pfColor[]     = {   1.0f, 1.0f, 1.0f, 1.0f };
       const GLfloat pfSpecular[]  = {   0.9f, 0.9f, 0.9f, 1.0f };
@@ -141,6 +144,9 @@ namespace argos {
       glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,           pfShininess);
       glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION,            pfEmission);
    }
+
+   /****************************************/
+   /****************************************/
 
 
    void CQTOpenGLThymio::RenderBody() {
@@ -154,6 +160,24 @@ namespace argos {
       
       //orientation CQuaternion(CRadians::PI_OVER_TWO, CVector3::Z)
        // renders physical engine
+//      std::vector<CVector2> tVertices;
+//      int i = 0;
+//      tVertices.push_back(CVector2(  -0.055, -0.0425));
+//      for(Real x = -5.5; x<=5.5; x = x + 0.2)
+//      {
+//       Real y = (-0.082)*x*x + 6.75;
+//       tVertices.push_back( CVector2(  x/100,y/100  ) );
+//       std::cout<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
+//      }
+//      tVertices.push_back( CVector2( 0.055, -0.0425) );
+
+//      qlfunc->DrawPolygon(
+//               CVector3(0,0,THYMIO_BASE_TOP), //position
+//               CQuaternion(-CRadians::PI_OVER_TWO, CVector3::Z), //orientation
+//               tVertices,
+//               CColor::WHITE,
+//               true
+//               );
       std::vector<CVector2> tVertices;
       int i = 0;
       tVertices.push_back(CVector2(  -0.055, -0.0425));
@@ -249,30 +273,30 @@ namespace argos {
    void CQTOpenGLThymio::RenderLED() {
       /* Draw it as a tiny pyramid pointing to Z upwards
          (with no base, cause it's not visible anyway) */
-      glBegin(GL_TRIANGLES);
-      /* North */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f( 0.015, -0.015, 0.000);
-      glVertex3f( 0.015,  0.015, 0.000);
-      /* South */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f(-0.015,  0.015, 0.000);
-      glVertex3f(-0.015, -0.015, 0.000);
-      /* West */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f( 0.015,  0.015, 0.000);
-      glVertex3f(-0.015,  0.015, 0.000);
-      /* East */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f(-0.015, -0.015, 0.000);
-      glVertex3f( 0.015, -0.015, 0.000);
-      glEnd();
+        glBegin(GL_TRIANGLES);
+        /* North */
+        glVertex3f( 0.000,  0.000, 0.015);
+        glVertex3f( 0.015, -0.015, 0.000);
+        glVertex3f( 0.015,  0.015, 0.000);
+        /* South */
+        glVertex3f( 0.000,  0.000, 0.015);
+        glVertex3f(-0.015,  0.015, 0.000);
+        glVertex3f(-0.015, -0.015, 0.000);
+        /* West */
+        glVertex3f( 0.000,  0.000, 0.015);
+        glVertex3f( 0.015,  0.015, 0.000);
+        glVertex3f(-0.015,  0.015, 0.000);
+        /* East */
+        glVertex3f( 0.000,  0.000, 0.015);
+        glVertex3f(-0.015, -0.015, 0.000);
+        glVertex3f( 0.015, -0.015, 0.000);
+        glEnd();
    }
 
    /****************************************/
    /****************************************/
 
-   class CQTOpenGLOperationDrawThymioNormal : public CQTOpenGLOperationDrawNormal {
+   class CQTOpenGLOperationDrawThymioNormal     : public CQTOpenGLOperationDrawNormal {
    public:
       void ApplyTo(CQTOpenGLWidget& c_visualization,
                    CThymioEntity& c_entity) {
@@ -283,7 +307,7 @@ namespace argos {
       }
    };
 
-   class CQTOpenGLOperationDrawThymioSelected : public CQTOpenGLOperationDrawSelected {
+   class CQTOpenGLOperationDrawThymioSelected   : public CQTOpenGLOperationDrawSelected {
    public:
       void ApplyTo(CQTOpenGLWidget& c_visualization,
                    CThymioEntity& c_entity) {

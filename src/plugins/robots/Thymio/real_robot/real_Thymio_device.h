@@ -1,7 +1,6 @@
 #ifndef REAL_Thymio_DEVICE_H
 #define REAL_Thymio_DEVICE_H
 
-// #include <Thymio/Thymio.h>
 #include "dbusinterface.h"
 
 class CRealThymioDevice {
@@ -17,14 +16,9 @@ public:
       return ThymioInterface;
    }
 
-   // inline char* GetBuffer() {
-   //    return m_pchBuffer;
-   // }
-
 private:
 
    Aseba::DBusInterface* ThymioInterface;
-   // static char m_pchBuffer[100];
    
 };
 

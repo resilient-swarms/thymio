@@ -141,14 +141,6 @@ else(ARGOS_BUILD_FOR_SIMULATOR)
     -lThymio)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
-#
-# Executable
-#
-# add_executable(main
-#     real_robot/main.cpp)
-# target_link_libraries(    
-#                            argos3plugin_${ARGOS_BUILD_FOR}_Thymio)
-
 
 #
 # Installation
@@ -164,17 +156,17 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     DESTINATION include/argos3/plugins/robots/Thymio/simulator
     )
   # install(
-  #   FILES simulator/Thymio_texture_bottom.png 
+  #   FILES simulator/Thymio_texture_bottom.png
   #         simulator/Thymio_texture_side.png
   #         simulator/Thymio_texture_top.png
   #   DESTINATION include/argos3/plugins/simulator/visualizations/qt-opengl/textures)
 # else(ARGOS_BUILD_FOR_SIMULATOR)
   install(
-    FILES ${ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_REALROBOT} 
+    FILES ${ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_REALROBOT}
     DESTINATION include/argos3/plugins/robots/Thymio/real_robot
     )
   install(
-    FILES real_robot/main.cpp 
+    FILES real_robot/main.cpp
     DESTINATION include/argos3/plugins/robots/Thymio/real_robot
     )
 endif(ARGOS_BUILD_FOR_SIMULATOR)

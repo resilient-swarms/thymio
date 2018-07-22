@@ -3,6 +3,7 @@
 
 #include <argos3/core/utility/configuration/argos_configuration.h>
 #include <argos3/core/control_interface/ci_controller.h>
+#include "dbusinterface.h"
 
 namespace argos {
 
@@ -74,8 +75,13 @@ namespace argos {
        */
       static void Cleanup(int);
 
-   protected:
 
+      inline Aseba::DBusInterface* GetInterface() const {
+         return ThymioInterface;
+      }
+
+   protected:
+      Aseba::DBusInterface* ThymioInterface;
       CCI_Controller*       m_pcController;
       ticpp::Document       m_tConfiguration;
       TConfigurationNode    m_tConfRoot;
