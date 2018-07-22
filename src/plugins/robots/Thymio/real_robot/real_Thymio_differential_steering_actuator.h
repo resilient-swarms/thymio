@@ -3,6 +3,7 @@
 
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
 #include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
+#include "dbusinterface.h"
 
 using namespace argos;
 
@@ -12,7 +13,7 @@ class CRealThymioDifferentialSteeringActuator :
 
 public:
 
-   CRealThymioDifferentialSteeringActuator(knet_dev_t* pt_dspic);
+   CRealThymioDifferentialSteeringActuator(Aseba::DBusInterface* ThymioInterface);
    
    virtual ~CRealThymioDifferentialSteeringActuator();
 

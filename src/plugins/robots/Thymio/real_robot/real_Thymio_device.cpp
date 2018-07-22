@@ -3,13 +3,13 @@
 /****************************************/
 /****************************************/
 
-char CRealThymioDevice::m_pchBuffer[100];
+// char CRealThymioDevice::m_pchBuffer[100];
 
 /****************************************/
 /****************************************/
 
-CRealThymioDevice::CRealThymioDevice(knet_dev_t* pt_dspic) :
-   m_ptDSPic(pt_dspic) {
+CRealThymioDevice::CRealThymioDevice(Aseba::DBusInterface* ThymioInterface) :
+   ThymioInterface(ThymioInterface) {
 }
 
 /****************************************/
