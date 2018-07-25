@@ -22,7 +22,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     real_robot/real_Thymio_differential_steering_actuator.h
     # real_robot/real_Thymio_leds_actuator.h
     # real_robot/real_Thymio_battery_sensor.h
-    # real_robot/real_Thymio_ground_sensor.h
+    real_robot/real_Thymio_ground_sensor.h
     real_robot/real_Thymio_proximity_sensor.h
     real_robot/dbusinterface.h
     real_robot/real_robot.h
@@ -73,7 +73,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
       real_robot/real_Thymio_differential_steering_actuator.cpp
       # real_robot/real_Thymio_leds_actuator.cpp
       # real_robot/real_Thymio_battery_sensor.cpp
-      # real_robot/real_Thymio_ground_sensor.cpp
+      real_robot/real_Thymio_ground_sensor.cpp
       real_robot/real_Thymio_proximity_sensor.cpp
       real_robot/dbusinterface.cpp
       real_robot/real_robot.cpp

@@ -8,6 +8,7 @@
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
+#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
 
 /*
  * All the ARGoS stuff in the 'argos' namespace.
@@ -65,6 +66,8 @@ private:
    CCI_DifferentialSteeringActuator* m_pcWheels;
    /* Pointer to the Thymio proximity sensor */
    CCI_ThymioProximitySensor* m_pcProximity;
+   /* Pointer to the Thymio ground sensors */
+   CCI_ThymioGroundSensor* m_pcGround;
 
    /*
     * The following variables are used as parameters for the

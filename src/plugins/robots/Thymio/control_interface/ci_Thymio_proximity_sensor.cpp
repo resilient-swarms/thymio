@@ -21,7 +21,7 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   CCI_ThymioProximitySensor::CCI_ThymioProximitySensor() : m_tReadings(7) 
+   CCI_ThymioProximitySensor::CCI_ThymioProximitySensor() : m_tReadings(7)
    {
       for(size_t i = 0; i < 7; ++i) {
          m_tReadings[i].Angle = i * SPACING;

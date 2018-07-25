@@ -57,7 +57,7 @@ namespace argos {
             m_cNoiseRange.Set(-fNoiseLevel, fNoiseLevel);
             m_pcRNG = CRandom::CreateRNG("argos");
          }
-         m_tReadings.resize(4);
+         m_tReadings.resize(2);
       }
       catch(CARGoSException& ex) {
          THROW_ARGOSEXCEPTION_NESTED("Initialization error in Thymio rotzonly ground sensor", ex);
@@ -114,7 +114,7 @@ namespace argos {
 
    REGISTER_SENSOR(CThymioGroundRotZOnlySensor,
                    "Thymio_ground", "rot_z_only",
-                   "Carlo Pinciroli [ilpincy@gmail.com]",
+                   "sina.sarparast@gmail.com",
                    "1.0",
                    "The Thymio  ground sensor.",
                    "This sensor accesses the Thymio  ground sensor. For a complete description\n"

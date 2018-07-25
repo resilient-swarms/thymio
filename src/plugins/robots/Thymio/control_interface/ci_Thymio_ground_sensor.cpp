@@ -17,12 +17,10 @@ namespace argos {
    /****************************************/
 
    CCI_ThymioGroundSensor::CCI_ThymioGroundSensor() :
-      m_tReadings(4) {
+      m_tReadings(2) {
       // Set the values for the ground sensor offset (taken from the CAD model, in cm)
-      m_tReadings[0].Offset.Set(0.06140,  0.01);
-      m_tReadings[1].Offset.Set(0.02060,  0.0059);
-      m_tReadings[2].Offset.Set(0.02060, -0.0059);
-      m_tReadings[3].Offset.Set(0.06140, -0.01);
+      m_tReadings[0].Offset.Set(0.072,  0.0115);
+      m_tReadings[1].Offset.Set(0.072, -0.0115);
    }
 
    /****************************************/
