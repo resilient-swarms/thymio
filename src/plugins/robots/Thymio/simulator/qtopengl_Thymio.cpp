@@ -59,9 +59,9 @@ namespace argos {
 
 
       /* Create the LED display list */
-      // glNewList(m_unLEDList, GL_COMPILE);
-      // RenderLED();
-      // glEndList();
+       glNewList(m_unLEDList, GL_COMPILE);
+       RenderLED();
+       glEndList();
       /* Create the wheel display list */
       glNewList(m_unWheelList, GL_COMPILE);
       RenderWheel();
@@ -91,12 +91,13 @@ namespace argos {
             
       /* Place the LEDs */
       CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
-      for(UInt32 i = 0; i < 3; i++) {
+      for(UInt32 i = 0; i < 8; i++) {
          const CColor&     cColor      = cLEDEquippedEntity.GetLED(i).GetColor();
          const CVector3&   cOffset     = cLEDEquippedEntity.GetLEDOffset(i);
          SetLEDMaterial(cColor.GetRed(), cColor.GetGreen(), cColor.GetBlue());
          glPushMatrix();
          glTranslatef(cOffset.GetX(), cOffset.GetY(), cOffset.GetZ());
+         glRotatef(-90,0,1,0);
          glCallList(m_unLEDList);
          glPopMatrix();
       }

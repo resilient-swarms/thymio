@@ -68,7 +68,7 @@ namespace argos {
          /* LED equipped entity */
          m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
          AddComponent(*m_pcLEDEquippedEntity);
-         for(int i=0; i<39; i++){
+         for(int i=0; i<8; i++){
          m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
          }
@@ -76,7 +76,7 @@ namespace argos {
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this, "proximity");
          AddComponent(*m_pcProximitySensorEquippedEntity);
-         for(UInt32 i = 0; i < 7; ++i) {
+         for(UInt32 i = 0; i < 8; ++i) {
             m_pcProximitySensorEquippedEntity->AddSensor(
                PROXIMITY_SENSOR_OFFSET[i], // offset
                CVector3(1.0 , CRadians::PI_OVER_TWO , PROXIMITY_SENSOR_ANGLES[i]), // direction
@@ -134,9 +134,10 @@ namespace argos {
          m_pcWheeledEntity->SetWheel(0, CVector3(-THYMIO_XOFFSET,  Thymio_HALF_WHEEL_DISTANCE, 0.0f), Thymio_WHEEL_RADIUS);
          m_pcWheeledEntity->SetWheel(1, CVector3(-THYMIO_XOFFSET, -Thymio_HALF_WHEEL_DISTANCE, 0.0f), Thymio_WHEEL_RADIUS);
 
-         /* LED equipped entity, with LEDs [0-11] and beacon [12] */
-         m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
-         for(int i=0; i<39; i++){
+         /* LED equipped entity, with LEDs [0-8] */
+         m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds");
+         AddComponent(*m_pcLEDEquippedEntity);
+         for(int i=0; i<8; i++){
          m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
          }
@@ -202,8 +203,8 @@ namespace argos {
    /****************************************/
 
    void CThymioEntity::UpdateComponents() {
-      // if(m_pcLEDEquippedEntity->IsEnabled())
-      //    m_pcLEDEquippedEntity->Update();
+       if(m_pcLEDEquippedEntity->IsEnabled())
+          m_pcLEDEquippedEntity->Update();
       if(m_pcBatteryEquippedEntity->IsEnabled())
          m_pcBatteryEquippedEntity->Update();
    }
@@ -251,7 +252,7 @@ namespace argos {
                    "attribute, you can change it to, i.e., 4m as follows:\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
-                   "    <Thymio id=\"kh0\" rab_range=\"4\">\n"
+                   "    <Thymio id=\"thymio\" rab_range=\"4\">\n"
                    "      <body position=\"0.4,2.3,0.25\" orientation=\"45,0,0\" />\n"
                    "      <controller config=\"mycntrl\" />\n"
                    "    </Thymio>\n"
@@ -262,7 +263,7 @@ namespace argos {
                    "'rab_data_size' attribute, you can change it to, i.e., 100 bytes as follows:\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
-                   "    <Thymio id=\"kh0\" rab_data_size=\"100\">\n"
+                   "    <Thymio id=\"thymio\" rab_data_size=\"100\">\n"
                    "      <body position=\"0.4,2.3,0.25\" orientation=\"45,0,0\" />\n"
                    "      <controller config=\"mycntrl\" />\n"
                    "    </Thymio>\n"
@@ -277,7 +278,7 @@ namespace argos {
                    "argos3/src/plugins/simulator/entities/battery_equipped_entity.cpp.\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
-                   "    <Thymio id=\"kh0\"\n"
+                   "    <Thymio id=\"thymio\"\n"
                    "      <body position=\"0.4,2.3,0.25\" orientation=\"45,0,0\" />\n"
                    "      <controller config=\"mycntrl\" />\n"
                    "      <battery model=\"time\" factor=\"1e-5\"/>\n"
@@ -286,7 +287,7 @@ namespace argos {
                    "  </arena>\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
-                   "    <Thymio id=\"kh0\"\n"
+                   "    <Thymio id=\"thymio\"\n"
                    "      <body position=\"0.4,2.3,0.25\" orientation=\"45,0,0\" />\n"
                    "      <controller config=\"mycntrl\" />\n"
                    "      <battery model=\"motion\" pos_factor=\"1e-3\"\n"

@@ -38,8 +38,8 @@ const CRadians PROXIMITY_SENSOR_ANGLES[7] = {
    CRadians::ZERO,
    CRadians(-0.34906),
    CRadians(-0.69813),
-   -CRadians::PI,
-   -CRadians::PI
+  -CRadians::PI,
+  -CRadians::PI
 };
 
 //measurements from https://github.com/enki-community/enki/blob/master/enki/robots/thymio2/Thymio2.cpp
@@ -53,60 +53,15 @@ const CVector3 PROXIMITY_SENSOR_OFFSET[7] = {
    CVector3( -THYMIO_WIDTH/2  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
 };
 
-const CVector3 Thymio_LEDS_OFFSET[35] = {
-	//missing
-   // CVector3( 0.04,  0.025, THYMIO_BASE_TOP),
-   // CVector3(-0.05,  0.000, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //circular ring leds 
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //RGB top led
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // //RGB botom right led
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // //RGB botom left led
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // //buttons leds
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //horizontal proximity leds
-   //may need to swap x and ys
-   CVector3( 0.015, 0.078, THYMIO_BASE_TOP),
-   CVector3( 0.054, 0.043, THYMIO_BASE_TOP),
-   CVector3( 0.104, 0.026, THYMIO_BASE_TOP),
-   CVector3( 0.015, 0.026, THYMIO_BASE_TOP),
-
-   CVector3( 0.020, 0.043, THYMIO_BASE_TOP),
-   CVector3( 0.024, 0.078, THYMIO_BASE_TOP),
-   CVector3( 0.040, 0.023, THYMIO_BASE_TOP),
-   CVector3( 0.021, 0.023, THYMIO_BASE_TOP),
-   //vertical proximity LEDs
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   CVector3( 0.04, -0.025, THYMIO_BASE_TOP)
-   //RC LED
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //sound
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   //temperature
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP),
-   // CVector3( 0.04, -0.025, THYMIO_BASE_TOP)
+const CVector3 Thymio_LEDS_OFFSET[8] = {
+    CVector3(  0.062   , 0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3(  0.075   , 0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3(  0.0785  , 0.0115  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3(  0.0785  ,-0.0115  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3(  0.075   ,-0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3(  0.062   ,-0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3( -THYMIO_WIDTH/2  , 0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
+    CVector3( -THYMIO_WIDTH/2  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
 };
 
 /****************************************/

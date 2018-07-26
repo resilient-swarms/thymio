@@ -46,7 +46,7 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
-   //m_pcLeds      = GetActuator<CCI_LEDsActuator                >("leds");
+   m_pcLeds      = GetActuator<CCI_LEDsActuator                >("leds");
    m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    /*
@@ -60,6 +60,11 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
    m_cGoStraightAngleRange.Set(-ToRadians(m_cAlpha), ToRadians(m_cAlpha));
    GetNodeAttributeOrDefault(t_node, "delta", m_fDelta, m_fDelta);
    GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
+   /*
+    * set the color of LEDs
+    */
+   m_pcLeds->SetAllIntensities(50);
+   m_pcLeds->SetSingleIntensity(1,200);
 }
 
 /****************************************/

@@ -20,7 +20,7 @@
                                library="build/testing/libThymio_diffusion">
       <actuators>
         <differential_steering implementation="default" />
-	<!--<leds                  implementation="default" medium="leds" />-->
+	<leds                  implementation="default" medium="leds"/>
       </actuators>
       <sensors>
         <Thymio_proximity implementation="default" show_rays="true" />
@@ -112,7 +112,9 @@
   <!-- ********* -->
   <!-- * Media * -->
   <!-- ********* -->
-  <media />
+  <media>
+    <led id="leds" />
+  </media>
 
   <!-- ****************** -->
   <!-- * Visualization * -->

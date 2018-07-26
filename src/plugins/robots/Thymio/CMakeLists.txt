@@ -14,6 +14,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/dynamics2d_Thymio_model.h
     simulator/Thymio_entity.h
     simulator/Thymio_measures.h
+    simulator/Thymio_proximity_default_sensor.h
     simulator/Thymio_ground_rotzonly_sensor.h
     )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
