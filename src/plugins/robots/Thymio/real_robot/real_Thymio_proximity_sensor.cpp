@@ -23,7 +23,7 @@ void CRealThymioProximitySensor::Do() {
    for( int i=0; i<list.count(); ++i )
    { 
        m_tReadings[i].Value = (short)list[i];
-        std::cout<<"Proximity sensro value:"<<std::to_string( m_tReadings[i].Value) <<"\n";
+        std::cout<<"Proximity sensro ("<<i<<") value:"<<std::to_string( m_tReadings[i].Value) <<"\n";
    }
 
 }

@@ -12,6 +12,7 @@ CThymioDiffusion::CThymioDiffusion() :
    m_pcWheels(NULL),
    m_pcProximity(NULL),
    m_pcGround(NULL),
+   m_pcLeds(NULL),
    m_cAlpha(10.0f),
    m_fDelta(0.5f),
    m_fWheelVelocity(2.5f),
@@ -45,6 +46,7 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
+   //m_pcLeds      = GetActuator<CCI_LEDsActuator                >("leds");
    m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    /*
@@ -87,7 +89,7 @@ void CThymioDiffusion::ControlStep() {
    CRadians cAngle = cAccumulator.Angle();
    if(m_cGoStraightAngleRange.WithinMinBoundIncludedMaxBoundIncluded(cAngle) &&
       cAccumulator.Length() < m_fDelta &&
-      cground != 0    ) {
+      cground == 0    ) {
       /* Go straight */
       m_pcWheels->SetLinearVelocity(m_fWheelVelocity, m_fWheelVelocity);
    }

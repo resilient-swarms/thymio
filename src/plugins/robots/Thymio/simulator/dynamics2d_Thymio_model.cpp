@@ -57,7 +57,7 @@ namespace argos {
         {
           Real y = (-0.082)*x*x+6.75;
           tVertices[i++] =  cpv( x/100, y/100) ;
-          std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
+//          std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
         }
        tVertices[i] = cpv( 0.055, -0.0425);
 

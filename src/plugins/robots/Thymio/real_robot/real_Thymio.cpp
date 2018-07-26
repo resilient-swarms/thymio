@@ -57,8 +57,8 @@ void CRealThymio::Destroy() {
 CCI_Actuator* CRealThymio::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealThymioDifferentialSteeringActuator,
                  "differential_steering");
-   // MAKE_ACTUATOR(CRealThymioLEDsActuator,
-   //               "leds");
+    MAKE_ACTUATOR(CRealThymioLEDsActuator,
+                  "leds");
    return NULL;
 }
 

@@ -161,7 +161,7 @@ namespace argos {
       {
        Real y = (-0.082)*x*x + 6.75;
        tVertices.push_back( CVector2(  x/100,y/100  ) );
-       std::cout<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
+//       std::cout<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
       }
       tVertices.push_back( CVector2( 0.055, -0.0425) );
 

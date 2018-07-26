@@ -61,7 +61,7 @@ namespace argos {
       virtual ~CCI_ThymioGroundSensor() {}
       
       const TReadings& GetReadings() const;
-      
+
 #ifdef ARGOS_WITH_LUA
       virtual void CreateLuaState(lua_State* pt_lua_state);
 

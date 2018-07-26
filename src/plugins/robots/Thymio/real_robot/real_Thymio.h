@@ -5,7 +5,7 @@
 #include "real_robot.h"
 #include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
 #include "real_Thymio_differential_steering_actuator.h"
-// #include "real_Thymio_leds_actuator.h"
+#include "real_Thymio_leds_actuator.h"
 // #include "real_Thymio_battery_sensor.h"
  #include "real_Thymio_ground_sensor.h"
 // #include "real_Thymio_lidar_sensor.h"

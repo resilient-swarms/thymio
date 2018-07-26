@@ -7,6 +7,7 @@
 #include <argos3/core/utility/math/angles.h>
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
 
@@ -61,7 +62,8 @@ public:
    virtual void Destroy() {}
 
 private:
-
+   /* Pointer to the LEDs */
+    CCI_LEDsActuator*   m_pcLeds;
    /* Pointer to the differential steering actuator */
    CCI_DifferentialSteeringActuator* m_pcWheels;
    /* Pointer to the Thymio proximity sensor */

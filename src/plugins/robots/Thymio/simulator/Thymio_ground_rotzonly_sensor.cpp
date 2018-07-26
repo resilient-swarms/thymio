@@ -71,26 +71,32 @@ namespace argos {
       /*
        * We make the assumption that the robot is rotated only wrt to Z
        */
+
       /* Get robot position and orientation */
       const CVector3& cEntityPos = m_pcEmbodiedEntity->GetOriginAnchor().Position;
       const CQuaternion& cEntityRot = m_pcEmbodiedEntity->GetOriginAnchor().Orientation;
       CRadians cRotZ, cRotY, cRotX;
       cEntityRot.ToEulerAngles(cRotZ, cRotY, cRotX);
+
       /* Set robot center */
       CVector2 cCenterPos(cEntityPos.GetX(), cEntityPos.GetY());
+
       /* Position of sensor on the ground after rototranslation */
       CVector2 cSensorPos;
+
       /* Go through the sensors */
       for(UInt32 i = 0; i < m_tReadings.size(); ++i) {
          /* Calculate sensor position on the ground */
          cSensorPos = m_pcGroundSensorEntity->GetSensor(i).Offset;
          cSensorPos.Rotate(cRotZ);
          cSensorPos += cCenterPos;
+
          /* Get the color */
-         const CColor& cColor = m_pcFloorEntity->GetColorAtPoint(cSensorPos.GetX(),
-                                                                 cSensorPos.GetY());
+         const CColor& cColor = m_pcFloorEntity->GetColorAtPoint(cSensorPos.GetX(),cSensorPos.GetY());
+
          /* Set the reading */
          m_tReadings[i].Value = cColor.ToGrayScale() / 255.0f;
+
          /* Apply noise to the sensor */
          if(m_bAddNoise) {
             m_tReadings[i].Value += m_pcRNG->Uniform(m_cNoiseRange);

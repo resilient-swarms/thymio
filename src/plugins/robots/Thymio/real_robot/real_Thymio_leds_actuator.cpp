@@ -3,35 +3,34 @@
 /****************************************/
 /****************************************/
 
-CRealThymioLEDsActuator::CRealThymioLEDsActuator(knet_dev_t* pt_dspic) :
-   CRealThymioDevice(pt_dspic) {
-   kh4_SetRGBLeds(0, 0, 0, 0, 0, 0, 0, 0, 0, GetDSPic());
+CRealThymioLEDsActuator::CRealThymioLEDsActuator(Aseba::DBusInterface* ThymioInterface) :
+   CRealThymioDevice(ThymioInterface) {
+
 }
    
 /****************************************/
 /****************************************/
 
 CRealThymioLEDsActuator::~CRealThymioLEDsActuator() {
-   kh4_SetRGBLeds(0, 0, 0, 0, 0, 0, 0, 0, 0, GetDSPic());
+    Aseba::DBusInterface* Interface = this->GetInterface();
+    Interface->setVariable("Thymio-II","leds.prox.h",{0});
 }
    
 /****************************************/
 /****************************************/
 
-static Real ARGOS2KH4 = 63.0 / 255.0;
 
 void CRealThymioLEDsActuator::Do() {
-   kh4_SetRGBLeds(
-      m_tSettings[0].GetRed()   * ARGOS2KH4,
-      m_tSettings[0].GetGreen() * ARGOS2KH4,
-      m_tSettings[0].GetBlue()  * ARGOS2KH4,
-      m_tSettings[1].GetRed()   * ARGOS2KH4,
-      m_tSettings[1].GetGreen() * ARGOS2KH4,
-      m_tSettings[1].GetBlue()  * ARGOS2KH4,
-      m_tSettings[2].GetRed()   * ARGOS2KH4,
-      m_tSettings[2].GetGreen() * ARGOS2KH4,
-      m_tSettings[2].GetBlue()  * ARGOS2KH4,
-      GetDSPic());
+
+}
+
+/****************************************/
+/****************************************/
+
+//its a good idea to devise a good conversion plan for values
+void CRealThymioLEDsActuator::SetLed(Real brightness){
+    Aseba::DBusInterface* Interface = this->GetInterface();
+    Interface->setVariable("Thymio-II","leds.prox.h",{(short)brightness});
 }
 
 /****************************************/
