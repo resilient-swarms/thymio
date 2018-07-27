@@ -18,7 +18,7 @@ CRealThymioGroundSensor::~CRealThymioGroundSensor() {
 
 void CRealThymioGroundSensor::Do() {
     Aseba::DBusInterface* Interface = this->GetInterface();
-    QList<qint16> list = Interface->getVariable("thymio-II", "prox.ground.reflected");
+    QList<qint16> list = Interface->getVariable("thymio-II", "prox.ground.delta");
     for( int i=0; i<list.count(); ++i )
     {
         m_tReadings[i].Value = (short)list[i];

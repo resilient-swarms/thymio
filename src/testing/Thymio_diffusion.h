@@ -7,7 +7,7 @@
 #include <argos3/core/utility/math/angles.h>
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
-#include <argos3/plugins/robots/generic/control_interface/ci_leds_actuator.h>
+#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_leds_actuator.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
 
@@ -28,7 +28,7 @@ public:
    CThymioDiffusion();
 
    /* Class destructor. */
-   virtual ~CThymioDiffusion() {}
+   virtual ~CThymioDiffusion();
 
    /*
     * This function initializes the controller.
@@ -59,11 +59,11 @@ public:
     * so the function could have been omitted. It's here just for
     * completeness.
     */
-   virtual void Destroy() {}
+   virtual void Destroy(){}
 
 private:
    /* Pointer to the LEDs */
-    CCI_LEDsActuator*   m_pcLeds;
+    CCI_ThymioLedsActuator*   m_pcLeds;
    /* Pointer to the differential steering actuator */
    CCI_DifferentialSteeringActuator* m_pcWheels;
    /* Pointer to the Thymio proximity sensor */

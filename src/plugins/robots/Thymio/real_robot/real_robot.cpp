@@ -28,7 +28,8 @@ CRealRobot::CRealRobot() :
 /****************************************/
 
 void CRealRobot::Init(const std::string& str_conf_fname,
-                      const std::string& str_controller_id) {
+                      const std::string& str_controller_id,
+                       Aseba::DBusInterface* ThymioInterface) {
    /* Parse the .argos file */
    m_tConfiguration.LoadFile(str_conf_fname);
    m_tConfRoot = *m_tConfiguration.FirstChildElement();
@@ -54,6 +55,7 @@ void CRealRobot::Init(const std::string& str_conf_fname,
          m_ptControllerConfRoot = &(*itControllers);
       }
    }
+   std::cout<<strControllerTag;
    /* Make sure we found the tag */
    if(strControllerTag == "") {
       THROW_ARGOSEXCEPTION("Can't find controller with id \"" << str_controller_id << "\"");
@@ -62,7 +64,7 @@ void CRealRobot::Init(const std::string& str_conf_fname,
     * get connection to Thymio
     */
    try{
-       ThymioInterface = new Aseba::DBusInterface();
+       this->ThymioInterface = ThymioInterface;
    }
    catch(CARGoSException& e)
    {
@@ -149,14 +151,20 @@ void CRealRobot::Execute() {
    CRate cRate(m_fRate);
    /* Main loop */
    LOG << "[INFO] Control loop running" << std::endl;
-   while(true) {
+   bool count = true;
+   while(count) {
       /* Do useful work */
       Sense();
       Control();
       Act();
       /* Sleep to enforce control rate */
       cRate.Sleep();
+//      if(value.empty())
+//          count = true;
+//      else
+//          count = value.first();
    }
+   this->Cleanup(1);
 }
 
 /****************************************/
@@ -175,4 +183,6 @@ void CRealRobot::Cleanup(int) {
 
 /****************************************/
 /****************************************/
+
+
 

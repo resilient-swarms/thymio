@@ -26,7 +26,8 @@ namespace argos {
        * Internally calls InitRobot() and InitController() in this order.
        */
       virtual void Init(const std::string& str_conf_fname,
-                        const std::string& str_controller_id);
+                        const std::string& str_controller_id,
+                         Aseba::DBusInterface* ThymioInterface);
 
       /**
        * Put your robot initialization code here.

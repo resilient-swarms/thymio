@@ -46,7 +46,7 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
-   m_pcLeds      = GetActuator<CCI_LEDsActuator                >("leds");
+   m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("leds");
    m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    /*
@@ -60,21 +60,19 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
    m_cGoStraightAngleRange.Set(-ToRadians(m_cAlpha), ToRadians(m_cAlpha));
    GetNodeAttributeOrDefault(t_node, "delta", m_fDelta, m_fDelta);
    GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
-   /*
-    * set the color of LEDs
-    */
-   m_pcLeds->SetAllIntensities(50);
-   m_pcLeds->SetSingleIntensity(1,200);
 }
 
 /****************************************/
 /****************************************/
 
 void CThymioDiffusion::ControlStep() {
+
    /* Get readings from proximity sensor */
    const CCI_ThymioProximitySensor::TReadings& tProxReads = m_pcProximity->GetReadings();
    /* Get readings from ground sensor */
    const CCI_ThymioGroundSensor::TReadings& tGroundReads = m_pcGround->GetReadings();
+
+   m_pcLeds->SetProxHIntensity(tProxReads);
 
    /* Sum them together */
    CVector2 cAccumulator;
@@ -93,8 +91,7 @@ void CThymioDiffusion::ControlStep() {
     */
    CRadians cAngle = cAccumulator.Angle();
    if(m_cGoStraightAngleRange.WithinMinBoundIncludedMaxBoundIncluded(cAngle) &&
-      cAccumulator.Length() < m_fDelta &&
-      cground == 0    ) {
+      cAccumulator.Length() < m_fDelta  && cground <= 500) {
       /* Go straight */
       m_pcWheels->SetLinearVelocity(m_fWheelVelocity, m_fWheelVelocity);
    }
@@ -107,6 +104,10 @@ void CThymioDiffusion::ControlStep() {
          m_pcWheels->SetLinearVelocity(0.0f, m_fWheelVelocity);
       }
    }
+}
+
+CThymioDiffusion::~CThymioDiffusion(){
+    m_pcWheels->SetLinearVelocity(0.0f, 0.0f);
 }
 
 /****************************************/

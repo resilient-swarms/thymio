@@ -116,7 +116,7 @@ namespace Aseba
 	}
 
 	//Load an Aseba script (.aesl) on an Aseba Node
-	void DBusInterface::loadScript(const QString& script)
+    void DBusInterface::loadScript(const QString& script)
 	{
 		// check to ensure that we can find the file
 		QFile file(script);
@@ -134,13 +134,13 @@ namespace Aseba
 		}
 	}
 
-	//Get an Aseba variable from a Aseba node
+    //Get an Aseba variable from an Aseba node
 	Values DBusInterface::getVariable(const QString& node, const QString& variable)
 	{
 		return dBusMessagetoValues(dbusMainInterface.call( "GetVariable",node, variable),0);
 	}
 
-	//Set an Aseba variable from a Aseba node
+    //Set an Aseba variable from an Aseba node
 	void DBusInterface::setVariable(const QString& node, const QString& variable, const Values& value)
 	{
 		dbusMainInterface.call("SetVariable",node,variable,valuetoVariant(value));

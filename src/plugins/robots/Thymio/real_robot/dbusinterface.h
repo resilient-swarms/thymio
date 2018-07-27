@@ -57,7 +57,7 @@ namespace Aseba
 
 		bool checkConnection();
 		void displayNodeList();
-		void loadScript(const QString& script);
+        void loadScript(const QString& script);
 		Values getVariable(const QString& node, const QString& variable);
 		void setVariable(const QString& node, const QString& variable, const Values& value);
 		void connectEvent(const QString& eventName, EventCallback callback);
