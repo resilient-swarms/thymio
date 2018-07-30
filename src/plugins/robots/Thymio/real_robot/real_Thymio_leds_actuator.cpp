@@ -61,8 +61,14 @@ void CRealThymioLEDsActuator::SetProxHIntensity(const CCI_ThymioProximitySensor:
                                            (short) intensity[7].Value});
 }
 
+/****************************************/
+/****************************************/
+
 void CRealThymioLEDsActuator::SetProxVIntensity(const CCI_ThymioProximitySensor::TReadings intensity){
     Aseba::DBusInterface* Interface = this->GetInterface();
      Interface->sendEventName("ProxVLeds",{(short)intensity[0].Value,
                                            (short)intensity[1].Value});
 }
+
+/****************************************/
+/****************************************/

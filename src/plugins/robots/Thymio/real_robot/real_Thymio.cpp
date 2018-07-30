@@ -58,7 +58,7 @@ CCI_Actuator* CRealThymio::MakeActuator(const std::string& str_name) {
    MAKE_ACTUATOR(CRealThymioDifferentialSteeringActuator,
                  "differential_steering");
     MAKE_ACTUATOR(CRealThymioLEDsActuator,
-                  "leds");
+                  "thymio_led");
    return NULL;
 }
 

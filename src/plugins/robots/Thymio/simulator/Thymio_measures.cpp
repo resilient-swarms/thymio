@@ -38,8 +38,8 @@ const CRadians PROXIMITY_SENSOR_ANGLES[7] = {
    CRadians::ZERO,
    CRadians(-0.34906),
    CRadians(-0.69813),
-  -CRadians::PI,
-  -CRadians::PI
+   CRadians::PI,
+   CRadians::PI
 };
 
 //measurements from https://github.com/enki-community/enki/blob/master/enki/robots/thymio2/Thymio2.cpp

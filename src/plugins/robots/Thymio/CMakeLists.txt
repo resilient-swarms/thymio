@@ -16,6 +16,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     simulator/Thymio_measures.h
     simulator/Thymio_proximity_default_sensor.h
     simulator/Thymio_ground_rotzonly_sensor.h
+    simulator/Thymio_led_actuator.h
     )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
@@ -55,6 +56,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
       simulator/Thymio_measures.cpp
       simulator/Thymio_ground_rotzonly_sensor.cpp
       simulator/Thymio_proximity_default_sensor.cpp
+      simulator/Thymio_led_actuator.cpp
       )
   # Compile the graphical visualization only if the necessary libraries have been found
     include(ARGoSCheckQTOpenGL)

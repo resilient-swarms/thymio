@@ -73,6 +73,7 @@ namespace argos {
                                        m_pcEmbodiedEntity->GetOriginAnchor());
          }
 
+
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this, "proximity");
          AddComponent(*m_pcProximitySensorEquippedEntity);
@@ -135,7 +136,7 @@ namespace argos {
          m_pcWheeledEntity->SetWheel(1, CVector3(-THYMIO_XOFFSET, -Thymio_HALF_WHEEL_DISTANCE, 0.0f), Thymio_WHEEL_RADIUS);
 
          /* LED equipped entity, with LEDs [0-8] */
-         m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds");
+         m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "thymio_led");
          AddComponent(*m_pcLEDEquippedEntity);
          for(int i=0; i<8; i++){
          m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
@@ -297,7 +298,7 @@ namespace argos {
                    "  </arena>\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
-                   "    <Thymio id=\"kh0\"\n"
+                   "    <Thymio id=\"thymio\"\n"
                    "      <body position=\"0.4,2.3,0.25\" orientation=\"45,0,0\" />\n"
                    "      <controller config=\"mycntrl\" />\n"
                    "      <battery model=\"time_motion\" time_factor=\"1e-5\"\n"

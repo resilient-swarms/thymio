@@ -46,7 +46,7 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
-   m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("leds");
+   m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
    m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    /*
@@ -97,7 +97,7 @@ void CThymioDiffusion::ControlStep() {
    }
    else {
       /* Turn, depending on the sign of the angle */
-      if(cAngle.GetValue() < 0.0f) {
+      if(cAngle.GetValue() > 0.0f) {
          m_pcWheels->SetLinearVelocity(m_fWheelVelocity, 0.0f);
       }
       else {

@@ -16,7 +16,16 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   static CRadians SPACING = CRadians(ARGOS_PI / 4.0f);
+//   static CRadians SPACING = CRadians(0.69813);
+    const CRadians PROXIMITY_SENSOR_ANGLES[7] = {
+        CRadians(0.69813),
+        CRadians(0.34906),
+        CRadians::ZERO,
+        CRadians(-0.34906),
+        CRadians(-0.69813),
+        CRadians::PI,
+        CRadians::PI
+    };
 
    /****************************************/
    /****************************************/
@@ -24,7 +33,8 @@ namespace argos {
    CCI_ThymioProximitySensor::CCI_ThymioProximitySensor() : m_tReadings(7)
    {
       for(size_t i = 0; i < 7; ++i) {
-         m_tReadings[i].Angle = i * SPACING;
+//         m_tReadings[i].Angle = i * SPACING;
+         m_tReadings[i].Angle = PROXIMITY_SENSOR_ANGLES[i];
          m_tReadings[i].Angle.SignedNormalize();
          }
 
