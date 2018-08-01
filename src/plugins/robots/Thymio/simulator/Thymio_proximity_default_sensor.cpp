@@ -34,13 +34,13 @@ namespace argos {
       // needs to be modified for Thymio
       virtual Real CalculateReading(Real f_distance) {
          if(f_distance < 0.04) {
-            return 1.0;
+            return 4300.0;
          }
          else if(f_distance > 0.12){
             return 0.0;
          }
          else {
-            return 4.14*exp(-33.0*f_distance)-.085;
+            return 4300*exp(-33.0*f_distance)-.085;
          }
       }
 

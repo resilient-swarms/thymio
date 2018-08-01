@@ -95,14 +95,14 @@ namespace argos {
          const CColor& cColor = m_pcFloorEntity->GetColorAtPoint(cSensorPos.GetX(),cSensorPos.GetY());
 
          /* Set the reading */
-         m_tReadings[i].Value = cColor.ToGrayScale() / 255.0f;
+         m_tReadings[i].Value = cColor.ToGrayScale() ;
 
          /* Apply noise to the sensor */
          if(m_bAddNoise) {
             m_tReadings[i].Value += m_pcRNG->Uniform(m_cNoiseRange);
          }
          /* Clamp the reading between 0 and 1 */
-         UNIT.TruncValue(m_tReadings[i].Value);
+         //UNIT.TruncValue(m_tReadings[i].Value);
       }
    }
 

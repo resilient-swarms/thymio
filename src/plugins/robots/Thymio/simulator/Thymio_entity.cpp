@@ -56,8 +56,11 @@ namespace argos {
           * Create and init components
           */
          /* Embodied entity */
+
          m_pcEmbodiedEntity = new CEmbodiedEntity(this, "body_0", c_position, c_orientation);
          AddComponent(*m_pcEmbodiedEntity);
+//         m_pcEmbodiedEntity->AddAnchor("body",CVector3(0,0,0), CQuaternion(CRadians::PI_OVER_TWO,CVector3(0,0,1)) );
+//         m_pcEmbodiedEntity->EnableAnchor("body");
 
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);
@@ -66,13 +69,12 @@ namespace argos {
          m_pcWheeledEntity->SetWheel(1, CVector3(-THYMIO_XOFFSET, -Thymio_HALF_WHEEL_DISTANCE, 0.0f), Thymio_WHEEL_RADIUS);
 
          /* LED equipped entity */
-         m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "leds_0");
+         m_pcLEDEquippedEntity = new CLEDEquippedEntity(this, "thymio_led");
          AddComponent(*m_pcLEDEquippedEntity);
          for(int i=0; i<8; i++){
          m_pcLEDEquippedEntity->AddLED(Thymio_LEDS_OFFSET[i],
                                        m_pcEmbodiedEntity->GetOriginAnchor());
          }
-
 
          /* Proximity sensor equipped entity */
          m_pcProximitySensorEquippedEntity = new CProximitySensorEquippedEntity(this, "proximity");
@@ -82,7 +84,7 @@ namespace argos {
                PROXIMITY_SENSOR_OFFSET[i], // offset
                CVector3(1.0 , CRadians::PI_OVER_TWO , PROXIMITY_SENSOR_ANGLES[i]), // direction
                 THYMIO_PROXIMITY_SENSOR_RANGE,
-               m_pcEmbodiedEntity->GetOriginAnchor());
+                    m_pcEmbodiedEntity->GetOriginAnchor());
          }
 
          /* Ground sensor equipped entity */
@@ -128,6 +130,8 @@ namespace argos {
          m_pcEmbodiedEntity = new CEmbodiedEntity(this);
          AddComponent(*m_pcEmbodiedEntity);
          m_pcEmbodiedEntity->Init(GetNode(t_tree, "body"));
+//         m_pcEmbodiedEntity->AddAnchor("body",CVector3(0,0,0), CQuaternion(CRadians::ZERO,CVector3(0,0,1)) );
+//         m_pcEmbodiedEntity->EnableAnchor("body");
 
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);

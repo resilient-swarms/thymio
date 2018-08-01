@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
 
    /* Open and pass the events file*/
    try {
-       ThymioInterface->loadScript("ScriptDBusThymio.aesl");
+       ThymioInterface->loadScript("../../../ScriptDBusThymio.aesl");
    } catch (std::exception ex) {
        //std::cout<<ex.what()<<"couldn't open file";
        THROW_ARGOSEXCEPTION("Unknown actuator \"");

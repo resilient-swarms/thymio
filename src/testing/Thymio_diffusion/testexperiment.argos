@@ -39,7 +39,7 @@
   <!-- *********************** -->
   <arena size="5, 5, 1" center="0,0,0.5">
 
-    <floor id="floor" source="image" path="/home/sina/Desktop/Thymio/src/testing/color.png"/> 
+    <floor id="floor" source="image" path="/home/sina/Desktop/Thymio/src/testing/Thymio_diffusion/color.png"/> 
 
     <box id="wall_north" size="4,0.1,0.5" movable="false">
       <body position="0,2,0" orientation="0,0,0" />
@@ -67,7 +67,7 @@
     <distribute>
       <position method="uniform" min="-2,-2,0" max="2,2,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="20" max_trials="100">
+      <entity quantity="1" max_trials="100">
         <Thymio id="eb0">
           <body position="100,0,0" orientation="0,0,0" />
           <controller config="thymio" />

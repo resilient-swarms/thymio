@@ -10,6 +10,7 @@
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_leds_actuator.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
+#include <argos3/core/utility/logging/argos_log.h>
 
 /*
  * All the ARGoS stuff in the 'argos' namespace.

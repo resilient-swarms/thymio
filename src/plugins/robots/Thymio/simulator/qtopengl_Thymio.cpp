@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file <argos3/plugins/robots/Thymio/simulator/qtopengl_Thymio.cpp>
  *
  * @author Carlo Pinciroli - <ilpincy@gmail.com>
@@ -16,9 +16,12 @@
 #include <argos3/core/utility/math/vector2.h>
 #include <QImage>
 
+#include <QOpenGLBuffer>
+#include <QOpenGLContext>
+
 namespace argos {
 
-  static const Real HALF_CHASSIS_LENGHT = 0.056f;
+  static const Real HALF_CHASSIS_LENGHT = 0.055f;
   static const Real HALF_CHASSIS_WIDTH  = 0.055f;
   static const Real BODY_HEIGHT         = 0.053f;
   static const int  NUMBER_OF_VERTICIES = 46;
@@ -146,102 +149,118 @@ namespace argos {
 
    void CQTOpenGLThymio::RenderBody() {
     CQTOpenGLUserFunctions* qlfunc = new CQTOpenGLUserFunctions();
-      qlfunc->DrawBox(
-            CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
-            CQuaternion( ), 
-            CVector3(THYMIO_WIDTH,THYMIO_LENGHT,THYMIO_HEIGHT),//size
-            CColor::WHITE
-            );
-      
-      //orientation CQuaternion(CRadians::PI_OVER_TWO, CVector3::Z)
-       // renders physical engine
-      std::vector<CVector2> tVertices;
-      int i = 0;
-      tVertices.push_back(CVector2(  -0.055, -0.0425));
-      for(Real x = -5.5; x<=5.5; x = x + 0.2)
-      {
-       Real y = (-0.082)*x*x + 6.75;
-       tVertices.push_back( CVector2(  x/100,y/100  ) );
-//       std::cout<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
-      }
-      tVertices.push_back( CVector2( 0.055, -0.0425) );
 
-      qlfunc->DrawPolygon(
-               CVector3(0,0,THYMIO_BASE_TOP), //position
-               CQuaternion(-CRadians::PI_OVER_TWO, CVector3::Z), //orientation
-               tVertices,
-               CColor::WHITE,
-               true
-               );
-
-      // qlfunc->DrawPolygon(
-      //          CVector3(0,0,THYMIO_BASE_ELEVATION), //position
-      //          CQuaternion(), //orientation
-      //          tVertices,
-      //          CColor::RED,
-      //          true
-      //          );
+//      qlfunc->DrawBox(
+//            CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
+//            CQuaternion( ),
+//            CVector3(0.085,0.11,THYMIO_HEIGHT),//size
+//            CColor::WHITE
+//            );
 
 
+//     CQTOpenGLUserFunctions::DrawBox(
+//       CVector3(0,0,0), //position
+//       CQuaternion( CVector3(0,0,0),CVector3(0,0,0)), //orientation
+//       CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
+//       CColor::WHITE
+//       )
 
-    // CQTOpenGLUserFunctions::DrawBox(
-    //   CVector3(0,0,0), //position
-    //   CQuaternion( CVector3(0,0,0),CVector3(0,0,0)), //orientation
-    //   CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
-    //   CColor::WHITE
-    //   )
+       SetWhitePlasticMaterial();
 
-      // SetWhitePlasticMaterial();
-      // glBegin(GL_QUADS);
-      //   /* Bottom face */
-      //   glNormal3f( 0.0f,  0.0f,-1.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+
+       glBegin(GL_POLYGON);
+         /* top face */
+         glVertex3f(-0.055 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  , 0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  , 0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.056 , 0.000  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  ,-0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  ,-0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 ,-0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 ,-0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+
+         glEnd();
         
+         /* bottom face */
+         glBegin(GL_POLYGON);
+//         glNormal3f( 1.0f,  0.0f, 0.0f);
+         glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+         glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
+         glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
+         glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
+         glEnd();
 
-      //   /* Top face */
-      //   glNormal3f( 0.0f,  0.0f, 1.0f);
-      //   glVertex3f(-HALF_CHASSIS_WIDTH, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f( HALF_CHASSIS_WIDTH, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f( HALF_CHASSIS_WIDTH,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f(-HALF_CHASSIS_WIDTH,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
 
+        glBegin(GL_QUADS);
+        glVertex3f(-0.055 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+        glVertex3f(-0.055 , 0.055 ,  THYMIO_BASE_ELEVATION);
+        glVertex3f( 0.033 , 0.055 ,  THYMIO_BASE_ELEVATION);
+        glVertex3f( 0.033 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+        glEnd();
 
-      // glEnd();
+/*The Curve*/
+       glBegin(GL_QUADS);
+         glVertex3f(0.033  , -0.055 ,    BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f(0.033  , -0.055 ,    THYMIO_BASE_ELEVATION);
+         glVertex3f(0.04   , -0.05  ,    THYMIO_BASE_ELEVATION);
+         glVertex3f(0.04   , -0.05  ,    BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
 
-      // glBegin(GL_QUADS);
-      //   /* South face */
-      //   glNormal3f( 0.0f, -1.0f, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-        
-      //   /* East face */
-      //   glNormal3f( 1.0f,  0.0f, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   /* North face */
-      //   glNormal3f( 0.0f,  1.0f, 0.0f);
-      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   /* West face */
-      //   glNormal3f(-1.0f,  0.0f, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-      //   glVertex3f(-HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-      // glEnd();
+         glBegin(GL_QUADS);
+         glVertex3f( 0.04  ,-0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  ,-0.05   , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  ,-0.0255 , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  ,-0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
 
-      // glDisable(GL_NORMALIZE);
+         glBegin(GL_QUADS);
+         glVertex3f( 0.05  ,-0.0255, BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  ,-0.0255, THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.056 , 0.0   , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.056 , 0.0   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
 
-      // glDisable(GL_TEXTURE_2D);
+         glBegin(GL_QUADS);
+         glVertex3f( 0.056 , 0.000  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.056 , 0.000  , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.050 , 0.0255 , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.050 , 0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
+
+         glBegin(GL_QUADS);
+         glVertex3f( 0.05  , 0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  , 0.0255 , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  , 0.05   , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  , 0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
+
+         glBegin(GL_QUADS);
+         glVertex3f( 0.04  , 0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  , 0.05   , THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.033 , 0.055  , THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
+
+/*end of curve*/
+
+         //side
+         glBegin(GL_QUADS);
+         glVertex3f(-0.055 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 ,-0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 ,-0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
+
+         //bottom
+         glBegin(GL_QUADS);
+         glVertex3f(-0.053 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.053 , 0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.053 ,-0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.053 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
+
+       glDisable(GL_TEXTURE_2D);
    }
 
    /****************************************/

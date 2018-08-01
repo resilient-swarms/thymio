@@ -22,7 +22,7 @@ void CRealThymioGroundSensor::Do() {
     for( int i=0; i<list.count(); ++i )
     {
         m_tReadings[i].Value = (short)list[i];
-         std::cout<<"*ground sensor value:"<<std::to_string( m_tReadings[i].Value) <<"\n";
+//         std::cout<<"*ground sensor value:"<<std::to_string( m_tReadings[i].Value) <<"\n";
     }
 }
 

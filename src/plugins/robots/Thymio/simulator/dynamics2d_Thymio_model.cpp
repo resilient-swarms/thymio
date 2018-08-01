@@ -18,7 +18,7 @@ namespace argos {
    static const Real Thymio_MASS                = 0.270f; //THYMIO is 270 grams
    static const Real Thymio_MAX_FORCE           = 1.5f;
    static const Real Thymio_MAX_TORQUE          = 1.5f;
-   static const int  NUMBER_OF_VERTICIES        = 57;
+   static const int  NUMBER_OF_VERTICIES        = 9;
 
    enum Thymio_WHEELS {
       Thymio_LEFT_WHEEL   = 0,
@@ -51,15 +51,36 @@ namespace argos {
         cpVect* tVertices = new cpVect[NUMBER_OF_VERTICIES];
 
         int i = 0;
-        tVertices[i++] = cpv(-0.055, -0.0425);
-        //55 points
-        for(Real x = -5.5; x<=5.5; x = x + 0.2)
-        {
-          Real y = (-0.082)*x*x+6.75;
-          tVertices[i++] =  cpv( x/100, y/100) ;
-//          std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
-        }
-       tVertices[i] = cpv( 0.055, -0.0425);
+        tVertices[i++] = cpv(-0.055, -0.053);
+        tVertices[i++] = cpv(-0.055,  0.033);
+
+        tVertices[i++] = cpv(-0.0500, 0.040);
+        tVertices[i++] = cpv(-0.0255, 0.050);
+        tVertices[i++] = cpv( 0.0000, 0.056);
+        tVertices[i++] = cpv( 0.0255, 0.050);
+        tVertices[i++] = cpv( 0.0500, 0.040);
+//        //55 points
+////        for(Real x = -5.5; x<=5.5; x = x + 0.2)
+////        {
+////          Real y = (-0.082)*x*x+6.75;
+////          tVertices[i++] =  cpv( x/100, y/100) ;
+//////          std::cout<<i<<") x:"<<x/100<<"\ty:"<<y/100<<"\n";
+////        }
+       tVertices[i++] = cpv( 0.055,  0.033);
+       tVertices[i]   = cpv( 0.055, -0.053);
+       //*********************************
+
+//       tVertices[i++] = cpv( -0.0425, -0.055);
+//       tVertices[i++] = cpv(  0.0425, -0.055);
+
+//       tVertices[i++] = cpv( 0.062, -0.0485 );
+//       tVertices[i++] = cpv( 0.075, -0.0255 );
+//       tVertices[i++] = cpv( 0.0795, 0.0000 );
+//       tVertices[i++] = cpv( 0.075,  0.0255);
+//       tVertices[i++] = cpv( 0.062,  0.0485);
+
+//       tVertices[i++] = cpv( 0.0425, 0.055);
+//       tVertices[i]   = cpv(-0.0425, 0.055);
 
        /*Box physical model*/
        /*
