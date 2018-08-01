@@ -100,7 +100,13 @@ namespace argos {
          SetLEDMaterial(cColor.GetRed(), cColor.GetGreen(), cColor.GetBlue());
          glPushMatrix();
          glTranslatef(cOffset.GetX(), cOffset.GetY(), cOffset.GetZ());
-         glRotatef(-90,0,1,0);
+         if(i==7 || i==6){
+             glRotatef(-90,0,1,0);
+         }
+         else{
+             glRotatef(90,0,1,0);
+             glRotatef(PROXIMITY_SENSOR_ANGLES[i].GetValue(),1,0,0); //proximity sensors' angles are similar to LEDs'
+         }
          glCallList(m_unLEDList);
          glPopMatrix();
       }
@@ -165,39 +171,23 @@ namespace argos {
 //       CColor::WHITE
 //       )
 
-       SetWhitePlasticMaterial();
+//       SetWhitePlasticMaterial();
 
 
        glBegin(GL_POLYGON);
          /* top face */
-         glVertex3f(-0.055 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.04  , 0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.05  , 0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.056 , 0.000  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.05  ,-0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.04  ,-0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f( 0.033 ,-0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
          glVertex3f(-0.055 ,-0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 ,-0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  ,-0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  ,-0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.056 , 0.000  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.05  , 0.0255 , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.04  , 0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
 
          glEnd();
         
-         /* bottom face */
-         glBegin(GL_POLYGON);
-//         glNormal3f( 1.0f,  0.0f, 0.0f);
-         glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-         glVertex3f( HALF_CHASSIS_LENGHT, -HALF_CHASSIS_WIDTH, 0.0f);
-         glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, 0.0f);
-         glVertex3f( HALF_CHASSIS_LENGHT,  HALF_CHASSIS_WIDTH, BODY_HEIGHT);
-         glEnd();
-
-
-        glBegin(GL_QUADS);
-        glVertex3f(-0.055 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-        glVertex3f(-0.055 , 0.055 ,  THYMIO_BASE_ELEVATION);
-        glVertex3f( 0.033 , 0.055 ,  THYMIO_BASE_ELEVATION);
-        glVertex3f( 0.033 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-        glEnd();
 
 /*The Curve*/
        glBegin(GL_QUADS);
@@ -238,13 +228,13 @@ namespace argos {
          glBegin(GL_QUADS);
          glVertex3f( 0.04  , 0.05   , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
          glVertex3f( 0.04  , 0.05   , THYMIO_BASE_ELEVATION);
-         glVertex3f(-0.033 , 0.055  , THYMIO_BASE_ELEVATION);
-         glVertex3f(-0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 , 0.055  , THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
          glEnd();
 
 /*end of curve*/
 
-         //side
+         //sides
          glBegin(GL_QUADS);
          glVertex3f(-0.055 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
          glVertex3f(-0.055 ,-0.055 ,  THYMIO_BASE_ELEVATION);
@@ -252,12 +242,19 @@ namespace argos {
          glVertex3f( 0.033 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
          glEnd();
 
-         //bottom
          glBegin(GL_QUADS);
-         glVertex3f(-0.053 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glVertex3f(-0.053 , 0.055 ,  THYMIO_BASE_ELEVATION);
-         glVertex3f(-0.053 ,-0.055 ,  THYMIO_BASE_ELEVATION);
-         glVertex3f(-0.053 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f( 0.033 , 0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 , 0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glEnd();
+
+         //back
+         glBegin(GL_QUADS);
+         glVertex3f(-0.055 , 0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 , 0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 ,-0.055 ,  THYMIO_BASE_ELEVATION);
+         glVertex3f(-0.055 ,-0.055 ,  BODY_HEIGHT+THYMIO_BASE_ELEVATION);
          glEnd();
 
        glDisable(GL_TEXTURE_2D);
@@ -271,21 +268,21 @@ namespace argos {
          (with no base, cause it's not visible anyway) */
       glBegin(GL_TRIANGLES);
       /* North */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f( 0.015, -0.015, 0.000);
-      glVertex3f( 0.015,  0.015, 0.000);
+      glVertex3f( 0.000,  0.000, 0.005);
+      glVertex3f( 0.005, -0.005, 0.000);
+      glVertex3f( 0.005,  0.005, 0.000);
       /* South */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f(-0.015,  0.015, 0.000);
-      glVertex3f(-0.015, -0.015, 0.000);
+      glVertex3f( 0.000,  0.000, 0.005);
+      glVertex3f(-0.005,  0.005, 0.000);
+      glVertex3f(-0.005, -0.005, 0.000);
       /* West */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f( 0.015,  0.015, 0.000);
-      glVertex3f(-0.015,  0.015, 0.000);
+      glVertex3f( 0.000,  0.000, 0.005);
+      glVertex3f( 0.005,  0.005, 0.000);
+      glVertex3f(-0.005,  0.005, 0.000);
       /* East */
-      glVertex3f( 0.000,  0.000, 0.015);
-      glVertex3f(-0.015, -0.015, 0.000);
-      glVertex3f( 0.015, -0.015, 0.000);
+      glVertex3f( 0.000,  0.000, 0.005);
+      glVertex3f(-0.005, -0.005, 0.000);
+      glVertex3f( 0.005, -0.005, 0.000);
       glEnd();
    }
 
