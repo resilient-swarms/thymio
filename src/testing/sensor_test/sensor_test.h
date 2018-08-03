@@ -9,6 +9,9 @@
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
 #include <argos3/core/utility/logging/argos_log.h>
 
+#include <iostream>
+#include <fstream>
+
 using namespace argos;
 
 class CSensorTest : public CCI_Controller {
@@ -44,9 +47,15 @@ private:
    Real m_fDelta;
    /* Wheel speed. */
    Real m_fWheelVelocity;
+
+   /*Simulator tick*/
+   Real m_tick;
+
    /* Angle tolerance range to go straight.
     * It is set to [-alpha,alpha]. */
    CRange<CRadians> m_cGoStraightAngleRange;
+
+   std::ofstream sensor_readings;
 
 };
 

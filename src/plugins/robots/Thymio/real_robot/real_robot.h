@@ -88,6 +88,7 @@ namespace argos {
       TConfigurationNode    m_tConfRoot;
       TConfigurationNode*   m_ptControllerConfRoot;
       Real                  m_fRate;
+      Real                  m_Time;
       static CRealRobot*    m_pcInstance;
       
    };

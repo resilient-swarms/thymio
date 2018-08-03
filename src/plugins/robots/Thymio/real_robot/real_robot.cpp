@@ -34,11 +34,14 @@ void CRealRobot::Init(const std::string& str_conf_fname,
    m_tConfiguration.LoadFile(str_conf_fname);
    m_tConfRoot = *m_tConfiguration.FirstChildElement();
    /*
-    * Get the control rate
+    * Get the control rate and timer
     */
    TConfigurationNode& tFramework   = GetNode(m_tConfRoot, "framework");
    TConfigurationNode& tExperiment  = GetNode(tFramework, "experiment");
    GetNodeAttribute(tExperiment, "ticks_per_second", m_fRate);
+
+   GetNodeAttribute(tExperiment, "length", m_Time);
+
    /*
     * Parse XML to identify the controller to run
     */
@@ -56,10 +59,12 @@ void CRealRobot::Init(const std::string& str_conf_fname,
       }
    }
    std::cout<<strControllerTag;
+
    /* Make sure we found the tag */
    if(strControllerTag == "") {
       THROW_ARGOSEXCEPTION("Can't find controller with id \"" << str_controller_id << "\"");
    }
+
    /*
     * get connection to Thymio
     */
@@ -121,6 +126,7 @@ void CRealRobot::Init(const std::string& str_conf_fname,
       pcCISens->Init(*itSens);
       m_pcController->AddSensor(itSens->Value(), pcCISens);
    }
+
    /* Configure the controller */
    m_pcController->Init(GetNode(*m_ptControllerConfRoot, "params"));
    LOG << "[INFO] Controller type '" << strControllerTag << "', id '" << str_controller_id << "' initialization done" << std::endl;
@@ -147,6 +153,7 @@ void CRealRobot::Control() {
 /****************************************/
 
 void CRealRobot::Execute() {
+    Real passed_time = 0;
    /* Enforce the control rate */
    CRate cRate(m_fRate);
    /* Main loop */
@@ -157,12 +164,14 @@ void CRealRobot::Execute() {
       Sense();
       Control();
       Act();
+
       /* Sleep to enforce control rate */
       cRate.Sleep();
-//      if(value.empty())
-//          count = true;
-//      else
-//          count = value.first();
+
+      /*enforce the timer*/
+      passed_time++;
+      if(passed_time/cRate.GetRate() >= this->m_Time && this->m_Time!=0.0f)
+          count = false;
    }
    this->Cleanup(1);
 }

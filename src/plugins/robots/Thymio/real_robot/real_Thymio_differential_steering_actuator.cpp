@@ -38,8 +38,8 @@ void CRealThymioDifferentialSteeringActuator::SetLinearVelocity(Real f_left_velo
    // m_fCurrentVelocity[0] = f_left_velocity;
    // m_fCurrentVelocity[1] = f_right_velocity;
   Aseba::DBusInterface* Interface = this->GetInterface();
-  Interface->setVariable("thymio-II", "motor.left.target",  {(short)f_left_velocity } );
-  Interface->setVariable("thymio-II", "motor.right.target", {(short)f_right_velocity} );
+  Interface->setVariable("thymio-II", "motor.left.target",  {(signed short)f_left_velocity } );
+  Interface->setVariable("thymio-II", "motor.right.target", {(signed short)f_right_velocity} );
 }
 
 /****************************************/

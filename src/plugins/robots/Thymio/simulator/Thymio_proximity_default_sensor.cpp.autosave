@@ -40,10 +40,10 @@ namespace argos {
             output = 0;
          }
          else if(f_distance > 0.02 && f_distance < 0.085){
-            output = 0.083/2910 * f_distance; // lineslope / distance range
+            output = 2910/(0.083) * f_distance; // lineslope / distance range
          }
          else {
-            output = 0.015/192 * f_distance;
+            output =  192/(0.015) * f_distance;
          }
 
          /* scaling down into range */
