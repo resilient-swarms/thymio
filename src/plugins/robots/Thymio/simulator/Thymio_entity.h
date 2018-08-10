@@ -20,6 +20,7 @@ namespace argos {
 #include <argos3/core/simulator/entity/composable_entity.h>
 #include <argos3/plugins/simulator/entities/wheeled_entity.h>
 #include <argos3/plugins/simulator/entities/box_entity.h>
+#include <argos3/plugins/robots/Thymio/simulator/Thymio_acc_sensor.h>
 
 namespace argos {
 
@@ -91,6 +92,7 @@ namespace argos {
       CProximitySensorEquippedEntity* m_pcProximitySensorEquippedEntity;
       CWheeledEntity*                 m_pcWheeledEntity;
       CBatteryEquippedEntity*         m_pcBatteryEquippedEntity;
+      CThymioAccSensor*               m_pcThymioAccSensor;
    };
 
 }

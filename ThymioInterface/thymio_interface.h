@@ -92,7 +92,7 @@ public:
     void listVariables(const std::string target);
     Values getVariable(const std::string& nodeName, const std::string& varName);
     void setVariable(const std::string& nodeName, const std::string& varName, const strings& data);
-    void emit(const std::string& eventName, const strings& data);
+    void sendEventName(const std::string& eventName, const strings& data);
     void load(const std::string& filePath);
     void stop(const std::string& nodeName);
     void run(const std::string& nodeName);

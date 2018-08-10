@@ -97,6 +97,10 @@ namespace argos {
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
 
+         /* Accelerometer */
+         m_pcThymioAccSensor = new CThymioAccSensor(this,"accelerometer");
+         AddComponent(*m_pcThymioAccSensor);
+
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0", str_bat_model);
          AddComponent(*m_pcBatteryEquippedEntity);
@@ -167,6 +171,8 @@ namespace argos {
          m_pcGroundSensorEquippedEntity->AddSensor(THYMIO_IR_SENSORS_GROUND_OFFSET[1],
                                                    CGroundSensorEquippedEntity::TYPE_GRAYSCALE,
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
+
+
 
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0");

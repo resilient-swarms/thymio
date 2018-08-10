@@ -24,7 +24,7 @@
   #define IN_LIBXML
 #endif
 
-#include "shell.h"
+#include "thymio_interface.h"
 
 using namespace std;
 //using namespace Dashel;
@@ -260,7 +260,7 @@ void ThymioInterface::setVariable(const string& nodeName, const string& varName,
     this->wait();
 }
 
-void ThymioInterface::emit(const string& eventName, const strings& data)
+void ThymioInterface::sendEventName(const string& eventName, const strings& data)
 {
 
 	size_t pos;
@@ -538,7 +538,7 @@ int main()
     interface->listNodes();
     interface->wait();
 
-    interface->load("../ScriptDBusThymio.aesl");
+    interface->load("../../ScriptDBusThymio.aesl");
     interface->wait();
 
 //    interface->listVariables("thymio-II");
@@ -581,13 +581,35 @@ int main()
     while(j<=10);
 
 
-    interface->emit("ProxHLeds",{"32","32","32","32","32","32","32","32"});
-    interface->emit("ProxVLeds",{"32","32"});
+    interface->sendEventName("ProxHLeds",{"32","32","32","32","32","32","32","32"});
+    interface->sendEventName("ProxVLeds",{"32","32"});
 
     interface->wait(1000);
 
-    interface->emit("ProxHLeds",{"0","0","0","0","0","0","0","0"});
-    interface->emit("ProxVLeds",{"0","0"});
+    interface->sendEventName("ProxHLeds",{"0","0","0","0","0","0","0","0"});
+    interface->sendEventName("ProxVLeds",{"0","0"});
+
+
+
+    interface->setVariable("thymio-II","motor.left.target",{"0"});
+    interface->setVariable("thymio-II","motor.right.target",{"0"});
+    ThymioInterface::Values accelerometer;
+
+    j = 0;
+    k = 0;
+    do{
+        accelerometer = interface->getVariable("thymio-II","acc");
+//        interface->setVariable("thymio-II","motor.left.target",{to_string(k++)});
+//        interface->setVariable("thymio-II","motor.right.target",{to_string(k++)});
+
+        std::cout<<j<< ") -x:" << (short)accelerometer[0] << " -y:" << (short)accelerometer[1] << " z:" << (short)accelerometer[2] <<endl;
+
+        j++;
+    }
+    while(j<=100);
+
+    interface->setVariable("thymio-II","motor.left.target",{"0"});
+    interface->setVariable("thymio-II","motor.right.target",{"0"});
 
 	return 0;
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.7.0, 2018-08-08T21:03:46. -->
+<!-- Written by QtCreator 4.7.0, 2018-08-10T10:43:55. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -129,6 +129,7 @@
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
     <valuelist type="QVariantList" key="CMake.Configuration">
+     <value type="QString">ARGOS_BUILD_FOR:STRING=simulator</value>
      <value type="QString">BUILD_FOR_THYMIO:BOOL=OFF</value>
      <value type="QString">CMAKE_BUILD_TYPE:STRING=Debug</value>
      <value type="QString">CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++</value>

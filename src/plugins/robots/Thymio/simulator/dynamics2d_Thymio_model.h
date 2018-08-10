@@ -21,6 +21,8 @@ namespace argos {
 namespace argos {
 
    class CDynamics2DThymioModel : public CDynamics2DSingleBodyObjectModel {
+   public:
+       const Real* m_fCurrentWheelVelocity;
 
    public:
 
@@ -39,7 +41,7 @@ namespace argos {
 
       CDynamics2DDifferentialSteeringControl m_cDiffSteering;
 
-      const Real* m_fCurrentWheelVelocity;
+
 
    };
 
