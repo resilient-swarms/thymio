@@ -30,7 +30,7 @@ Q_DECLARE_METATYPE( QList<qint16> );
 
 typedef QList<qint16> Values;
 
-namespace a
+namespace Aseba
 {
 	class DBusInterface : public QObject
 	{

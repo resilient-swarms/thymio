@@ -21,7 +21,7 @@
 
 #include "dbusinterface.h"
 
-namespace a
+namespace Aseba
 {
 	// Create DBus connection with the interface ch.epfl.mobots.AsebaNetwork
 	DBusInterface::DBusInterface() :

@@ -38,10 +38,10 @@ execute_process(
 endif(NOT DEFINED CPACK_PACKAGE_RELEASE)
 # Other stuff
 set(CPACK_PACKAGE_DESCRIPTION "ARGoS-Thymio (Thymio plugin for ARGoS)
- A plugin to support the Thymio robot (https://www.k-team.com/Thymio-iv/)
+ A plugin to support the Thymio robot )
  into the ARGoS multi-robot simulator (http://www.argos-sim.info/).")
-set(CPACK_PACKAGE_HOMEPAGE "http://github.com/ilpincy/argos3-Thymio/")
-set(CPACK_PACKAGE_MAINTAINER "Carlo Pinciroli <ilpincy@gmail.com>")
+set(CPACK_PACKAGE_HOMEPAGE "http://github.com/")
+set(CPACK_PACKAGE_MAINTAINER "")
 set(CPACK_PACKAGE_NAME "argos3plugins_${ARGOS_BUILD_FOR}_Thymio")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Thymio support for ARGoS3")
 set(CPACK_PACKAGE_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")

@@ -29,6 +29,17 @@ if(BUZZ_FOUND)
 endif(BUZZ_FOUND)
 
 #
+# Find Qt5Core
+#
+#find_package( Qt5Core REQUIRED )
+
+find_package(Qt5 OPTIONAL_COMPONENTS Core Test)
+
+find_package(Qt5DBus)
+
+find_package(aseba)
+
+#
 # Set ARGoS include dir
 #
 include_directories(${CMAKE_SOURCE_DIR} ${ARGOS_INCLUDE_DIRS})
