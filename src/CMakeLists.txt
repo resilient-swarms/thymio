@@ -36,6 +36,11 @@ if(NOT UNIX)
 endif(NOT UNIX)
 
 #
+#Deploy Qt
+#
+#include(${CMAKE_SOURCE_DIR}/cmake/deployqt.cmake)
+
+#
 # Set build options
 #
 include(${CMAKE_SOURCE_DIR}/cmake/ARGoSBuildOptions.cmake)

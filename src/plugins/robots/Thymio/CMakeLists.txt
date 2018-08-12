@@ -118,11 +118,13 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   endif(ARGOS_COMPILE_QTOPENGL)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
-#if(BUILD_FOR_THYMIO)
-#    target_link_libraries(
-#      argos3plugin_${ARGOS_BUILD_FOR}_Thymio
-#      -lThymio)
-#endif(BUILD_FOR_THYMIO)
+if(BUILD_FOR_THYMIO)
+    target_link_libraries(
+      argos3plugin_${ARGOS_BUILD_FOR}_Thymio
+#      -lThymio
+      Qt5::DBus
+      )
+endif(BUILD_FOR_THYMIO)
 
 
 

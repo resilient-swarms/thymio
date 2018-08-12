@@ -95,7 +95,7 @@ namespace Aseba
 		}
 		qDebug() << "You are connected to the D-Bus session bus";
 
-		QDBusMessage nodelist=dbusMainInterface.call("GetNodesList");
+        QDBusMessage nodelist=dbusMainInterface.call("GetNodesList");
 
 		for (int i=0;i<nodelist.arguments().size();++i)
 		{

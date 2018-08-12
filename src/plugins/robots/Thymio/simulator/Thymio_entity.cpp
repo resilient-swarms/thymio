@@ -98,8 +98,8 @@ namespace argos {
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
 
          /* Accelerometer */
-         m_pcThymioAccSensor = new CThymioAccSensor(this,"accelerometer");
-         AddComponent(*m_pcThymioAccSensor);
+//         m_pcThymioAccSensor = new CThymioAccSensor(this,"accelerometer");
+//         AddComponent(*m_pcThymioAccSensor);
 
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0", str_bat_model);

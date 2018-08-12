@@ -28,6 +28,37 @@ if(BUZZ_FOUND)
   include_directories(${BUZZ_C_INCLUDE_DIR})
 endif(BUZZ_FOUND)
 
+find_package(Qt5 COMPONENTS Widgets )
+#    if(Qt5Widgets_FOUND AND Qt5Gui_FOUND)
+#        if(Qt5_VERSION VERSION_GREATER 5.4)
+                # QT is OK, now check for OpenGL
+#                find_package(OpenGL)
+                # All the required libraries are OK
+#                set(ARGOS_COMPILE_QTOPENGL ON)
+
+                # These are required by Qt5
+                set(CMAKE_AUTOMOC ON)
+                set(CMAKE_CXX_STANDARD 14)
+                set(CMAKE_INCLUDE_CURRENT_DIR ON)
+                # Paths
+                add_definitions(${Qt5Widgets_DEFINITIONS} )
+                include_directories(${Qt5Widgets_INCLUDE_DIRS} )
+                set(ARGOS_QTOPENGL_LIBRARIES ${Qt5Widgets_LIBRARIES} )
+# Qt and Qwt
+#find_package(Qt5 OPTIONAL_COMPONENTS Core Gui Widgets OpenGL Network Help Concurrent Xml Svg Test LinguistTools)
+
+
+#if (UNIX AND NOT APPLE)
+#        find_package(Qt5X11Extras)
+        find_package(Qt5DBus)
+#endif ()
+
+#if(Qt5_FOUND)
+#    add_definitions(${Qt5_DEFINITIONS})
+#    include_directories(${Qt5_INCLUDE_DIRS} )
+##    message("found QtDBus")
+#endif(Qt5_FOUND)
+
 #
 # Set ARGoS include dir
 #

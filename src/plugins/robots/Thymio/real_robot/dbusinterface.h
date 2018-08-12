@@ -25,6 +25,7 @@
 #include <QtDBus/QtDBus>
 #include <functional>
 
+
 Q_DECLARE_METATYPE( QList<qint16> );
 
 
@@ -41,12 +42,13 @@ namespace Aseba
 		QDBusConnection bus;
 		typedef std::function<void(const Values&)> EventCallback;
 		std::map<QString, EventCallback> callbacks;
-		QDBusInterface dbusMainInterface;
+        QDBusInterface dbusMainInterface;
 		QDBusInterface* eventfilterInterface;
 
 	public:
 
 		DBusInterface();
+        ~DBusInterface(){}
 
 		QList<QString> nodeList;
 
