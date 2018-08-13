@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.7.0, 2018-08-12T17:12:35. -->
+<!-- Written by QtCreator 4.7.0, 2018-08-13T11:53:03. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -493,6 +493,7 @@
     </valuelist>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments">-c &quot;/home/sina/Desktop/Thymio/src/testing/Thymio_diffusion/testexperiment.argos&quot;
 -i thymio</value>
+    <value type="bool" key="CMakeProjectManager.CMakeRunConfiguration.UseTerminal">true</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/sina/Desktop/Thymio/build/testing/Thymio_diffusion</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
