@@ -95,7 +95,7 @@ namespace argos{
 
    REGISTER_ACTUATOR(ThymioLedActuator,
                      "thymio_led", "default",
-                     "Carlo Pinciroli [ilpincy@gmail.com]",
+                     "Sina Sarparast [sina.sarparast@gmail.com]",
                      "1.0",
                      "The Thymio LED actuator.",
                      "This actuator controls the LED of the thymio. For a complete description of its\n"

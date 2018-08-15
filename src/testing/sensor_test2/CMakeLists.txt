@@ -1,4 +1,4 @@
-find_package( Qt5Core REQUIRED )
+#find_package( Qt5Core REQUIRED )
 
 if(ARGOS_BUILD_FOR_SIMULATOR AND NOT BUILD_FOR_THYMIO)
    add_library(

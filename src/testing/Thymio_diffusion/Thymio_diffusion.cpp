@@ -74,7 +74,10 @@ void CThymioDiffusion::ControlStep() {
 
    m_pcLeds->SetProxHIntensity(tProxReads);
 
-   LOG << tGroundReads;
+//   LOG << tProxReads;
+   std::cout << tProxReads;
+
+//   LOG << tGroundReads;
    std::cout<< "Ground 1 "<< tGroundReads[0]<<"\n";
    std::cout<< "Ground 2 "<< tGroundReads[1]<<"\n";
 

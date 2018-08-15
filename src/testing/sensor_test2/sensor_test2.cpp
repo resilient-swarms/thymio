@@ -62,8 +62,6 @@ void CSensorTest::ControlStep() {
    std::cout<< "Ground 2 "<< tGroundReads[1]<<"\n";
    std::cout<< "proximity :"<< tProxReads[2].Value <<"\n";
 
-
-
    m_pcWheels->SetLinearVelocity(0,0);
 }
 

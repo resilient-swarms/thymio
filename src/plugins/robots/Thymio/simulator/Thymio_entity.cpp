@@ -59,8 +59,6 @@ namespace argos {
 
          m_pcEmbodiedEntity = new CEmbodiedEntity(this, "body_0", c_position, c_orientation);
          AddComponent(*m_pcEmbodiedEntity);
-//         m_pcEmbodiedEntity->AddAnchor("body",CVector3(0,0,0), CQuaternion(CRadians::PI_OVER_TWO,CVector3(0,0,1)) );
-//         m_pcEmbodiedEntity->EnableAnchor("body");
 
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);
@@ -98,8 +96,8 @@ namespace argos {
                                                    m_pcEmbodiedEntity->GetOriginAnchor());
 
          /* Accelerometer */
-         m_pcThymioAccSensor = new CThymioAccSensor(this,"accelerometer");
-         AddComponent(*m_pcThymioAccSensor);
+//         m_pcThymioAccSensor = new CThymioAccSensor(this,"accelerometer");
+//         AddComponent(*m_pcThymioAccSensor);
 
          /* Battery equipped entity */
          m_pcBatteryEquippedEntity = new CBatteryEquippedEntity(this, "battery_0", str_bat_model);
@@ -134,8 +132,7 @@ namespace argos {
          m_pcEmbodiedEntity = new CEmbodiedEntity(this);
          AddComponent(*m_pcEmbodiedEntity);
          m_pcEmbodiedEntity->Init(GetNode(t_tree, "body"));
-//         m_pcEmbodiedEntity->AddAnchor("body",CVector3(0,0,0), CQuaternion(CRadians::ZERO,CVector3(0,0,1)) );
-//         m_pcEmbodiedEntity->EnableAnchor("body");
+
 
          /* Wheeled entity and wheel positions (left, right) */
          m_pcWheeledEntity = new CWheeledEntity(this, "wheels_0", 2);
@@ -263,7 +260,7 @@ namespace argos {
                    "attribute, you can change it to, i.e., 4m as follows:\n\n"
                    "  <arena ...>\n"
                    "    ...\n"
-                   "    <Thymio id=\"thymio\" rab_range=\"4\">\n"
+                   "    <Thymio id=\"thymio\" >\n"
                    "      <body position=\"0.4,2.3,0.25\" orientation=\"45,0,0\" />\n"
                    "      <controller config=\"mycntrl\" />\n"
                    "    </Thymio>\n"

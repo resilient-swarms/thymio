@@ -28,6 +28,8 @@ if(BUZZ_FOUND)
   include_directories(${BUZZ_C_INCLUDE_DIR})
 endif(BUZZ_FOUND)
 
+
+find_package( Qt5Core REQUIRED )
 #
 # Set ARGoS include dir
 #

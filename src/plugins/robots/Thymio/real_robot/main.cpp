@@ -10,32 +10,6 @@ int main(int argc, char* argv[]) {
 
     QCoreApplication a(argc,argv);
 
-//    QString filename="ScriptDBusThymio.aesl";
-//    QFile file( filename );
-//    file.setPermissions(QFile::ExeUser);
-//    if ( file.open(QIODevice::ReadWrite) )
-//    {
-//        QTextStream stream( &file );
-//        stream << "<!DOCTYPE aesl-source>\
-//                  <network>\
-//                  <!--list of global events-->\
-//                  <event size=\"8\" name=\"TurnOnLed\"/>\
-//                  <!--list of constants-->\
-//                  <!--show keywords state-->\
-//                  <keywords flag=\"true\"/>\
-//                  <!--node thymio-II-->\
-//                  <node nodeId=\"1\" name=\"thymio-II\">var sum\
-//                  onevent acc\
-//                      if acc[2]&lt;15 then\
-//                          emit Falling\
-//                      end\
-//                  onevent TurnOnLed\
-//                      call led.prox.h(event.args[0],event.args[1],event.args[2],event.args[3],event.args[4],event.args[5],event.args[6],event.args[7],event.args[8],)	\
-//                  </node>\
-//                  </network>"
-//                  << endl;
-//    }
-
     /*
      * Parse the command line
      */
@@ -64,7 +38,7 @@ int main(int argc, char* argv[]) {
    }
    catch(CARGoSException& ex) {
       /* A fatal error occurred: dispose of data, print error and exit */
-       LOGERR << "Couln't Parse Args!" << std::endl;
+       LOGERR << "Couldn't Parse Args!" << std::endl;
       return 1;
    }
 

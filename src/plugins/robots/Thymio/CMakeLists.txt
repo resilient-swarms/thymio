@@ -124,8 +124,6 @@ endif(ARGOS_BUILD_FOR_SIMULATOR)
 #      -lThymio)
 #endif(BUILD_FOR_THYMIO)
 
-
-
 #
 # Installation
 #
@@ -141,7 +139,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
-if(BUILD_FOR_THYMIO)
+if(BUILD_FOR_THYMIO AND NOT ARGOS_BUILD_FOR_SIMULATOR)
     install(
       FILES ${ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_REALROBOT}
       DESTINATION include/argos3/plugins/robots/Thymio/real_robot
@@ -150,7 +148,7 @@ if(BUILD_FOR_THYMIO)
       FILES real_robot/main.cpp
       DESTINATION include/argos3/plugins/robots/Thymio/real_robot
       )
-endif(BUILD_FOR_THYMIO)
+endif(BUILD_FOR_THYMIO AND NOT ARGOS_BUILD_FOR_SIMULATOR)
 
 install(
   TARGETS argos3plugin_${ARGOS_BUILD_FOR}_Thymio

@@ -30,6 +30,8 @@ void CSensorTest::Init(TConfigurationNode& t_node) {
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    m_tick        = 0;
 
+   GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
+
    try {
        sensor_readings.open("sensor_readings.csv");
    } catch (std::exception e) {
@@ -62,7 +64,7 @@ void CSensorTest::ControlStep() {
 
 
 
-   m_pcWheels->SetLinearVelocity(1,1);
+   m_pcWheels->SetLinearVelocity(m_fWheelVelocity,m_fWheelVelocity);
 }
 
 CSensorTest::~CSensorTest(){

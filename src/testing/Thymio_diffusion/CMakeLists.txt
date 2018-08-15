@@ -1,4 +1,4 @@
-find_package( Qt5Core REQUIRED )
+#find_package( Qt5Core REQUIRED )
 
 if(ARGOS_BUILD_FOR_SIMULATOR AND NOT BUILD_FOR_THYMIO)
    add_library(
@@ -28,4 +28,4 @@ target_link_libraries( Thymio_diffusion
 qt5_use_modules( Thymio_diffusion
                    DBus Test )
 
-add_subdirectory(loop_functions)
+#add_subdirectory(loop_functions)
