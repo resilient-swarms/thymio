@@ -6,7 +6,7 @@
   <!-- ************************* -->
   <framework>
     <system threads="0" />
-    <experiment length="120"
+    <experiment length="30"
                 ticks_per_second="10"
                 random_seed="124" />
   </framework>
@@ -16,8 +16,8 @@
   <!-- *************** -->
   <controllers>
 
-    <sensor_test2_controller id="sensor_test2"
-                               library="build/testing/sensor_test2/libsensor_test2">
+    <ground_sensor_test_controller id="ground_sensor_test"
+                               library="build/testing/ground_sensor_test/libground_sensor_test">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
@@ -30,7 +30,7 @@
 
       <params alpha="0" delta="0.4" velocity="1" />
 
-    </sensor_test2_controller>
+    </ground_sensor_test_controller>
 
   </controllers>
 

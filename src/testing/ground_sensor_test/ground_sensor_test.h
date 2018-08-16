@@ -14,15 +14,15 @@
 
 using namespace argos;
 
-class CSensorTest : public CCI_Controller {
+class CGroundSensorTest : public CCI_Controller {
 
 public:
 
    /* Class constructor. */
-   CSensorTest();
+   CGroundSensorTest();
 
    /* Class destructor. */
-   virtual ~CSensorTest();
+   virtual ~CGroundSensorTest();
 
    virtual void Init(TConfigurationNode& t_node);
 
@@ -56,6 +56,9 @@ private:
    CRange<CRadians> m_cGoStraightAngleRange;
 
    std::ofstream sensor_readings;
+
+   std::vector<double> right_ground_sensor_readings;
+   std::vector<double> left_ground_sensor_readings;
 
    int timer;
    int dist;

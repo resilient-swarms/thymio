@@ -23,7 +23,7 @@ void CRealThymioProximitySensor::Do() {
    for( int i=0; i<list.count(); ++i )
    { 
        m_tReadings[i].Value = (short) list[i];
-       m_tReadings[i].Value = m_tReadings[i].Value/4300; //scaling robot's sensor reading to [0,1]
+       m_tReadings[i].Value = m_tReadings[i].Value;///4300; //scaling robot's sensor reading to [0,1]
    }
 
 }

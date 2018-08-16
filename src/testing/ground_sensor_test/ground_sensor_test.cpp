@@ -1,5 +1,5 @@
 /* Include the controller definition */
-#include "sensor_test2.h"
+#include "ground_sensor_test.h"
 /* Function definitions for XML parsing */
 #include <argos3/core/utility/configuration/argos_configuration.h>
 /* 2D vector definition */
@@ -16,7 +16,7 @@
 /****************************************/
 /****************************************/
 
-CSensorTest::CSensorTest() :
+CGroundSensorTest::CGroundSensorTest() :
    m_pcWheels(NULL),
    m_pcProximity(NULL),
    m_pcGround(NULL),
@@ -30,7 +30,7 @@ CSensorTest::CSensorTest() :
 /****************************************/
 /****************************************/
 
-void CSensorTest::Init(TConfigurationNode& t_node) {
+void CGroundSensorTest::Init(TConfigurationNode& t_node) {
 
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
@@ -39,11 +39,9 @@ void CSensorTest::Init(TConfigurationNode& t_node) {
    m_tick        = 0;
 
 
-   dist = 11;
-   timer = 0;
+//   timer = 0;
    try {
-       sensor_readings.open("sensor_readings.csv");
-       sensor_readings<< dist <<"cm";
+       sensor_readings.open("ground_sensor_readings.csv");
    } catch (std::exception e) {
        std::cout << e.what();
    }
@@ -53,48 +51,63 @@ void CSensorTest::Init(TConfigurationNode& t_node) {
 /****************************************/
 /****************************************/
 
-void CSensorTest::ControlStep() {
+void CGroundSensorTest::ControlStep() {
    /*Increase tick*/
     m_tick++;
-    timer++;
+//    timer++;
 
-   /* Get readings from proximity sensor */
-   const CCI_ThymioProximitySensor::TReadings& tProxReads = m_pcProximity->GetReadings();
    /* Get readings from ground sensor */
    const CCI_ThymioGroundSensor::TReadings& tGroundReads = m_pcGround->GetReadings();
 
-   sensor_readings <<","<<tProxReads[2].Value; // tick / 10 ticks per second * 1cm/s = distance
+   std::cout<< "Ground sensor left: "<< tGroundReads[0] <<"\n";
+   std::cout<< "Ground sensor right: "<< tGroundReads[1] <<"\n";
 
-//   LOG << tGroundReads;
-//   std::cout<< "Ground 1 "<< tGroundReads[0]<<"\n";
-//   std::cout<< "Ground 2 "<< tGroundReads[1]<<"\n";
-   std::cout<< m_tick<<") "<<dist<<"cm proximity :"<< tProxReads[2].Value <<"\n";
+   left_ground_sensor_readings.push_back( tGroundReads[0].Value );
+   right_ground_sensor_readings.push_back( tGroundReads[1].Value );
 
    char c;
-   if( timer % 100 == 0){
+   if( (int)m_tick % 100 == 0){
        m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
-       sensor_readings << "\n" << --dist <<"cm";
-       sensor_readings.flush();
-//       sleep(5);
+
+       sensor_readings<<"left sensor,right sensor\n";
+
+       /* Save readings to file*/
+//       sensor_readings<<"left sensor";
+       for(size_t i=0; i<=left_ground_sensor_readings.size();i++)
+        {
+           sensor_readings<<","<<left_ground_sensor_readings[i];
+           sensor_readings<<","<<right_ground_sensor_readings[i];
+           sensor_readings<<"\n";
+       }
+
+       left_ground_sensor_readings.clear();
+       right_ground_sensor_readings.clear();
+
+       sensor_readings<<"\n";
+
+        /* Waits for user input for next phase of the experiment */
+       std::cout<< "Please enter any character to continue: ";
        std::cin>>c;
        m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
-       timer = 0;
+//       timer = 0;
    }
+
 
 //   m_pcWheels->SetLinearVelocity(0,0);
 }
 
-CSensorTest::~CSensorTest(){
+CGroundSensorTest::~CGroundSensorTest(){
     try {
-        sensor_readings<<"\n";
+        sensor_readings.flush();
         sensor_readings.close();
     } catch (std::exception e) {
         std::cout << e.what();
     }
+    m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
     m_pcWheels->SetLinearVelocity(0.0f, 0.0f);
 }
 
 /****************************************/
 /****************************************/
 
-REGISTER_CONTROLLER(CSensorTest, "sensor_test2_controller")
+REGISTER_CONTROLLER(CGroundSensorTest, "ground_sensor_test_controller")
