@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <iostream>
 #include "real_robot.h"
-
+#include <aseba/switches/asebacppapi/thymio_interface.h>
 using namespace argos;
 
 /****************************************/
@@ -28,8 +28,7 @@ CRealRobot::CRealRobot() :
 /****************************************/
 
 void CRealRobot::Init(const std::string& str_conf_fname,
-                      const std::string& str_controller_id,
-                       Aseba::DBusInterface* ThymioInterface) {
+                      const std::string& str_controller_id) {
    /* Parse the .argos file */
    m_tConfiguration.LoadFile(str_conf_fname);
    m_tConfRoot = *m_tConfiguration.FirstChildElement();
@@ -63,17 +62,6 @@ void CRealRobot::Init(const std::string& str_conf_fname,
    /* Make sure we found the tag */
    if(strControllerTag == "") {
       THROW_ARGOSEXCEPTION("Can't find controller with id \"" << str_controller_id << "\"");
-   }
-
-   /*
-    * get connection to Thymio
-    */
-   try{
-       this->ThymioInterface = ThymioInterface;
-   }
-   catch(CARGoSException& e)
-   {
-      THROW_ARGOSEXCEPTION("Error initializing communication with Thymio Interface");
    }
 
    /*

@@ -29,7 +29,11 @@ if(BUZZ_FOUND)
 endif(BUZZ_FOUND)
 
 
-find_package( Qt5Core REQUIRED )
+#find_package( Qt5Core REQUIRED )
+
+find_package(LibXml2)
+include_directories(${LIBXML2_INCLUDE_DIR})
+
 #
 # Set ARGoS include dir
 #

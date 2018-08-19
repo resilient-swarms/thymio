@@ -3,7 +3,7 @@
 
 #include <argos3/core/utility/configuration/argos_configuration.h>
 #include <argos3/core/control_interface/ci_controller.h>
-#include "dbusinterface.h"
+#include <aseba/switches/asebacppapi/thymio_interface.h>
 
 namespace argos {
 
@@ -26,8 +26,7 @@ namespace argos {
        * Internally calls InitRobot() and InitController() in this order.
        */
       virtual void Init(const std::string& str_conf_fname,
-                        const std::string& str_controller_id,
-                         Aseba::DBusInterface* ThymioInterface);
+                        const std::string& str_controller_id);
 
       /**
        * Put your robot initialization code here.
@@ -77,12 +76,12 @@ namespace argos {
       static void Cleanup(int);
 
 
-      inline Aseba::DBusInterface* GetInterface() const {
-         return ThymioInterface;
-      }
+//      inline Aseba::ThymioInterface* GetInterface() const {
+//         return ThymioInterface;
+//      }
 
    protected:
-      Aseba::DBusInterface* ThymioInterface;
+//      Aseba::ThymioInterface* ThymioInterface;
       CCI_Controller*       m_pcController;
       ticpp::Document       m_tConfiguration;
       TConfigurationNode    m_tConfRoot;

@@ -3,7 +3,7 @@
 
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
 #include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
-#include "dbusinterface.h"
+#include <aseba/switches/asebacppapi/thymio_interface.h>
 
 using namespace argos;
 
@@ -11,9 +11,10 @@ class CRealThymioProximitySensor :
    public CCI_ThymioProximitySensor,
    public CRealThymioDevice {
 
+
 public:
 
-   CRealThymioProximitySensor(Aseba::DBusInterface* ThymioInterface);
+   CRealThymioProximitySensor(Aseba::ThymioInterface* ThymioInterface);
    
    virtual ~CRealThymioProximitySensor();
 

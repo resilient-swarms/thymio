@@ -1,24 +1,27 @@
 #ifndef REAL_Thymio_DEVICE_H
 #define REAL_Thymio_DEVICE_H
 
-#include "dbusinterface.h"
+//#include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
+//#include <argos3/core/utility/logging/argos_log.h>
+
+#include <aseba/switches/asebacppapi/thymio_interface.h>
 
 class CRealThymioDevice {
 
 public:
 
-   CRealThymioDevice(Aseba::DBusInterface* ThymioInterface);
-   virtual ~CRealThymioDevice() {}
+   CRealThymioDevice(Aseba::ThymioInterface* ThymioInterface);
+   virtual ~CRealThymioDevice();
 
    virtual void Do() = 0;
 
-   inline Aseba::DBusInterface* GetInterface() const {
+   inline Aseba::ThymioInterface* GetInterface() const {
       return ThymioInterface;
    }
 
 private:
 
-   Aseba::DBusInterface* ThymioInterface;
+   Aseba::ThymioInterface* ThymioInterface;
    
 };
 

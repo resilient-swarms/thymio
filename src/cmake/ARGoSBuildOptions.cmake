@@ -31,7 +31,7 @@ endif(NOT DEFINED ARGOS_BUILD_NATIVE)
 #
 if(NOT ARGOS_BUILD_FOR_SIMULATOR)
   if(NOT DEFINED Thymio_LIBS)
-    message(FATAL_ERROR "Please specify the location of the Thymio IV libraries with -DThymio_LIBS=PATH")
+    message(FATAL_ERROR "Please specify the location of the Thymio libraries with -DThymio_LIBS=PATH")
   else(NOT DEFINED Thymio_LIBS)
     include_directories(${Thymio_LIBS}/include)
     link_directories(${Thymio_LIBS}/lib)
