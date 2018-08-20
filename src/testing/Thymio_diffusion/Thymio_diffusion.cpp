@@ -105,10 +105,10 @@ void CThymioDiffusion::ControlStep() {
    else {
       /* Turn, depending on the sign of the angle */
       if(cAngle.GetValue() > 0.0f) {
-         m_pcWheels->SetLinearVelocity(m_fWheelVelocity, 0.0f);
+         m_pcWheels->SetLinearVelocity(m_fWheelVelocity, 0);
       }
       else {
-         m_pcWheels->SetLinearVelocity(0.0f, m_fWheelVelocity);
+         m_pcWheels->SetLinearVelocity(0, m_fWheelVelocity);
       }
    }
 }

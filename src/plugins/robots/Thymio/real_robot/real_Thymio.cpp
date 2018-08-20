@@ -36,6 +36,10 @@ void CRealThymio::InitRobot() {
        THROW_ARGOSEXCEPTION("Error initializing communication with Thymio Interface");
     }
 
+    this->ThymioInterface->pingNetwork();
+    this->ThymioInterface->wait(100);
+    this->ThymioInterface->pingNetwork();
+
     /* Open and pass the events file*/
     try {
         ThymioInterface->load("../../../ScriptDBusThymio.aesl");
