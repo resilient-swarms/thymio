@@ -75,11 +75,9 @@ void CThymioDiffusion::ControlStep() {
    m_pcLeds->SetProxHIntensity(tProxReads);
 
 //   LOG << tProxReads;
+   LOG << tProxReads[2].Value<< tProxReads[2].Angle.GetValue();
    std::cout << tProxReads;
 
-//   LOG << tGroundReads;
-   std::cout<< "Ground 1 "<< tGroundReads[0]<<"\n";
-   std::cout<< "Ground 2 "<< tGroundReads[1]<<"\n";
 
    /* Sum them together */
    CVector2 cAccumulator;

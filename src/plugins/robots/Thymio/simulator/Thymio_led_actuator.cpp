@@ -70,14 +70,14 @@ namespace argos{
       /****************************************/
 
       void ThymioLedActuator::SetProxHIntensity(const CCI_ThymioProximitySensor::TReadings intensity){
-          m_pcLEDEquippedEntity->SetLEDColor(0,CColor((short)(intensity[0].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(1,CColor((short)(intensity[1].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(2,CColor((short)(intensity[2].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(3,CColor((short)(intensity[2].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(4,CColor((short)(intensity[3].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(5,CColor((short)(intensity[4].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(6,CColor((short)(intensity[5].Value*100),0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(7,CColor((short)(intensity[6].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(0,CColor((short)(intensity[0].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(1,CColor((short)(intensity[1].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(2,CColor((short)(intensity[2].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(3,CColor((short)(intensity[2].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(4,CColor((short)(intensity[3].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(5,CColor((short)(intensity[4].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(6,CColor((short)(intensity[5].Value*4300/32),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(7,CColor((short)(intensity[6].Value*4300/32),0,0,255));
       }
 
       /****************************************/
