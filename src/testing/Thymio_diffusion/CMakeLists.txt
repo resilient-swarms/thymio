@@ -1,4 +1,3 @@
-#find_package( Qt5Core REQUIRED )
 find_library(asebacppapi_LIBRARY NAMES asebacppapi HINTS /usr/local/lib)
 include_directories(${LIBXML2_INCLUDE_DIR})
 
@@ -24,15 +23,8 @@ target_link_libraries( Thymio_diffusion
   	argos3core_${ARGOS_BUILD_FOR}
   	argos3plugin_${ARGOS_BUILD_FOR}_Thymio
   	argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
-#        ${CMAKE_SOURCE_DIR}/libasebacppapi.so
-#        asebacppapis
+
         ${asebacppapi_LIBRARY}
         ${LIBXML2_LIBRARIES}
-#        Qt5::DBus
   	)
 
-
-#qt5_use_modules( Thymio_diffusion
-#                   DBus Test )
-
-#add_subdirectory(loop_functions)

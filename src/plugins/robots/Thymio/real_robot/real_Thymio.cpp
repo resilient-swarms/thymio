@@ -40,12 +40,13 @@ void CRealThymio::InitRobot() {
     this->ThymioInterface->wait(100);
     this->ThymioInterface->pingNetwork();
 
-    /* Open and pass the events file*/
-    try {
-        ThymioInterface->load("../../../ScriptDBusThymio.aesl");
-    } catch (std::exception ex) {
-        THROW_ARGOSEXCEPTION("Can't Open File!!! \"");
-    }
+//    /* Open and pass the events file*/
+//    try {
+//        ThymioInterface->load("../../../ScriptDBusThymio.aesl");
+//    } catch (std::exception ex) {
+//        THROW_ARGOSEXCEPTION("Can't Open File!!! \"");
+//    }
+    this->ThymioInterface->setup("thymio-II");
 
    /* Make sure to start from a clean state */
    /* It's weird to call Destroy() here, but all it does is making
