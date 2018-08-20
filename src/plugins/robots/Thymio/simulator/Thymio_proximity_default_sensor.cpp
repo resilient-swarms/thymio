@@ -33,23 +33,12 @@ namespace argos {
       }
       // needs to be modified for Thymio
       virtual Real CalculateReading(Real f_distance) {
-           Real output = 0;
-
-         /*fitting into range */
-         if(f_distance > 0.085) {
-            output = 0;
-         }
-         else if(f_distance > 0.02 && f_distance < 0.085){
-            output = 0.083/2910 * f_distance; // lineslope / distance range
-         }
-         else {
-            output = 0.015/192 * f_distance;
-         }
-
-         /* scaling down into range */
-         return output / 4300;
+           Real x = f_distance;
+           if(0<=x && x<=11)
+               return -2.055*x*x*x*x+43.41*x*x*x-292.9*x*x+312.2*x+4362;
+           else
+               return 0;
       }
-
    };
 
    /****************************************/

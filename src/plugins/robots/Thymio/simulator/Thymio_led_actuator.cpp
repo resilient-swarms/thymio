@@ -70,14 +70,14 @@ namespace argos{
       /****************************************/
 
       void ThymioLedActuator::SetProxHIntensity(const CCI_ThymioProximitySensor::TReadings intensity){
-          m_pcLEDEquippedEntity->SetLEDColor(0,CColor(intensity[0].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(1,CColor(intensity[1].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(2,CColor(intensity[2].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(3,CColor(intensity[2].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(4,CColor(intensity[3].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(5,CColor(intensity[4].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(6,CColor(intensity[5].Value*100,0,0,255));
-          m_pcLEDEquippedEntity->SetLEDColor(7,CColor(intensity[6].Value*100,0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(0,CColor((short)(intensity[0].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(1,CColor((short)(intensity[1].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(2,CColor((short)(intensity[2].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(3,CColor((short)(intensity[2].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(4,CColor((short)(intensity[3].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(5,CColor((short)(intensity[4].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(6,CColor((short)(intensity[5].Value*100),0,0,255));
+          m_pcLEDEquippedEntity->SetLEDColor(7,CColor((short)(intensity[6].Value*100),0,0,255));
       }
 
       /****************************************/
@@ -85,7 +85,7 @@ namespace argos{
 
       void ThymioLedActuator::SetProxVIntensity(const CCI_ThymioProximitySensor::TReadings intensity){
           for(size_t i=0; i < intensity.size(); ++i)
-              m_pcLEDEquippedEntity->SetLEDColor(i,CColor(intensity[i].Value,0,0,255));
+              m_pcLEDEquippedEntity->SetLEDColor(i,CColor(intensity[i].Value*100,0,0,255));
       }
 
       /****************************************/
