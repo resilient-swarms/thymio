@@ -22,7 +22,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
     )
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
-if(BUILD_FOR_THYMIO)
+if(ARGOS_BUILD_FOR STREQUAL "thymio")
     set(ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_REALROBOT
       real_robot/real_Thymio.h
       real_robot/real_Thymio_device.h
@@ -31,10 +31,10 @@ if(BUILD_FOR_THYMIO)
       # real_robot/real_Thymio_battery_sensor.h
       real_robot/real_Thymio_ground_sensor.h
       real_robot/real_Thymio_proximity_sensor.h
-      real_robot/dbusinterface.h
-      real_robot/real_robot.h
+#      real_robot/dbusinterface.h
+#      real_robot/real_robot.h
       )
-endif(BUILD_FOR_THYMIO)
+endif(ARGOS_BUILD_FOR STREQUAL "thymio"s)
 
 
 #
@@ -78,7 +78,7 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
 
-if(BUILD_FOR_THYMIO)
+if(ARGOS_BUILD_FOR STREQUAL "thymio")
     set(ARGOS3_SOURCES_PLUGINS_ROBOTS_Thymio
       ${ARGOS3_SOURCES_PLUGINS_ROBOTS_Thymio}
       ${ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_REALROBOT}
@@ -89,10 +89,11 @@ if(BUILD_FOR_THYMIO)
 #       real_robot/real_Thymio_battery_sensor.cpp
       real_robot/real_Thymio_ground_sensor.cpp
       real_robot/real_Thymio_proximity_sensor.cpp
-      real_robot/dbusinterface.cpp
-      real_robot/real_robot.cpp
+#      real_robot/dbusinterface.cpp
+#      real_robot/real_robot.cpp
+#      real_robot/thymio_interface.cpp
       )
-endif(BUILD_FOR_THYMIO)
+endif(ARGOS_BUILD_FOR STREQUAL "thymio")
 
 #
 # Create Thymio plugin
@@ -118,11 +119,11 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
   endif(ARGOS_COMPILE_QTOPENGL)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
-#if(BUILD_FOR_THYMIO)
+#if(ARGOS_BUILD_FOR STREQUAL "thymio")
 #    target_link_libraries(
 #      argos3plugin_${ARGOS_BUILD_FOR}_Thymio
 #      -lThymio)
-#endif(BUILD_FOR_THYMIO)
+#endif(ARGOS_BUILD_FOR STREQUAL "thymio")
 
 #
 # Installation

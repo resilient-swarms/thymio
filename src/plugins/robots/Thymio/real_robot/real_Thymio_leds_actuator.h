@@ -3,8 +3,7 @@
 
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_leds_actuator.h>
 #include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
-#include "dbusinterface.h"
-#include <QtDBus/QtDBus>
+#include <aseba/switches/asebacppapi/thymio_interface.h>
 
 using namespace argos;
 
@@ -14,7 +13,7 @@ class CRealThymioLEDsActuator :
 
 public:
 
-   CRealThymioLEDsActuator(Aseba::DBusInterface* ThymioInterface);
+   CRealThymioLEDsActuator(Aseba::ThymioInterface* ThymioInterface);
    
    virtual ~CRealThymioLEDsActuator();
 

@@ -3,7 +3,7 @@
 /****************************************/
 /****************************************/
 
-CRealThymioLEDsActuator::CRealThymioLEDsActuator(Aseba::DBusInterface* ThymioInterface) :
+CRealThymioLEDsActuator::CRealThymioLEDsActuator(Aseba::ThymioInterface* ThymioInterface) :
    CRealThymioDevice(ThymioInterface) {
 }
    
@@ -11,7 +11,7 @@ CRealThymioLEDsActuator::CRealThymioLEDsActuator(Aseba::DBusInterface* ThymioInt
 /****************************************/
 
 CRealThymioLEDsActuator::~CRealThymioLEDsActuator() {
-    Aseba::DBusInterface* Interface = this->GetInterface();
+    Aseba::ThymioInterface* Interface = this->GetInterface();
     Interface->setVariable("Thymio-II","leds.prox.h",{0});
 }
    
@@ -27,7 +27,7 @@ void CRealThymioLEDsActuator::Do() {
 /****************************************/
 
 void CRealThymioLEDsActuator::SetProxHIntensity(std::vector<short> intensity){
-    Aseba::DBusInterface* Interface = this->GetInterface();
+    Aseba::ThymioInterface* Interface = this->GetInterface();
      Interface->sendEventName("ProxHLeds",{intensity[0],
                                            intensity[1],
                                            intensity[2],intensity[2],
@@ -41,7 +41,7 @@ void CRealThymioLEDsActuator::SetProxHIntensity(std::vector<short> intensity){
 /****************************************/
 
 void CRealThymioLEDsActuator::SetProxVIntensity(std::vector<short> intensity){
-    Aseba::DBusInterface* Interface = this->GetInterface();
+    Aseba::ThymioInterface* Interface = this->GetInterface();
      Interface->sendEventName("ProxVLeds",{intensity[0],intensity[1]});
 }
 
@@ -49,7 +49,7 @@ void CRealThymioLEDsActuator::SetProxVIntensity(std::vector<short> intensity){
 /****************************************/
 
 void CRealThymioLEDsActuator::SetProxHIntensity(const CCI_ThymioProximitySensor::TReadings intensity){
-    Aseba::DBusInterface* Interface = this->GetInterface();
+    Aseba::ThymioInterface* Interface = this->GetInterface();
      Interface->sendEventName("ProxHLeds",{(short) intensity[0].Value,
                                            (short) intensity[1].Value,
                                            (short) intensity[2].Value,(short) intensity[2].Value,
@@ -63,7 +63,7 @@ void CRealThymioLEDsActuator::SetProxHIntensity(const CCI_ThymioProximitySensor:
 /****************************************/
 
 void CRealThymioLEDsActuator::SetProxVIntensity(const CCI_ThymioProximitySensor::TReadings intensity){
-    Aseba::DBusInterface* Interface = this->GetInterface();
+    Aseba::ThymioInterface* Interface = this->GetInterface();
      Interface->sendEventName("ProxVLeds",{(short)intensity[0].Value,
                                            (short)intensity[1].Value});
 }

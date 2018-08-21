@@ -4,7 +4,7 @@
 /****************************************/
 /****************************************/
 
-CRealThymioDifferentialSteeringActuator::CRealThymioDifferentialSteeringActuator(Aseba::DBusInterface* ThymioInterface) :
+CRealThymioDifferentialSteeringActuator::CRealThymioDifferentialSteeringActuator(Aseba::ThymioInterface* ThymioInterface) :
    CRealThymioDevice(ThymioInterface) {
 
 }
@@ -13,9 +13,9 @@ CRealThymioDifferentialSteeringActuator::CRealThymioDifferentialSteeringActuator
 /****************************************/
 
 CRealThymioDifferentialSteeringActuator::~CRealThymioDifferentialSteeringActuator() {
-  Aseba::DBusInterface* Interface = this->GetInterface();
-  Interface->setVariable("thymio-II", "motor.left.target", Values({0}));
-  Interface->setVariable("thymio-II", "motor.right.target", Values({0}));
+  Aseba::ThymioInterface* Interface = this->GetInterface();
+  Interface->setVariable("thymio-II", "motor.left.target", {0});
+  Interface->setVariable("thymio-II", "motor.right.target", {0});
 }
    
 /****************************************/
@@ -37,7 +37,7 @@ void CRealThymioDifferentialSteeringActuator::SetLinearVelocity(Real f_left_velo
                                                                    Real f_right_velocity) {
    // m_fCurrentVelocity[0] = f_left_velocity;
    // m_fCurrentVelocity[1] = f_right_velocity;
-  Aseba::DBusInterface* Interface = this->GetInterface();
+  Aseba::ThymioInterface* Interface = this->GetInterface();
   Interface->setVariable("thymio-II", "motor.left.target",  {(signed short)(f_left_velocity*25) } ); //must be scaled 25 is 1cm/s for thymio's motor
   Interface->setVariable("thymio-II", "motor.right.target", {(signed short)(f_right_velocity*25)} );
 }

@@ -3,7 +3,7 @@
 
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
 #include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
-#include "dbusinterface.h"
+#include <aseba/switches/asebacppapi/thymio_interface.h>
 
 using namespace argos;
 
@@ -13,7 +13,7 @@ class CRealThymioGroundSensor :
 
 public:
 
-   CRealThymioGroundSensor(Aseba::DBusInterface* ThymioInterface);
+   CRealThymioGroundSensor(Aseba::ThymioInterface* ThymioInterface);
    
    virtual ~CRealThymioGroundSensor();
 

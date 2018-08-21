@@ -26,7 +26,7 @@
         <Thymio_proximity implementation="default" show_rays="true" />
 	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
       </sensors>
-      <params alpha="0" delta="0.4" velocity="20" />
+      <params alpha="0" delta="0.4" velocity="1" />
 
     </Thymio_diffusion_controller>
 
@@ -66,7 +66,7 @@
     <distribute>
       <position method="uniform" min="-2,-2,0" max="2,2,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="10" max_trials="100">
+      <entity quantity="50" max_trials="100">
         <Thymio id="eb0">
           <body position="100,0,0" orientation="0,0,0" />
           <controller config="thymio" />
