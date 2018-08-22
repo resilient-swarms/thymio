@@ -18,13 +18,13 @@ namespace argos {
 
 //   static CRadians SPACING = CRadians(0.69813);
     const CRadians PROXIMITY_SENSOR_ANGLES[7] = {
-        CRadians(0.69813),
-        CRadians(0.34906),
-        CRadians::PI,
-        CRadians(-0.34906),
         CRadians(-0.69813),
-        -CRadians::PI,
-        -CRadians::PI
+        CRadians(-0.34906),
+        CRadians::ZERO,
+        CRadians( 0.34906),
+        CRadians( 0.69813),
+        CRadians::PI,
+        CRadians::PI
     };
 
    /****************************************/

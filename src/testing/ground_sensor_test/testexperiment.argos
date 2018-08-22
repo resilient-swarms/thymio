@@ -16,7 +16,7 @@
   <!-- *************** -->
   <controllers>
 
-    <ground_sensor_test_controller id="ground_sensor_test"
+    <ground_sensor_test_controller id="thymio"
                                library="build/testing/ground_sensor_test/libground_sensor_test">
       <actuators>
         <differential_steering implementation="default" />
@@ -28,7 +28,7 @@
 	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
       </sensors>
 
-      <params alpha="0" delta="0.4" velocity="1" />
+      <params alpha="0" delta="0.4" velocity="5" />
 
     </ground_sensor_test_controller>
 

@@ -7,7 +7,7 @@ set(ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_CONTROLINTERFACE
   control_interface/ci_Thymio_ground_sensor.h
   control_interface/ci_Thymio_proximity_sensor.h
   control_interface/ci_Thymio_leds_actuator.h
-#  control_interface/ci_Thymio_acc_sensor.h
+  control_interface/ci_Thymio_acc_sensor.h
   )
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
@@ -45,7 +45,7 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_Thymio
   control_interface/ci_Thymio_encoder_sensor.cpp
   control_interface/ci_Thymio_ground_sensor.cpp
   control_interface/ci_Thymio_proximity_sensor.cpp
-  control_interface/ci_Thymio_leds_actuator.cpp
+#  control_interface/ci_Thymio_leds_actuator.cpp
 #  control_interface/ci_Thymio_acc_sensor.cpp
   )
 

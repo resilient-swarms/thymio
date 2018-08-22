@@ -75,8 +75,8 @@ void CThymioDiffusion::ControlStep() {
    m_pcLeds->SetProxHIntensity(tProxReads);
 
 //   LOG << tProxReads;
-   LOG << tProxReads[2].Value<< tProxReads[2].Angle.GetValue();
-   std::cout << tProxReads;
+//   LOG << tProxReads[2].Value<< tProxReads[2].Angle.GetValue();
+//   std::cout << tProxReads;
 
 
    /* Sum them together */
@@ -95,6 +95,7 @@ void CThymioDiffusion::ControlStep() {
     * is far enough, continue going straight, otherwise curve a little
     */
    CRadians cAngle = cAccumulator.Angle();
+   LOG << cAngle.GetValue();
    if(m_cGoStraightAngleRange.WithinMinBoundIncludedMaxBoundIncluded(cAngle) &&
       cAccumulator.Length() < m_fDelta  && cground <= 500) {
       /* Go straight */
@@ -102,8 +103,12 @@ void CThymioDiffusion::ControlStep() {
    }
    else {
       /* Turn, depending on the sign of the angle */
-      if(cAngle.GetValue() > 0.0f) {
+      if(cAngle.GetValue() < 0.0f) {
          m_pcWheels->SetLinearVelocity(m_fWheelVelocity, 0);
+      }
+      else if(cAngle.GetValue() == 0.0f)
+      {
+          m_pcWheels->SetLinearVelocity(-m_fWheelVelocity, -m_fWheelVelocity);
       }
       else {
          m_pcWheels->SetLinearVelocity(0, m_fWheelVelocity);

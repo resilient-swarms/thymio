@@ -7,9 +7,9 @@
 
 #include <unistd.h>
 
-#include <time.h>
+//#include <time.h>
 
-#include <sys/time.h>
+//#include <sys/time.h>
 
 #include <argos3/core/utility/math/general.h>
 
@@ -39,7 +39,7 @@ void CGroundSensorTest::Init(TConfigurationNode& t_node) {
    m_tick        = 0;
 
 
-//   timer = 0;
+   timer = 300;
    try {
        sensor_readings.open("ground_sensor_readings.csv");
    } catch (std::exception e) {
@@ -54,11 +54,12 @@ void CGroundSensorTest::Init(TConfigurationNode& t_node) {
 void CGroundSensorTest::ControlStep() {
    /*Increase tick*/
     m_tick++;
-//    timer++;
+    timer--;
 
    /* Get readings from ground sensor */
    const CCI_ThymioGroundSensor::TReadings& tGroundReads = m_pcGround->GetReadings();
 
+   std::cout<<m_tick<<") ";
    std::cout<< "Ground sensor left: "<< tGroundReads[0] <<"\n";
    std::cout<< "Ground sensor right: "<< tGroundReads[1] <<"\n";
 
@@ -66,7 +67,7 @@ void CGroundSensorTest::ControlStep() {
    right_ground_sensor_readings.push_back( tGroundReads[1].Value );
 
    char c;
-   if( (int)m_tick % 100 == 0){
+   if( timer % 100 == 0){
        m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
 
        sensor_readings<<"left sensor,right sensor\n";
@@ -84,13 +85,19 @@ void CGroundSensorTest::ControlStep() {
        right_ground_sensor_readings.clear();
 
        sensor_readings<<"\n";
+       sensor_readings.flush();
 
         /* Waits for user input for next phase of the experiment */
        std::cout<< "Please enter any character to continue: ";
        std::cin>>c;
        m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
-//       timer = 0;
+       if(timer == 0)
+       {
+           sensor_readings.close();
+       }
+
    }
+//   timer++;
 
 
 //   m_pcWheels->SetLinearVelocity(0,0);

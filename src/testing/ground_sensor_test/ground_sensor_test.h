@@ -61,7 +61,6 @@ private:
    std::vector<double> left_ground_sensor_readings;
 
    int timer;
-   int dist;
 
 };
 
