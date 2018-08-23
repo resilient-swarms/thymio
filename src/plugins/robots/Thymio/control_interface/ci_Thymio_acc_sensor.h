@@ -15,20 +15,28 @@ class CCI_Thymio_acc_sensor : virtual public CCI_Sensor{
         struct AccValues{
             short x;
             short y;
+            short z;
+
+//            AccValues(short x,short y,short z)
+//            {
+//                this->x = x;
+//                this->y = y;
+//                this->z = z;
+//            }
         }accValues;
 
     public:
-//        CCI_Thymio_acc_sensor();
+        CCI_Thymio_acc_sensor();
 
-        virtual ~CCI_Thymio_acc_sensor();
+        virtual ~CCI_Thymio_acc_sensor(){}
 
         virtual AccValues& getAccValues();
 
 
     #ifdef ARGOS_WITH_LUA
-          virtual void CreateLuaState(lua_State* pt_lua_state);
+        virtual void CreateLuaState(lua_State* pt_lua_state){}
 
-          virtual void ReadingsToLuaState(lua_State* pt_lua_state);
+        virtual void ReadingsToLuaState(lua_State* pt_lua_state){}
     #endif
 
     };

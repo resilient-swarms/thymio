@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.7.0, 2018-08-22T15:39:25. -->
+<!-- Written by QtCreator 4.7.0, 2018-08-23T14:23:24. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -129,7 +129,7 @@
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
     <valuelist type="QVariantList" key="CMake.Configuration">
-     <value type="QString">ARGOS_BUILD_FOR:STRING=simulator</value>
+     <value type="QString">ARGOS_BUILD_FOR:STRING=robot</value>
      <value type="QString">BUILD_FOR_THYMIO:BOOL=OFF</value>
      <value type="QString">CMAKE_BUILD_TYPE:STRING=Debug</value>
      <value type="QString">CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++</value>
@@ -138,7 +138,7 @@
      <value type="QString">QT_QMAKE_EXECUTABLE:STRING=%{Qt:qmakeExecutable}</value>
      <value type="QString">Thymio_LIBS:PATH=/home/sina/Desktop/argos3/build_thymio</value>
     </valuelist>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/sina/Desktop/Thymio/build</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/sina/Desktop/Thymio/build_thymio</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="QString" key="CMakeProjectManager.MakeStep.AdditionalArguments"></value>
@@ -437,7 +437,7 @@
 -i thymio</value>
     <value type="bool" key="CMakeProjectManager.CMakeRunConfiguration.UseTerminal">true</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default"></value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/sina/Desktop/Thymio/build_thymio/testing/sensor_test</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">sensor_test</value>
@@ -495,7 +495,7 @@
 -i thymio</value>
     <value type="bool" key="CMakeProjectManager.CMakeRunConfiguration.UseTerminal">true</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default"></value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/sina/Desktop/Thymio/build_thymio/testing/Thymio_diffusion</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Thymio_diffusion</value>
@@ -553,7 +553,7 @@
 -i sensor_test2</value>
     <value type="bool" key="CMakeProjectManager.CMakeRunConfiguration.UseTerminal">true</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory">/home/sina/Desktop/Thymio/build/testing/sensor_test2</value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default"></value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/sina/Desktop/Thymio/build_thymio/testing/sensor_test2</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">sensor_test2</value>
@@ -667,7 +667,7 @@
 -i thymio</value>
     <value type="bool" key="CMakeProjectManager.CMakeRunConfiguration.UseTerminal">true</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory"></value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default"></value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory.default">/home/sina/Desktop/Thymio/build_thymio/testing/ground_sensor_test</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">ground_sensor_test</value>

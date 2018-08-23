@@ -31,6 +31,7 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
       # real_robot/real_Thymio_battery_sensor.h
       real_robot/real_Thymio_ground_sensor.h
       real_robot/real_Thymio_proximity_sensor.h
+      real_robot/real_Thymio_acc_sensor.h
 #      real_robot/dbusinterface.h
 #      real_robot/real_robot.h
       )
@@ -45,8 +46,8 @@ set(ARGOS3_SOURCES_PLUGINS_ROBOTS_Thymio
   control_interface/ci_Thymio_encoder_sensor.cpp
   control_interface/ci_Thymio_ground_sensor.cpp
   control_interface/ci_Thymio_proximity_sensor.cpp
-#  control_interface/ci_Thymio_leds_actuator.cpp
-#  control_interface/ci_Thymio_acc_sensor.cpp
+  control_interface/ci_Thymio_leds_actuator.cpp
+  control_interface/ci_Thymio_acc_sensor.cpp
   )
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
@@ -89,6 +90,7 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
 #       real_robot/real_Thymio_battery_sensor.cpp
       real_robot/real_Thymio_ground_sensor.cpp
       real_robot/real_Thymio_proximity_sensor.cpp
+      real_robot/real_Thymio_acc_sensor.cpp
 #      real_robot/dbusinterface.cpp
 #      real_robot/real_robot.cpp
 #      real_robot/thymio_interface.cpp

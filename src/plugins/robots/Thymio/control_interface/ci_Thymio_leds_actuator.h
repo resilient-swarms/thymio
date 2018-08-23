@@ -33,7 +33,7 @@ namespace argos {
        virtual void SetProxVIntensity(const CCI_ThymioProximitySensor::TReadings intensity) = 0;
 
 #ifdef ARGOS_WITH_LUA
-      virtual void CreateLuaState(lua_State* pt_lua_state);
+       virtual void CreateLuaState(lua_State* pt_lua_state){}
 #endif
 
    protected:

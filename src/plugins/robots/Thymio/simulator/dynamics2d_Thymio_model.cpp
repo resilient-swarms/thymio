@@ -144,6 +144,7 @@ namespace argos {
          /* No, we don't want to move - zero all speeds */
          m_cDiffSteering.Reset();
       }
+
    }
 
    /****************************************/
