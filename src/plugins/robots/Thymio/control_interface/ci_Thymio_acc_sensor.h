@@ -12,7 +12,7 @@ namespace argos {
 class CCI_Thymio_acc_sensor : virtual public CCI_Sensor{
 
     public:
-        struct AccValues{
+        struct SReading{
             short x;
             short y;
             short z;
@@ -30,7 +30,7 @@ class CCI_Thymio_acc_sensor : virtual public CCI_Sensor{
 
         virtual ~CCI_Thymio_acc_sensor(){}
 
-        virtual AccValues& getAccValues();
+        virtual SReading& getAccValues();
 
 
     #ifdef ARGOS_WITH_LUA
@@ -40,5 +40,6 @@ class CCI_Thymio_acc_sensor : virtual public CCI_Sensor{
     #endif
 
     };
+
 }
 #endif // CCI_THYMIO_ACC_SENSOR_H

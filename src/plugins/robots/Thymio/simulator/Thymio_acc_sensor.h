@@ -25,8 +25,7 @@ namespace argos {
 namespace argos {
 
    class CThymioAccSensor : public CCI_Thymio_acc_sensor,
-                            public CSimulatedSensor,
-                            public CComposableEntity{
+                            public CSimulatedSensor{
 
    public:
        struct Acceleration{
@@ -41,8 +40,7 @@ namespace argos {
 
    public:
 
-      CThymioAccSensor(CComposableEntity* pc_parent,
-                       const std::string& str_id);
+      CThymioAccSensor();
 
       virtual ~CThymioAccSensor() {}
 

@@ -39,7 +39,7 @@ void CGroundSensorTest::Init(TConfigurationNode& t_node) {
    m_tick        = 0;
 
 
-   timer = 300;
+   timer = 0;
    try {
        sensor_readings.open("ground_sensor_readings.csv");
    } catch (std::exception e) {
@@ -54,7 +54,7 @@ void CGroundSensorTest::Init(TConfigurationNode& t_node) {
 void CGroundSensorTest::ControlStep() {
    /*Increase tick*/
     m_tick++;
-    timer--;
+    timer++;
 
    /* Get readings from ground sensor */
    const CCI_ThymioGroundSensor::TReadings& tGroundReads = m_pcGround->GetReadings();
@@ -66,11 +66,15 @@ void CGroundSensorTest::ControlStep() {
    left_ground_sensor_readings.push_back( tGroundReads[0].Value );
    right_ground_sensor_readings.push_back( tGroundReads[1].Value );
 
-   char c;
-   if( timer % 100 == 0){
-       m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
 
-       sensor_readings<<"left sensor,right sensor\n";
+   if( timer % 100 == 0){
+       char str [80];
+       m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
+       std::cout<< "Please enter the name of this section of the experiment: ";
+
+       scanf ("%s",str);
+       sensor_readings<<"left sensor,right sensor, "<<str<<"\n";
+
 
        /* Save readings to file*/
 //       sensor_readings<<"left sensor";
@@ -87,15 +91,9 @@ void CGroundSensorTest::ControlStep() {
        sensor_readings<<"\n";
        sensor_readings.flush();
 
-        /* Waits for user input for next phase of the experiment */
-       std::cout<< "Please enter any character to continue: ";
-       std::cin>>c;
-       m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
-       if(timer == 0)
-       {
-           sensor_readings.close();
-       }
 
+       m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
+        timer = 0;
    }
 //   timer++;
 

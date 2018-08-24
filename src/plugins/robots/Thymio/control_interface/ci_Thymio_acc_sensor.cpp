@@ -17,7 +17,7 @@ namespace argos {
     /****************************************/
     /****************************************/
 
-    CCI_Thymio_acc_sensor::AccValues& CCI_Thymio_acc_sensor::getAccValues(){
+    CCI_Thymio_acc_sensor::SReading& CCI_Thymio_acc_sensor::getAccValues(){
         return accValues;
     }
 

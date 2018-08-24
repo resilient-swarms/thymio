@@ -22,9 +22,7 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   CThymioAccSensor::CThymioAccSensor(CComposableEntity* pc_parent,
-                                      const std::string& str_id) :
-      CComposableEntity(pc_parent, str_id),
+   CThymioAccSensor::CThymioAccSensor() :
       m_pcEmbodiedEntity(NULL),
       m_cWheeledEntity(NULL),
       m_pcRNG(NULL),
@@ -71,19 +69,19 @@ namespace argos {
 
    void CThymioAccSensor::Update() {
 
-       this->acceleration.vx_1 = this->acceleration.vx_2;
-       this->acceleration.vx_2 = m_cWheeledEntity->GetWheelVelocity(0);
-       this->acceleration.vy_1 = this->acceleration.vy_1;
-       this->acceleration.vy_2 = m_cWheeledEntity->GetWheelVelocity(1);
+//       this->acceleration.vx_1 = this->acceleration.vx_2;
+//       this->acceleration.vx_2 = m_cWheeledEntity->GetWheelVelocity(0);
+//       this->acceleration.vy_1 = this->acceleration.vy_1;
+//       this->acceleration.vy_2 = m_cWheeledEntity->GetWheelVelocity(1);
 
-       accValues.x = (short)this->acceleration.getAcceleration()[0];
-       accValues.y = (short)this->acceleration.getAcceleration()[1];
+//       accValues.x = (short)this->acceleration.getAcceleration()[0];
+//       accValues.y = (short)this->acceleration.getAcceleration()[1];
 
-         /* Apply noise to the sensor */
-         if(m_bAddNoise) {
-             this->accValues.x += m_pcRNG->Uniform(m_cNoiseRange);
-             this->accValues.y += m_pcRNG->Uniform(m_cNoiseRange);
-         }
+//         /* Apply noise to the sensor */
+//         if(m_bAddNoise) {
+//             this->accValues.x += m_pcRNG->Uniform(m_cNoiseRange);
+//             this->accValues.y += m_pcRNG->Uniform(m_cNoiseRange);
+//         }
          /* Clamp the reading between 0 and 1 */
          //UNIT.TruncValue(m_tReadings[i].Value);
       }
@@ -100,7 +98,7 @@ namespace argos {
    /****************************************/
 
    REGISTER_SENSOR(CThymioAccSensor,
-                   "accelerometer", "accelerometer",
+                   "accelerometer", "thymio_accelerometer",
                    "sina.sarparast@gmail.com",
                    "1.0",
                    "The Thymio accelerometer.",

@@ -97,13 +97,13 @@ void CThymioDiffusion::ControlStep() {
    CRadians cAngle = cAccumulator.Angle();
    LOG << cAngle.GetValue();
    if(m_cGoStraightAngleRange.WithinMinBoundIncludedMaxBoundIncluded(cAngle) &&
-      cAccumulator.Length() < m_fDelta  && cground <= 500) {
+      cAccumulator.Length() < m_fDelta ) {
       /* Go straight */
       m_pcWheels->SetLinearVelocity(m_fWheelVelocity, m_fWheelVelocity);
    }
    else {
       /* Turn, depending on the sign of the angle */
-      if(cAngle.GetValue() > 0.0f) {
+      if(cAngle.GetValue() < 0) {
          m_pcWheels->SetLinearVelocity(m_fWheelVelocity, 0);
       }
       else {

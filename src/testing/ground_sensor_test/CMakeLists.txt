@@ -1,14 +1,15 @@
-#find_package( Qt5Core REQUIRED )
+find_library(asebacppapi_LIBRARY NAMES asebacppapi HINTS /usr/local/lib)
+include_directories(${LIBXML2_INCLUDE_DIR})
 
-if(ARGOS_BUILD_FOR_SIMULATOR AND NOT BUILD_FOR_THYMIO)
+if(ARGOS_BUILD_FOR_SIMULATOR)
    add_library(
         ground_sensor_test MODULE
         ground_sensor_test.h
         ground_sensor_test.cpp
         )
-endif(ARGOS_BUILD_FOR_SIMULATOR AND NOT BUILD_FOR_THYMIO)
+endif(ARGOS_BUILD_FOR_SIMULATOR )
 
-if(BUILD_FOR_THYMIO)
+if(ARGOS_BUILD_FOR STREQUAL "thymio")
   add_executable( ground_sensor_test
   	ground_sensor_test.h
   	ground_sensor_test.cpp
@@ -16,15 +17,14 @@ if(BUILD_FOR_THYMIO)
     
   	)
 
-endif(BUILD_FOR_THYMIO)
+endif(ARGOS_BUILD_FOR STREQUAL "thymio")
 
 target_link_libraries( ground_sensor_test
   	argos3core_${ARGOS_BUILD_FOR}
   	argos3plugin_${ARGOS_BUILD_FOR}_Thymio
   	argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
-        Qt5::DBus
+        ${asebacppapi_LIBRARY}
+        ${LIBXML2_LIBRARIES}
   	)
 
-qt5_use_modules( ground_sensor_test
-                   DBus Test )
 
