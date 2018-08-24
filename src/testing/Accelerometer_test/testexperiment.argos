@@ -7,7 +7,7 @@
   <framework>
     <system threads="0" />
     <experiment length="120"
-                ticks_per_second="10"
+                ticks_per_second="5"
                 random_seed="124" />
   </framework>
 
@@ -25,8 +25,7 @@
       </actuators>
 
       <sensors>
-	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
-	<accelerometer implementation="thymio_accelerometer" />
+	<Thymio_accelerometer implementation="thymio_accelerometer" />
       </sensors>
 
       <params alpha="0" delta="0.4" velocity="1" />

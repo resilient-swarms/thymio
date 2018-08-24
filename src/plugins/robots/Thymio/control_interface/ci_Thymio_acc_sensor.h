@@ -38,8 +38,10 @@ class CCI_Thymio_acc_sensor : virtual public CCI_Sensor{
 
         virtual void ReadingsToLuaState(lua_State* pt_lua_state){}
     #endif
-
     };
+//    std::ostream& operator<<(std::ostream& c_os,
+//                             const CCI_Thymio_acc_sensor::SReading& accValues);
+
 
 }
 #endif // CCI_THYMIO_ACC_SENSOR_H

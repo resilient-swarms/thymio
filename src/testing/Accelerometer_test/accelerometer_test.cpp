@@ -7,9 +7,7 @@
 
 #include <unistd.h>
 
-#include <time.h>
-
-#include <sys/time.h>
+#include <argos3/core/utility/rate.h>
 
 #include <argos3/core/utility/math/general.h>
 
@@ -31,19 +29,16 @@ CAccelerometerTest::CAccelerometerTest() :
 
 void CAccelerometerTest::Init(TConfigurationNode& t_node) {
 
-   m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
-   m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcAccelerometer = GetSensor<CCI_Thymio_acc_sensor>         ("accelerometer");
+   m_pcWheels           = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
+   m_pcLeds             = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
+   m_pcAccelerometer    = GetSensor  <CCI_Thymio_acc_sensor           >("Thymio_accelerometer");
 
-   m_tick        = 0;
-   std::cout<< m_pcAccelerometer;
+   std::cout<<"accelerometer: "<<m_pcAccelerometer;
 
-
-   dist = 11;
    timer = 0;
+   rate = 5;
    try {
        acc_sensor_readings.open("acc_sensor_readings.csv");
-       acc_sensor_readings<< dist <<"cm";
    } catch (std::exception e) {
        std::cout << e.what();
    }
@@ -54,30 +49,65 @@ void CAccelerometerTest::Init(TConfigurationNode& t_node) {
 /****************************************/
 
 void CAccelerometerTest::ControlStep() {
-   /*Increase tick*/
-    m_tick++;
-    timer++;
 
-   char c;
-   if( timer % 100 == 0){
-       m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
-       acc_sensor_readings << "\n" << --dist <<"cm";
-       acc_sensor_readings.flush();
-//       sleep(5);
-       std::cin>>c;
-       m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
-       timer = 0;
-   }
+    std::cout<< "time: "<<timer/rate<<" ";
+    std::cout<< m_pcAccelerometer->accValues.x<<" ";
+    std::cout<< m_pcAccelerometer->accValues.y<<" ";
+    std::cout<< m_pcAccelerometer->accValues.z<<"\n";
+
+    m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
+    m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
+
+    if(timer/rate % 5 == 0){
+        m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
+        m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
+    }
+
+    if(timer/rate <= 5)
+    {
+        m_pcWheels->SetLinearVelocity(0,0);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer<<",";
+    }
+    else if(timer/rate<= 15){
+        m_pcWheels->SetLinearVelocity(2,-2);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer<<",";
+    }
+    else if(timer/rate<= 20){
+        m_pcWheels->SetLinearVelocity(0,0);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer<<",";
+    }
+    else if(timer/rate<= 30){
+        m_pcWheels->SetLinearVelocity(-2,2);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer<<",";
+    }
+    else if(timer/rate<= 35){
+        m_pcWheels->SetLinearVelocity(0,0);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer<<",";
+    }
+
+    if(timer/rate == 35)
+    {
+        char c;
+        try {
+            acc_sensor_readings<<"\n";
+            acc_sensor_readings.close();
+            std::cout<< "File is exported! end of the experiment!";
+        } catch (std::exception e) {
+            std::cout << e.what();
+        }
+        std::cin>> c;
+    }
+    timer++;
 
 }
 
 CAccelerometerTest::~CAccelerometerTest(){
-    try {
-        acc_sensor_readings<<"\n";
-        acc_sensor_readings.close();
-    } catch (std::exception e) {
-        std::cout << e.what();
-    }
+
     m_pcWheels->SetLinearVelocity(0.0f, 0.0f);
 }
 

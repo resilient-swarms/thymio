@@ -3,6 +3,7 @@
 #include "real_Thymio_leds_actuator.h"
 #include "real_Thymio_ground_sensor.h"
 #include "real_Thymio_proximity_sensor.h"
+#include "real_Thymio_acc_sensor.h"
 
 /****************************************/
 /****************************************/
@@ -58,13 +59,11 @@ void CRealThymio::InitRobot() {
 /****************************************/
 
 void CRealThymio::Destroy() {
+    /*Turn off the leds*/
+    ThymioInterface->sendEventName("ProxHLeds",{0,0,0,0,0,0,0,0});
+    ThymioInterface->sendEventName("ProxVLeds",{0,0});
+
    /* Stop wheels */
-   // kh4_set_speed(0, 0, m_ptDSPic);
-   // kh4_SetMode(kh4RegIdle, m_ptDSPic );
-   // /* Switch LEDs off */
-   // kh4_SetRGBLeds(0,0,0,0,0,0,0,0,0, m_ptDSPic);
-   // /* Switch ultrasound sensor off */
-   // kh4_activate_us(0, m_ptDSPic);
     ThymioInterface->setVariable("thymio-II", "motor.left.target",  {0} );
     ThymioInterface->setVariable("thymio-II", "motor.right.target", {0} );
 }
@@ -108,8 +107,8 @@ CCI_Sensor* CRealThymio::MakeSensor(const std::string& str_name) {
                 "Thymio_ground");
    MAKE_SENSOR(CRealThymioProximitySensor,
                "Thymio_proximity");
-   MAKE_SENSOR(CRealThymioProximitySensor,
-               "Thymio_proximity");
+   MAKE_SENSOR(CRealThymioAccSensor,
+               "Thymio_accelerometer");
    return NULL;
 }
 

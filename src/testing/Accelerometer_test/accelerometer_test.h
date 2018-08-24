@@ -45,9 +45,6 @@ private:
    /* Wheel speed. */
    Real m_fWheelVelocity;
 
-   /*Simulator tick*/
-   Real m_tick;
-
    /* Angle tolerance range to go straight.
     * It is set to [-alpha,alpha]. */
    CRange<CRadians> m_cGoStraightAngleRange;
@@ -55,7 +52,7 @@ private:
    std::ofstream acc_sensor_readings;
 
    int timer;
-   int dist;
+   int rate;
 
 };
 
