@@ -50,7 +50,7 @@ void CAccelerometerTest::Init(TConfigurationNode& t_node) {
 
 void CAccelerometerTest::ControlStep() {
 
-    std::cout<< "time: "<<timer/rate<<" ";
+    std::cout<< "time: "<<timer<<" ";
     std::cout<< m_pcAccelerometer->accValues.x<<" ";
     std::cout<< m_pcAccelerometer->accValues.y<<" ";
     std::cout<< m_pcAccelerometer->accValues.z<<"\n";
@@ -58,39 +58,49 @@ void CAccelerometerTest::ControlStep() {
     m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
     m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
 
-    if(timer/rate % 5 == 0){
+    if(timer/rate % 10 == 0){
         m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
         m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
     }
 
-    if(timer/rate <= 5)
+    if(timer/rate <= 10)
     {
         m_pcWheels->SetLinearVelocity(0,0);
         acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer<<",";
-    }
-    else if(timer/rate<= 15){
-        m_pcWheels->SetLinearVelocity(2,-2);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer<<",";
-    }
-    else if(timer/rate<= 20){
-        m_pcWheels->SetLinearVelocity(0,0);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
     }
     else if(timer/rate<= 30){
-        m_pcWheels->SetLinearVelocity(-2,2);
+        m_pcWheels->SetLinearVelocity(2,-2);
         acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
     }
-    else if(timer/rate<= 35){
+    else if(timer/rate<= 40){
         m_pcWheels->SetLinearVelocity(0,0);
         acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
+    }
+    else if(timer/rate<= 60){
+        m_pcWheels->SetLinearVelocity(-2,2);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
+    }
+    else if(timer/rate<= 70){
+        m_pcWheels->SetLinearVelocity(0,0);
+        acc_sensor_readings << timer<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
+        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
     }
 
-    if(timer/rate == 35)
+    if(timer/rate == 70)
     {
         char c;
         try {
@@ -103,6 +113,9 @@ void CAccelerometerTest::ControlStep() {
         std::cin>> c;
     }
     timer++;
+
+    //total running time is 70sec we have 5 readings each second it is worst that proximity sensors cause they are
+    //updated almost 5 times a second (16Hz)
 
 }
 
