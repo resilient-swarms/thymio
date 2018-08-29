@@ -16,8 +16,8 @@
   <!-- *************** -->
   <controllers>
 
-    <accelerometer_test_controller id="accelerometer_test_controller"
-                               library="build/testing/Accelerometer_test/libaccelerometer_test">
+    <accelerometer_test2_controller id="accelerometer_test2_controller"
+                               library="build/testing/Accelerometer_test2/libaccelerometer_test2">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
@@ -30,7 +30,7 @@
 
       <params alpha="0" delta="0.4" velocity="1" />
 
-    </accelerometer_test_controller>
+    </accelerometer_test2_controller>
 
   </controllers>
 

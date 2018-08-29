@@ -230,7 +230,7 @@ namespace argos {
          glVertex3f( 0.04  , 0.05   , THYMIO_BASE_ELEVATION);
          glVertex3f( 0.033 , 0.055  , THYMIO_BASE_ELEVATION);
          glVertex3f( 0.033 , 0.055  , BODY_HEIGHT+THYMIO_BASE_ELEVATION);
-         glEnd();
+       glEnd();
 
 /*end of curve*/
 

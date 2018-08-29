@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <ctime>
 using namespace argos;
 
 class CAccelerometerTest : public CCI_Controller {
@@ -51,7 +51,12 @@ private:
 
    std::ofstream acc_sensor_readings;
 
-   int timer;
+
+   std::clock_t start;
+   std::clock_t clk;
+   float timer;
+   float second;
+   int speedincrease;
    int rate;
 
 };

@@ -45,6 +45,8 @@ void CGroundSensorTest::Init(TConfigurationNode& t_node) {
    } catch (std::exception e) {
        std::cout << e.what();
    }
+   m_pcLeds->SetProxVIntensity({0,0});
+   m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
 
 }
 

@@ -54,7 +54,6 @@ void CSensorTest::ControlStep() {
 
    sensor_readings << m_tick <<","<< m_tick/10 * 1 << "," << tProxReads[2].Value<<"\n"; // tick / 10 ticks per second * 1cm/s = distance
 
-
    m_pcLeds->SetProxHIntensity(tProxReads);
 
 //   LOG << tGroundReads;

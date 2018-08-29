@@ -38,7 +38,6 @@ void CSensorTest::Init(TConfigurationNode& t_node) {
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    m_tick        = 0;
 
-
    dist = 11;
    timer = 0;
    try {
@@ -47,6 +46,7 @@ void CSensorTest::Init(TConfigurationNode& t_node) {
    } catch (std::exception e) {
        std::cout << e.what();
    }
+
 
 }
 
@@ -72,7 +72,7 @@ void CSensorTest::ControlStep() {
 
    char c;
    if( timer % 100 == 0){
-       m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
+//       m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
        sensor_readings << "\n" << --dist <<"cm";
        sensor_readings.flush();
 //       sleep(5);

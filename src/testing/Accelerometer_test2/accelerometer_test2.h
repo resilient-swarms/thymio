@@ -5,24 +5,25 @@
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
 #include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_leds_actuator.h>
-#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
-#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
+#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_acc_sensor.h>
 #include <argos3/core/utility/logging/argos_log.h>
 
 #include <iostream>
 #include <fstream>
 
+#include <ctime>
+
 using namespace argos;
 
-class CSensorTest : public CCI_Controller {
+class CAccelerometerTest : public CCI_Controller {
 
 public:
 
    /* Class constructor. */
-   CSensorTest();
+   CAccelerometerTest();
 
    /* Class destructor. */
-   virtual ~CSensorTest();
+   virtual ~CAccelerometerTest();
 
    virtual void Init(TConfigurationNode& t_node);
 
@@ -34,13 +35,11 @@ public:
 
 private:
    /* Pointer to the LEDs */
-   CCI_ThymioLedsActuator*   m_pcLeds;
+    CCI_ThymioLedsActuator*   m_pcLeds;
    /* Pointer to the differential steering actuator */
    CCI_DifferentialSteeringActuator* m_pcWheels;
    /* Pointer to the Thymio proximity sensor */
-   CCI_ThymioProximitySensor* m_pcProximity;
-   /* Pointer to the Thymio ground sensors */
-   CCI_ThymioGroundSensor* m_pcGround;
+   CCI_Thymio_acc_sensor* m_pcAccelerometer;
 
    CDegrees m_cAlpha;
 
@@ -48,17 +47,15 @@ private:
    /* Wheel speed. */
    Real m_fWheelVelocity;
 
-   /*Simulator tick*/
-   Real m_tick;
-
    /* Angle tolerance range to go straight.
     * It is set to [-alpha,alpha]. */
    CRange<CRadians> m_cGoStraightAngleRange;
 
-   std::ofstream sensor_readings;
+   std::ofstream acc_sensor_readings;
 
+   std::clock_t start;
    int timer;
-   int dist;
+   int rate;
 
 };
 

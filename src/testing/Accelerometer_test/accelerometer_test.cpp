@@ -11,6 +11,7 @@
 
 #include <argos3/core/utility/math/general.h>
 
+
 /****************************************/
 /****************************************/
 
@@ -35,22 +36,26 @@ void CAccelerometerTest::Init(TConfigurationNode& t_node) {
 
    std::cout<<"accelerometer: "<<m_pcAccelerometer;
 
+   start = std::clock();
+    speedincrease = 1;
    timer = 0;
-   rate = 5;
+   rate = 20;
+   second = 1.00f;
    try {
-       acc_sensor_readings.open("acc_sensor_readings.csv");
+       acc_sensor_readings.open("accelerometer_test_run.csv");
    } catch (std::exception e) {
        std::cout << e.what();
    }
 
+   m_fWheelVelocity = 0;
+   m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
+   m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
 }
 
 /****************************************/
 /****************************************/
 
 void CAccelerometerTest::ControlStep() {
-
-    std::cout<< "time: "<<timer<<" ";
     std::cout<< m_pcAccelerometer->accValues.x<<" ";
     std::cout<< m_pcAccelerometer->accValues.y<<" ";
     std::cout<< m_pcAccelerometer->accValues.z<<"\n";
@@ -58,64 +63,82 @@ void CAccelerometerTest::ControlStep() {
     m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
     m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
 
-    if(timer/rate % 10 == 0){
-        m_pcLeds->SetProxHIntensity({32,32,32,32,32,32,32,32});
-        m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});
-    }
 
-    if(timer/rate <= 10)
+    if(timer > second )
     {
-        m_pcWheels->SetLinearVelocity(0,0);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
-    }
-    else if(timer/rate<= 30){
-        m_pcWheels->SetLinearVelocity(2,-2);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
-    }
-    else if(timer/rate<= 40){
-        m_pcWheels->SetLinearVelocity(0,0);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
-    }
-    else if(timer/rate<= 60){
-        m_pcWheels->SetLinearVelocity(-2,2);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
-    }
-    else if(timer/rate<= 70){
-        m_pcWheels->SetLinearVelocity(0,0);
-        acc_sensor_readings << timer<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
-        acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
-    }
-
-    if(timer/rate == 70)
-    {
-        char c;
-        try {
-            acc_sensor_readings<<"\n";
-            acc_sensor_readings.close();
-            std::cout<< "File is exported! end of the experiment!";
-        } catch (std::exception e) {
-            std::cout << e.what();
+        if(second <5 )
+        {
+            std::cout<<"wait\t";
         }
-        std::cin>> c;
-    }
-    timer++;
+        else if(second < 15)
+        {
+            std::cout<<"Speed Up!!!\t";
+            m_fWheelVelocity += speedincrease;
+            m_pcWheels->SetLinearVelocity(m_fWheelVelocity,m_fWheelVelocity);
+        }
+        else if(second < 20 )
+        {
+            std::cout<<"wait\t";
+        }
+        else if(second < 30 )
+        {
+            std::cout<<"slow down!!!\t";
+            m_fWheelVelocity -= speedincrease;
+            m_pcWheels->SetLinearVelocity(m_fWheelVelocity,m_fWheelVelocity);
+        }
+        else if(second < 35 )
+        {
+            std::cout<<"wait\t";
+        }
+        else if(second < 45)
+        {
+            std::cout<<"slow down!!!\t";
+            m_fWheelVelocity -= speedincrease;
+            m_pcWheels->SetLinearVelocity(m_fWheelVelocity,m_fWheelVelocity);
 
-    //total running time is 70sec we have 5 readings each second it is worst that proximity sensors cause they are
-    //updated almost 5 times a second (16Hz)
+        }
+        else if(second < 50)
+        {
+            std::cout<<"wait\t";
+        }
+        else if(second < 60)
+        {
+            std::cout<<"Speed Up!!!\t";
+            m_fWheelVelocity += speedincrease;
+            m_pcWheels->SetLinearVelocity(m_fWheelVelocity,m_fWheelVelocity);
+        }
+        else if(second < 65)
+        {
+            std::cout<<"wait\t";
+        }
+        else
+        {
+            char c;
+            try {
+                acc_sensor_readings<<"\n";
+                acc_sensor_readings.close();
+                std::cout<< "File is exported! end of the experiment!";
+            } catch (std::exception e) {
+                std::cout << e.what();
+            }
+            std::cin>> c;
+        }
+
+        second += 1.00f; // means a second has passed add to second to prepare it for next second
+        std::cout<<second<<"\t One second passed!!!\n";
+
+    }
+    acc_sensor_readings << timer<<",";
+    acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
+    acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
+    acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
+
+    timer = (( std::clock() - start )*100/(double) CLOCKS_PER_SEC);
+//    std::cout<<( std::clock() - start )/(double) CLOCKS_PER_SEC;
+    std::cout<<timer<<") ";
+    std::cout<<m_fWheelVelocity<<"\t";
+
+
 
 }
 
