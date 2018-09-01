@@ -54,7 +54,7 @@ private:
    std::ofstream acc_sensor_readings;
 
    std::clock_t start;
-   int timer;
+   float timer;
    int rate;
    float second;
 

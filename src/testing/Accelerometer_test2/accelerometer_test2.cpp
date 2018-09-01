@@ -39,7 +39,7 @@ void CAccelerometerTest::Init(TConfigurationNode& t_node) {
    start = std::clock();
    timer = 0;
    rate = 20;
-   second = 1.00f;
+   second = 0.00f;
 
    try {
        acc_sensor_readings.open("acc_sensor_readings.csv");
@@ -100,7 +100,7 @@ void CAccelerometerTest::ControlStep() {
     acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
     acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
 
-    timer = (int)(( std::clock() - start )*100/(double) CLOCKS_PER_SEC);
+    timer = (( std::clock() - start )*100/(double) CLOCKS_PER_SEC);
 //    std::cout<<( std::clock() - start )/(double) CLOCKS_PER_SEC;
     std::cout<<timer<<") ";
 
