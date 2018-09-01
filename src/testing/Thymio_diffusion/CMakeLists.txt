@@ -26,3 +26,5 @@ target_link_libraries( Thymio_diffusion
         ${LIBXML2_LIBRARIES}
   	)
 
+add_subdirectory(loop_functions)
+add_subdirectory(trajectory_loop_functions)

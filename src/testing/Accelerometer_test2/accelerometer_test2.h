@@ -56,6 +56,7 @@ private:
    std::clock_t start;
    int timer;
    int rate;
+   float second;
 
 };
 

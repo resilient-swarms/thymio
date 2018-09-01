@@ -31,12 +31,20 @@
     </Thymio_diffusion_controller>
 
   </controllers>
+  <!-- ****************** -->
+  <!-- * Loop functions * -->
+  <!-- ****************** -->
+  <loop_functions library="build/testing/Thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
+                  label="trajectory_loop_functions" />
 
   <!-- *********************** -->
   <!-- * Arena configuration * -->
   <!-- *********************** -->
   <arena size="5, 5, 1" center="0,0,0.5">
 
+	<!--
+		is necessary for the ground sensors
+	!-->
     <floor id="floor" source="image" path="src/testing/Thymio_diffusion/color.png"/> 
 
 
@@ -120,7 +128,11 @@
   <!-- ****************** -->
   <visualization>
     <qt-opengl>
-
+	<!-- you can't have both of them at the same time!-->
+	<!-- <user_functions library="build/testing/Thymio_diffusion/loop_functions/libdraw_position"
+                      label="draw_position" /> !-->
+	<user_functions library="build/testing/Thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
+                      label="trajectory_qtuser_functions" />
       <camera>
         <placement idx="0" position="-1.37702,-1.04453,0.308332" look_at="-1.1334,-1.85855,-0.21895" up="0.15118,-0.505144,0.849691" lens_focal_length="20" />
       </camera>

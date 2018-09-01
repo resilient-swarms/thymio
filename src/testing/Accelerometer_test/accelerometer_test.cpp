@@ -21,7 +21,7 @@ CAccelerometerTest::CAccelerometerTest() :
    m_pcLeds(NULL),
    m_cAlpha(10.0f),
    m_fDelta(0.5f),
-   m_fWheelVelocity(2.5f),
+   m_fWheelVelocity(0),
    m_cGoStraightAngleRange(-ToRadians(m_cAlpha),
                            ToRadians(m_cAlpha)) {}
 
@@ -37,7 +37,7 @@ void CAccelerometerTest::Init(TConfigurationNode& t_node) {
    std::cout<<"accelerometer: "<<m_pcAccelerometer;
 
    start = std::clock();
-    speedincrease = 1;
+   speedincrease = 5;
    timer = 0;
    rate = 20;
    second = 1.00f;
@@ -70,7 +70,7 @@ void CAccelerometerTest::ControlStep() {
         {
             std::cout<<"wait\t";
         }
-        else if(second < 15)
+        else if(second < 10)
         {
             std::cout<<"Speed Up!!!\t";
             m_fWheelVelocity += speedincrease;
@@ -80,7 +80,7 @@ void CAccelerometerTest::ControlStep() {
         {
             std::cout<<"wait\t";
         }
-        else if(second < 30 )
+        else if(second < 25 )
         {
             std::cout<<"slow down!!!\t";
             m_fWheelVelocity -= speedincrease;
@@ -90,7 +90,7 @@ void CAccelerometerTest::ControlStep() {
         {
             std::cout<<"wait\t";
         }
-        else if(second < 45)
+        else if(second < 40)
         {
             std::cout<<"slow down!!!\t";
             m_fWheelVelocity -= speedincrease;
@@ -101,7 +101,7 @@ void CAccelerometerTest::ControlStep() {
         {
             std::cout<<"wait\t";
         }
-        else if(second < 60)
+        else if(second < 55)
         {
             std::cout<<"Speed Up!!!\t";
             m_fWheelVelocity += speedincrease;
