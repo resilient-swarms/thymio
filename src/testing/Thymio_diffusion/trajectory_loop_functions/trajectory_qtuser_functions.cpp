@@ -33,7 +33,7 @@ void CTrajectoryQTUserFunctions::DrawWaypoints(const std::vector<CVector3>& c_wa
       size_t unEnd = 1;
       while(unEnd < c_waypoints.size()) {
          DrawRay(CRay3(c_waypoints[unEnd],
-                       c_waypoints[unStart]), CColor::CYAN,5.0f);
+                       c_waypoints[unStart]), CColor::RED,5.0f);
          ++unStart;
          ++unEnd;
       }

@@ -29,24 +29,9 @@ namespace argos {
    /****************************************/
    /****************************************/
 
-   // static QOpenGLTexture* MakeTexture(const QString& str_fname) {
-   //    QString strPath =
-   //       QString(ARGOS_INSTALL_PREFIX) +
-   //       "/include/argos3/plugins/simulator/visualizations/qt-opengl/textures/" +
-   //       str_fname;
-   //    return new QOpenGLTexture(QImage(strPath));
-   // }
-
-   /****************************************/
-   /****************************************/
-
 
    CQTOpenGLThymio::CQTOpenGLThymio() :
       m_unVertices(40) {
-      /* Reserve the needed textures */
-      // m_pcTextures[0] = MakeTexture("Thymio_texture_top.png");
-      // m_pcTextures[1] = MakeTexture("Thymio_texture_bottom.png");
-      // m_pcTextures[2] = MakeTexture("Thymio_texture_side.png");
       /* Reserve the needed display lists */
       m_unLists = glGenLists(3);
       /* Assign indices for better referencing (later) */

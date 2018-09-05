@@ -9,8 +9,6 @@
 
 namespace argos {
    class CDynamics2DDifferentialSteeringControl;
-   class CDynamics2DGripper;     //I think we don't need this remove
-   class CDynamics2DGrippable;   //I think we don't need this remove
    class CDynamics2DThymioModel;
 }
 

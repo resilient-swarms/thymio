@@ -3,7 +3,6 @@
 #
 
 set(ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_CONTROLINTERFACE
-  control_interface/ci_Thymio_encoder_sensor.h
   control_interface/ci_Thymio_ground_sensor.h
   control_interface/ci_Thymio_proximity_sensor.h
   control_interface/ci_Thymio_leds_actuator.h
@@ -43,7 +42,6 @@ endif(ARGOS_BUILD_FOR STREQUAL "thymio"s)
 #
 set(ARGOS3_SOURCES_PLUGINS_ROBOTS_Thymio
   ${ARGOS3_HEADERS_PLUGINS_ROBOTS_Thymio_CONTROLINTERFACE}
-  control_interface/ci_Thymio_encoder_sensor.cpp
   control_interface/ci_Thymio_ground_sensor.cpp
   control_interface/ci_Thymio_proximity_sensor.cpp
   control_interface/ci_Thymio_leds_actuator.cpp
@@ -120,12 +118,6 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
       )
   endif(ARGOS_COMPILE_QTOPENGL)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
-
-#if(ARGOS_BUILD_FOR STREQUAL "thymio")
-#    target_link_libraries(
-#      argos3plugin_${ARGOS_BUILD_FOR}_Thymio
-#      -lThymio)
-#endif(ARGOS_BUILD_FOR STREQUAL "thymio")
 
 #
 # Installation

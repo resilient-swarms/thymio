@@ -1,0 +1,29 @@
+<!DOCTYPE aesl-source>
+<network>
+
+
+<!--list of global events-->
+
+<event size="8" name="ProxHLeds"/>
+<event size="8" name="ProxVLeds"/>
+
+<!--list of constants-->
+
+
+<!--show keywords state-->
+<keywords flag="true"/>
+
+
+<!--node thymio-II-->
+<node nodeId="1" name="thymio-II">
+	
+onevent ProxHLeds
+	call leds.prox.h(event.args[0],event.args[1],event.args[2],event.args[3],event.args[4],event.args[5],event.args[6],event.args[7])
+
+onevent ProxVLeds
+	call leds.prox.v(event.args[0],event.args[1])
+</node>
+
+
+</network>
+

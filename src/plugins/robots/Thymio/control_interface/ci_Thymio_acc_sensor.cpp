@@ -24,14 +24,5 @@ namespace argos {
     /****************************************/
     /****************************************/
 
-//    std::ostream& operator<<(std::ostream& c_os,
-//                             const CCI_Thymio_acc_sensor::SReading& accValues) {
-//       c_os << "Value=<" << accValues;
-//       return c_os;
-//    }
-
-    /****************************************/
-    /****************************************/
-
 }
 

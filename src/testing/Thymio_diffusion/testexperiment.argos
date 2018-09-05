@@ -45,7 +45,7 @@
 	<!--
 		is necessary for the ground sensors
 	!-->
-    <floor id="floor" source="image" path="src/testing/Thymio_diffusion/color.png"/> 
+    <floor id="floor" source="image" path="src/testing/Thymio_diffusion/desk.jpg"/> 
 
 
     <box id="wall_north" size="4,0.1,0.5" movable="false">

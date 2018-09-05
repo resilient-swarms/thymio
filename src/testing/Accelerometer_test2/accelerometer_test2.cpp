@@ -95,7 +95,7 @@ void CAccelerometerTest::ControlStep() {
         std::cout<<second<<"\t One second passed!!!\n";
     }
 
-    acc_sensor_readings << second<<",";
+    acc_sensor_readings << timer<<",";
     acc_sensor_readings << m_pcAccelerometer->accValues.x<<",";
     acc_sensor_readings << m_pcAccelerometer->accValues.y<<",";
     acc_sensor_readings << m_pcAccelerometer->accValues.z<<"\n";
