@@ -35,6 +35,7 @@ execute:
 
 
 ## For A Raspberry Pi :
+To configure WLAN use information from the [official documentation](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
 
 First install all dependencies for ARGoS, ASEBA and DaSHEL, then build them from source. When building ARGoS from source on a Raspberry Pi QtOpenGL is now required and also the build must be specifically for Thymio robot. 
 
@@ -53,15 +54,18 @@ First execute cmake using following options:
 
 Then build and install ARGoS. This will only compile and build necessary libraries for the execution of the controller codes.
 
-###For DaSHEL
+For DaSHEL
 normal build and install is enough.
 
-###For Thymio:
+For Thymio:
 First create a build_thymio directory in Thymio’s directory. Then run cmake with following options:
 
     Cmake –DARGOS_BUILD_FOR=Thymio –Dthymio_LIBS=<Path to the build_thymio directory inside ARGoS repository> ../src
 
 Then build and install Thymio.
+
+IMPORTANT: character encoding must be changed to US-UTF8 using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
+
 
 
 
