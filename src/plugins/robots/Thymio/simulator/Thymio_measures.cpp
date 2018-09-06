@@ -44,13 +44,6 @@ const CRadians PROXIMITY_SENSOR_ANGLES[7] = {
 
 //measurements from https://github.com/enki-community/enki/blob/master/enki/robots/thymio2/Thymio2.cpp
 const CVector3 PROXIMITY_SENSOR_OFFSET[7] = {
-//   CVector3(  0.062   , 0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-//   CVector3(  0.075   , 0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-//   CVector3(  0.0795  , 0       ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-//   CVector3(  0.075   ,-0.0255  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-//   CVector3(  0.062   ,-0.0485  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-//   CVector3( -THYMIO_WIDTH/2  , 0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
-//   CVector3( -THYMIO_WIDTH/2  ,-0.0295  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
     CVector3(  0.040   , 0.050  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
     CVector3(  0.050   , 0.025  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
     CVector3(  0.056   , 0.000  ,THYMIO_PROXIMITY_SENSOR_HEIGHT),
