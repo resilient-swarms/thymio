@@ -2,7 +2,7 @@
 #define TRAJECTORY_LOOP_FUNCTIONS_H
 
 #include <argos3/core/simulator/loop_functions.h>
-#include <argos3/plugins/robots/Thymio/simulator/Thymio_entity.h>
+#include <argos3/plugins/robots/thymio/simulator/thymio_entity.h>
 #include <fstream>
 using namespace argos;
 

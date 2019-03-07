@@ -23,16 +23,16 @@ if(LUA52_FOUND)
   include_directories(${LUA_INCLUDE_DIR})
 endif(LUA52_FOUND)
 
-find_package(Buzz)
-if(BUZZ_FOUND)
-  include_directories(${BUZZ_C_INCLUDE_DIR})
-endif(BUZZ_FOUND)
+#find_package(Buzz)
+#if(BUZZ_FOUND)
+#  include_directories(${BUZZ_C_INCLUDE_DIR})
+#endif(BUZZ_FOUND)
 
 
-#find_package( Qt5Core REQUIRED )
+##find_package( Qt5Core REQUIRED )
 
-find_package(LibXml2)
-include_directories(${LIBXML2_INCLUDE_DIR})
+#find_package(LibXml2)
+#include_directories(${LIBXML2_INCLUDE_DIR})
 
 #
 # Set ARGoS include dir

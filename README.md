@@ -6,7 +6,7 @@ Is an open source simulator based on ARGoS framework for Thymio robotic platform
 This version of Thymio on a desktop computer is mainly used for simulation.
 First clone this repository:
 
-	git clone https://github.com/daneshtarapore/Thymio
+	git clone https://github.com/daneshtarapore/thymio
 
 Then change directory to the repository you have cloned and create "build" directory using:
 

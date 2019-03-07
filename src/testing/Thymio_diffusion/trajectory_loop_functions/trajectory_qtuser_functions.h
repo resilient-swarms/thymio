@@ -2,7 +2,7 @@
 #define TRAJECTORY_QTUSER_FUNCTIONS_H
 
 #include <argos3/plugins/simulator/visualizations/qt-opengl/qtopengl_user_functions.h>
-#include <argos3/plugins/robots/Thymio/simulator/Thymio_entity.h>
+#include <argos3/plugins/robots/thymio/simulator/thymio_entity.h>
 
 using namespace argos;
 

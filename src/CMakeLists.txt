@@ -53,7 +53,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/ARGoSBuildChecks.cmake)
 #
 # Set up CPack for later use
 #
-include(${CMAKE_SOURCE_DIR}/cmake/ARGoSPackaging.cmake)
+#include(${CMAKE_SOURCE_DIR}/cmake/ARGoSPackaging.cmake)
 
 #
 # Compile stuff

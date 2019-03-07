@@ -1,1 +1,1 @@
-add_subdirectory(Thymio)
+add_subdirectory(thymio)
