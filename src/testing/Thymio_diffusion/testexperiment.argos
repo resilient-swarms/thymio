@@ -63,7 +63,7 @@
 
     <!--
         You can distribute entities randomly. Here, we distribute
-        10 foot-bots in this way:
+        10 Thymios in this way:
         - the position is uniformly distributed
         on the ground, in the square whose corners are (-2,-2) and (2,2)
         - the orientations are non-zero only when rotating around Z and chosen

@@ -37,7 +37,7 @@ void CTrajectoryLoopFunctions::Init(TConfigurationNode& t_tree) {
       CThymioEntity* pcFB = any_cast<CThymioEntity*>(it->second);
       /* Create a waypoint vector */
       m_tWaypoints[pcFB] = std::vector<CVector3>();
-      /* Add the initial position of the foot-bot */
+      /* Add the initial position of the robot */
       m_tWaypoints[pcFB].push_back(pcFB->GetEmbodiedEntity().GetOriginAnchor().Position);
         robots << pcFB->GetId() <<","<<
                   pcFB->GetEmbodiedEntity().GetOriginAnchor().Position.GetX()<<","<<

@@ -55,7 +55,7 @@
     </box>
 
  
-        <Thymio id="eb0">
+        <Thymio id="eb0">b
           <body position="-0.055,0,0" orientation="0,0,0" />
           <controller config="thymio" />
         </Thymio>

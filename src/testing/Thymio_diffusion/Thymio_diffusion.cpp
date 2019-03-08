@@ -50,8 +50,7 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
    m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    /*
-    * Parse the configuration file
-    *
+b    *
     * The user defines this part. Here, the algorithm accepts three
     * parameters and it's nice to put them in the config file so we don't
     * have to recompile if we want to try other settings.
