@@ -45,8 +45,11 @@
 	<!--
 		is necessary for the ground sensors
 	!-->
-    <floor id="floor" source="image" path="src/testing/Thymio_diffusion/desk.jpg"/> 
+    <!-- <floor id="floor" source="image" path="src/testing/Thymio_diffusion/desk.jpg"/>  -->
 
+    <floor id="floor"
+           source="loop_functions"
+           pixels_per_meter="50" />
 
     <box id="wall_north" size="4,0.1,0.5" movable="false">
       <body position="0,2,0" orientation="0,0,0" />
@@ -127,16 +130,6 @@
   <!-- * Visualization * -->
   <!-- ****************** -->
   <visualization>
-    <qt-opengl>
-	<!-- you can't have both of them at the same time!-->
-	<!-- <user_functions library="build/testing/Thymio_diffusion/loop_functions/libdraw_position"
-                      label="draw_position" /> !-->
-	<user_functions library="build/testing/Thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
-                      label="trajectory_qtuser_functions" />
-      <camera>
-        <placement idx="0" position="-1.37702,-1.04453,0.308332" look_at="-1.1334,-1.85855,-0.21895" up="0.15118,-0.505144,0.849691" lens_focal_length="20" />
-      </camera>
-    </qt-opengl>
   </visualization>
 
 </argos-configuration>
