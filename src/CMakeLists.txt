@@ -14,6 +14,7 @@ set(CMAKE_MACOSX_RPATH 0)
 #
 set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
+
 #
 # Set CMake policies to select wanted behaviors
 #
@@ -26,7 +27,8 @@ endif(POLICY CMP0042)
 #
 # Include path points to the base source dir
 #
-include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
+#include_directories(${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
+#include_directories(${CMAKE_SOURCE_DIR})
 
 #
 # Make sure we are under Unix
