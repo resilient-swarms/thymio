@@ -15,7 +15,7 @@ const Real WHEEL_RADIUS		        = 0.022;		  //measured from Thymio CAD files
 const Real WHEEL_WIDTH		        = 0.0195;		  //measured from Thymio CAD files
 const Real THYMIO_BASE_ELEVATION   = 0.011; 		  //measured from Thymio CAD files
 //const Real THYMIO_SENSORS_RING_RADIUS     = 0.11;
-const Real THYMIO_PROXIMITY_SENSOR_RANGE  = 0.1; //10cm
+const Real THYMIO_PROXIMITY_SENSOR_RANGE  = 1.0; // in meters. used to detect collisions. the actual max sensor range can be lower than this
 const Real THYMIO_PROXIMITY_SENSOR_HEIGHT = 0.03 ; //measured from Thymio CAD files
 const Real THYMIO_XOFFSET				= (THYMIO_WIDTH/2)- 0.03; //measured from Thymio CAD files (wheels distance from rear is 3cm)
 

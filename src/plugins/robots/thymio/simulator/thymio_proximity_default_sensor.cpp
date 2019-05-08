@@ -37,19 +37,19 @@ public:
     // needs to be modified for Thymio
     virtual Real CalculateReading(Real f_distance) // f_distance is in meters
     {
-        //std::cout << "Distance = " << f_distance << std::endl;
+        std::cout << "Distance = " << f_distance << std::endl;
 
         Real x, y;
         //if(0<=x && x<=11) // in meters, not cms.
         if(0.0<=f_distance && f_distance<=0.11) // in meters, not cms.
         {
-            x = f_distance * 100.0f;
+            x = f_distance * 100.0f; // x is in cm
             y = -2.055*x*x*x*x+43.41*x*x*x-292.9*x*x+312.2*x+4362.0;
         }
         else
             y = 0.0;
 
-        //std::cout << "y = " << y << std::endl;
+        std::cout << "y = " << y << std::endl;
         return y/4500.0; // Normalize by approx. max sensor value
     }
 };
@@ -89,6 +89,10 @@ void CThymioProximityDefaultSensor::SetRobot(CComposableEntity& c_entity)
 void CThymioProximityDefaultSensor::Init(TConfigurationNode& t_tree)
 {
     m_pcProximityImpl->Init(t_tree);
+
+    Real fRange = 0.11f; // in meters
+    GetNodeAttributeOrDefault(t_tree, "range", fRange, fRange);
+    std::cout << "Range = " << fRange;
 }
 
 /****************************************/
