@@ -8,17 +8,20 @@
 #include <string>
 #include <map>
 
-namespace argos {
+namespace argos
+{
    class CThymioProximityDefaultSensor;
 }
 
 #include <argos3/plugins/robots/thymio/control_interface/ci_thymio_proximity_sensor.h>
 #include <argos3/plugins/robots/generic/simulator/proximity_default_sensor.h>
 
-namespace argos {
+namespace argos
+{
 
    class CThymioProximityDefaultSensor : public CCI_ThymioProximitySensor,
-                                            public CSimulatedSensor {
+                                            public CSimulatedSensor
+   {
 
    public:
 

@@ -77,6 +77,8 @@ void CThymioDiffusion::ControlStep() {
 //   LOG << tProxReads[2].Value<< tProxReads[2].Angle.GetValue();
 //   std::cout << tProxReads;
 
+//   m_pcWheels->SetLinearVelocity(m_fWheelVelocity, m_fWheelVelocity);
+//   return;
 
    /* Sum them together */
    CVector2 cAccumulator;
