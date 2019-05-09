@@ -40,25 +40,25 @@ public:
     // needs to be modified for Thymio
     virtual Real CalculateReading(Real f_distance) // f_distance is in meters
     {
-        std::cout << "Distance = " << f_distance << " meters " << std::endl;
+        //std::cout << "Distance = " << f_distance << " meters " << std::endl;
 
         Real x, y;
         //if(0<=x && x<=11) // in meters, not cms.
         if (0.0 <= f_distance && f_distance <= f_range) // in meters, not cms.
         {
             x = f_distance * 100.0f; // x is in cm
-            std::cout << "distance in centimeters = " << x << std::endl;
+            //std::cout << "distance in centimeters = " << x << std::endl;
             x *= 0.11 / f_range; // convert the f_range back to the original 0.11m scale of the real-life thymio observations
-            std::cout << "scaled distance = " << x << std::endl;
+            //std::cout << "scaled distance = " << x << std::endl;
             //y = -2.055*x*x*x*x+43.41*x*x*x-292.9*x*x+312.2*x+4362.0;
             y = -40.0 * x * x + 40 * x + 4400.0; // remove unnecessary non-linearities, maintain similar range and shape (has y=0 at x=11)
         }
         else
             y = 0.0;
-
-        std::cout << "y before normalisation = " << y << std::endl;
+        
+        //std::cout << "y before normalisation = " << y << std::endl;
         y /= 4400.0; // Normalize by max sensor value
-        std::cout << "y after normalisation = " << y << std::endl;
+        //std::cout << "y after normalisation = " << y << std::endl;
         return y;
     }
 };

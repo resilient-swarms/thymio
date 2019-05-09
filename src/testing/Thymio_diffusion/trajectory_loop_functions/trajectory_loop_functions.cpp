@@ -91,6 +91,13 @@ void CTrajectoryLoopFunctions::PostStep() {
                       pcFB->GetEmbodiedEntity().GetOriginAnchor().Position.GetX() <<","<<
                       pcFB->GetEmbodiedEntity().GetOriginAnchor().Position.GetY() <<"\n";
       }
+      if(pcFB->GetEmbodiedEntity().IsCollidingWithSomething())
+      {
+         std::cout<<"Is colliding"<<std::endl;
+      }
+      else{
+         std::cout<<"Is NOT colliding"<<std::endl;
+      }
    }
 }
 
