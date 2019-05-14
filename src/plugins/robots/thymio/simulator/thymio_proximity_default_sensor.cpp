@@ -102,7 +102,7 @@ void CThymioProximityDefaultSensor::Init(TConfigurationNode &t_tree)
 
     Real fRange = 0.11f; // in meters
     GetNodeAttributeOrDefault(t_tree, "range", dynamic_cast<CThymioProximitySensorImpl *>(m_pcProximityImpl)->f_range, fRange);
-    std::cout << "Range = " << dynamic_cast<CThymioProximitySensorImpl *>(m_pcProximityImpl)->f_range;
+    //std::cout << "Range = " << dynamic_cast<CThymioProximitySensorImpl *>(m_pcProximityImpl)->f_range;
 } // namespace argos
 
 /****************************************/

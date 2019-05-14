@@ -13,6 +13,8 @@ CThymioDiffusion::CThymioDiffusion() :
    m_pcProximity(NULL),
    m_pcGround(NULL),
    m_pcLeds(NULL),
+   m_pcRABA(NULL),
+   m_pcRABS(NULL),
    m_cAlpha(10.0f),
    m_fDelta(0.5f),
    m_fWheelVelocity(2.5f),
@@ -22,7 +24,8 @@ CThymioDiffusion::CThymioDiffusion() :
 /****************************************/
 /****************************************/
 
-void CThymioDiffusion::Init(TConfigurationNode& t_node) {
+void CThymioDiffusion::Init(TConfigurationNode& t_node)
+{
    /*
     * Get sensor/actuator handles
     *
@@ -47,10 +50,12 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node) {
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity");
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
+   m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
+   m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );
    /*
-b    *
+    *
     * The user defines this part. Here, the algorithm accepts three
     * parameters and it's nice to put them in the config file so we don't
     * have to recompile if we want to try other settings.
@@ -64,7 +69,11 @@ b    *
 /****************************************/
 /****************************************/
 
-void CThymioDiffusion::ControlStep() {
+void CThymioDiffusion::ControlStep()
+{
+    m_pcRABA->ClearData(); // clear the channel at the start of each control cycle
+
+    m_pcRABA->SetData(0, 100); // send test-value of 100 on RAB medium
 
    /* Get readings from proximity sensor */
    const CCI_ThymioProximitySensor::TReadings& tProxReads = m_pcProximity->GetReadings();
@@ -75,20 +84,22 @@ void CThymioDiffusion::ControlStep() {
 
 //   LOG << tProxReads;
 //   LOG << tProxReads[2].Value<< tProxReads[2].Angle.GetValue();
-   std::cout << tProxReads;
+//   std::cout << tProxReads;
 
    m_pcWheels->SetLinearVelocity(m_fWheelVelocity, m_fWheelVelocity);
-   return;
+
 
    /* Sum them together */
    CVector2 cAccumulator;
-   for(size_t i = 0; i < tProxReads.size(); ++i) {
+   for(size_t i = 0; i < tProxReads.size(); ++i)
+   {
       cAccumulator += CVector2(tProxReads[i].Value, tProxReads[i].Angle);
    }
    cAccumulator /= tProxReads.size();
 
    short cground = 0;
-   for(size_t i = 0; i < tGroundReads.size(); ++i) {
+   for(size_t i = 0; i < tGroundReads.size(); ++i)
+   {
       cground += tGroundReads[i].Value;
    }
 
@@ -98,22 +109,36 @@ void CThymioDiffusion::ControlStep() {
    CRadians cAngle = cAccumulator.Angle();
    LOG << cAngle.GetValue();
    if(m_cGoStraightAngleRange.WithinMinBoundIncludedMaxBoundIncluded(cAngle) &&
-      cAccumulator.Length() < m_fDelta ) {
+      cAccumulator.Length() < m_fDelta )
+   {
       /* Go straight */
       m_pcWheels->SetLinearVelocity(m_fWheelVelocity, m_fWheelVelocity);
    }
-   else {
+   else
+   {
       /* Turn, depending on the sign of the angle */
-      if(cAngle.GetValue() < 0) {
+      if(cAngle.GetValue() < 0)
+      {
          m_pcWheels->SetLinearVelocity(m_fWheelVelocity, 0);
       }
-      else {
+      else
+      {
          m_pcWheels->SetLinearVelocity(0, m_fWheelVelocity);
       }
    }
+
+   CCI_RangeAndBearingSensor::TReadings sensor_readings = m_pcRABS->GetReadings();
+   std::cout << "Robots in RAB range of " << GetId() << " is " << sensor_readings.size() << std::endl;
+   for(size_t i = 0; i < sensor_readings.size(); ++i)
+   {
+       std::cout << "RAB range " << sensor_readings[i].Range << " Bearing "  << sensor_readings[i].HorizontalBearing << " Message size " << sensor_readings[i].Data.Size() << std::endl;
+       for(size_t j = 0; j < sensor_readings[i].Data.Size(); ++j)
+           std::cout << "Data-Packet at index " << j << " is " << sensor_readings[i].Data[j] << std::endl;
+   }
 }
 
-CThymioDiffusion::~CThymioDiffusion(){
+CThymioDiffusion::~CThymioDiffusion()
+{
     m_pcWheels->SetLinearVelocity(0.0f, 0.0f);
 }
 

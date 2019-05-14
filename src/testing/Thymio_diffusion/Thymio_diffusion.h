@@ -10,6 +10,8 @@
 #include <argos3/plugins/robots/thymio/control_interface/ci_thymio_leds_actuator.h>
 #include <argos3/plugins/robots/thymio/control_interface/ci_thymio_proximity_sensor.h>
 #include <argos3/plugins/robots/thymio/control_interface/ci_thymio_ground_sensor.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_actuator.h>
+#include <argos3/plugins/robots/generic/control_interface/ci_range_and_bearing_sensor.h>
 #include <argos3/core/utility/logging/argos_log.h>
 
 /*
@@ -71,6 +73,12 @@ private:
    CCI_ThymioProximitySensor* m_pcProximity;
    /* Pointer to the Thymio ground sensors */
    CCI_ThymioGroundSensor* m_pcGround;
+   /* Pointer to the range and bearing actuator */
+   CCI_RangeAndBearingActuator*  m_pcRABA;
+   /* Pointer to the range and bearing sensor */
+   CCI_RangeAndBearingSensor* m_pcRABS;
+
+
 
    /*
     * The following variables are used as parameters for the

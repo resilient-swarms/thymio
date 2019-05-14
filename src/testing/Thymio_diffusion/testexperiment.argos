@@ -21,10 +21,12 @@
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
+        <range_and_bearing implementation="default"/>
       </actuators>
       <sensors>
-        <Thymio_proximity implementation="default" show_rays="true" range="0.5" />
+        <Thymio_proximity implementation="default" show_rays="false" range="0.5" />
 	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true"/>
       </sensors>
       <params alpha="0" delta="0.4" velocity="3" />
 
@@ -77,8 +79,8 @@
     <distribute>
       <position method="uniform" min="-2,-2,0" max="2,2,0" />
       <orientation method="gaussian" mean="0,0,0" std_dev="360,0,0" />
-      <entity quantity="1" max_trials="100">
-        <Thymio id="eb0">
+      <entity quantity="5" max_trials="100">
+        <Thymio id="eb0" rab_range="1" rab_data_size="4">
           <body position="100,0,0" orientation="0,0,0" />
           <controller config="thymio" />
         </Thymio>
@@ -116,7 +118,6 @@
   <!-- ******************* -->
   <physics_engines>
     <dynamics2d id="dyn2d" />
-    <!-- <pointmass3d id="dyn2d" /> -->
   </physics_engines>
 
   <!-- ********* -->
@@ -124,6 +125,7 @@
   <!-- ********* -->
   <media>
     <led id="leds" />
+    <range_and_bearing id="rab" />
   </media>
 
   <!-- ****************** -->
