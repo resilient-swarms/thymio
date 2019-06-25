@@ -68,6 +68,10 @@ CQTOpenGLThymio::~CQTOpenGLThymio() {
 /****************************************/
 
 void CQTOpenGLThymio::Draw(CThymioEntity& c_entity) {
+    /* Place the LEDs */
+    CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
+    top_color = cLEDEquippedEntity.GetLED(0).GetColor();
+    SetLEDMaterial(top_color.GetRed(), top_color.GetGreen(), top_color.GetBlue());
     /* Draw the body */
     glPushMatrix();
     // glScalef(THYMIO_LENGHT, THYMIO_WIDTH, THYMIO_HEIGHT);
@@ -75,8 +79,6 @@ void CQTOpenGLThymio::Draw(CThymioEntity& c_entity) {
     glCallList(m_unBaseList);
     glPopMatrix();
 
-    /* Place the LEDs */
-    CLEDEquippedEntity& cLEDEquippedEntity = c_entity.GetLEDEquippedEntity();
     for(UInt32 i = 0; i < 8; i++) {
         const CColor&     cColor      = cLEDEquippedEntity.GetLED(i).GetColor();
         const CVector3&   cOffset     = cLEDEquippedEntity.GetLEDOffset(i);
@@ -139,31 +141,17 @@ void CQTOpenGLThymio::SetWhitePlasticMaterial() {
 void CQTOpenGLThymio::RenderBody() {
     CQTOpenGLUserFunctions* qlfunc = new CQTOpenGLUserFunctions();
 
-    //      qlfunc->DrawBox(
-    //            CVector3(0,0,BODY_HEIGHT/2+THYMIO_BASE_ELEVATION), //position
-    //            CQuaternion( ),
-    //            CVector3(0.085,0.11,THYMIO_HEIGHT),//size
-    //            CColor::WHITE
-    //            );
 
-
-    //     CQTOpenGLUserFunctions::DrawBox(
-    //       CVector3(0,0,0), //position
-    //       CQuaternion( CVector3(0,0,0),CVector3(0,0,0)), //orientation
-    //       CVector3(THYMIO_LENGHT,THYMIO_WIDTH,THYMIO_HEIGHT),//size
-    //       CColor::WHITE
-    //       )
-
-    //       SetWhitePlasticMaterial();
-
-    const GLfloat pfColor[]     = {   0.4f, 0.4f, 0.4f, 1.0f };
-    const GLfloat pfSpecular[]  = {   0.3f, 0.3f, 0.3f, 1.0f };
-    const GLfloat pfShininess[] = { 100.0f                   };
-    const GLfloat pfEmission[]  = {   0.0f, 0.0f, 0.0f, 1.0f };
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, pfColor);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,            pfSpecular);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,           pfShininess);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, pfEmission);
+//    Dark gray color of the Thymio robot body and wheels. Commented out to match the Thymio LED colors to help with visual debugging
+//    const GLfloat pfColor[]     = {   0.4f, 0.4f, 0.4f, 1.0f };
+//    const GLfloat pfColor[]     = {(float)top_color.GetRed(), (float)top_color.GetGreen(), (float)top_color.GetBlue(), 1.0f };
+//    const GLfloat pfSpecular[]  = {   0.3f, 0.3f, 0.3f, 1.0f };
+//    const GLfloat pfShininess[] = { 100.0f                   };
+//    const GLfloat pfEmission[]  = {   0.0f, 0.0f, 0.0f, 1.0f };
+//    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, pfColor);
+//    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,            pfSpecular);
+//    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,           pfShininess);
+//    glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, pfEmission);
 
 
     glBegin(GL_POLYGON);

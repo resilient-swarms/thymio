@@ -17,6 +17,8 @@ namespace argos {
 #endif
 
 #include <QOpenGLTexture>
+#include <argos3/core/utility/datatypes/color.h>
+
 
 namespace argos {
 
@@ -70,6 +72,11 @@ namespace argos {
       /** Number of vertices to display the round parts
           (wheels, chassis, etc.) */
       GLuint m_unVertices;
+
+
+      /** Color of the top of the robot -- takes the color of the LEDs.
+       * Used for visual debugging as LEDs too small */
+      CColor top_color;
 
    };
 

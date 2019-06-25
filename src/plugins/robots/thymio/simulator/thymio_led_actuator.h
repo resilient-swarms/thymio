@@ -19,6 +19,10 @@ namespace argos {
 
         virtual void SetRobot(CComposableEntity& c_entity);
 
+        virtual void SetColor(CColor led_rgb_color);
+
+        virtual void SetColors(std::vector<CColor> led_rgb_colors);
+
         virtual void SetProxHIntensity(std::vector<short> intensity);
 
         virtual void SetProxVIntensity(std::vector<short> intensity);

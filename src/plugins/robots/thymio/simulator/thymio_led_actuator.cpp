@@ -53,6 +53,22 @@ namespace argos{
       /****************************************/
       /****************************************/
 
+      void ThymioLedActuator::SetColor(CColor led_color){
+        for(size_t i=0; i < m_pcLEDEquippedEntity->GetLEDs().size(); ++i)
+            m_pcLEDEquippedEntity->SetLEDColor(i,led_color);
+      }
+
+      /****************************************/
+      /****************************************/
+
+      void ThymioLedActuator::SetColors(std::vector<CColor> led_colors){
+        for(size_t i=0; i < led_colors.size(); ++i)
+            m_pcLEDEquippedEntity->SetLEDColor(i,led_colors[i]);
+      }
+
+      /****************************************/
+      /****************************************/
+
       void ThymioLedActuator::SetProxHIntensity(std::vector<short> intensity){
         for(size_t i=0; i < intensity.size(); ++i)
             m_pcLEDEquippedEntity->SetLEDColor(i,CColor(intensity[i],0,0,255));
