@@ -1,4 +1,4 @@
-#include "real_Thymio_proximity_sensor.h"
+#include "real_thymio_proximity_sensor.h"
 
 /****************************************/
 /****************************************/

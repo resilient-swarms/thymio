@@ -1,4 +1,4 @@
-#include "real_Thymio_leds_actuator.h"
+#include "real_thymio_leds_actuator.h"
 
 /****************************************/
 /****************************************/
@@ -21,6 +21,18 @@ CRealThymioLEDsActuator::~CRealThymioLEDsActuator() {
 
 void CRealThymioLEDsActuator::Do() {
 
+}
+
+/****************************************/
+/****************************************/
+
+void CRealThymioLEDsActuator::SetColor(CColor led_color){
+}
+
+/****************************************/
+/****************************************/
+
+void CRealThymioLEDsActuator::SetColors(std::vector<CColor> led_colors){
 }
 
 /****************************************/

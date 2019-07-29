@@ -3,7 +3,7 @@
 
 #include <argos3/core/real_robot/real_robot.h>
 #include <argos3/core/utility/logging/argos_log.h>
-#include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
+#include <argos3/plugins/robots/thymio/real_robot/real_thymio_device.h>
 
 #include <aseba/switches/asebacppapi/thymio_interface.h>
 

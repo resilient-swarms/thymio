@@ -40,7 +40,7 @@ ThymioInterface::ThymioInterface(const std::string& target):
         map = new MessageMap();
         if(targetStream->failed())
         {
-            std::cout << targetStream->getFailReason();
+            std::cout << targetStream->getFailReason() << std::endl;
         }
         this->pingNetwork();
         this->wait();
@@ -543,7 +543,7 @@ bool ThymioInterface::setup(const string& nodeName){
         commonDefinitions.events.push_back(NamedValue(UTF8ToWString("ProxHLeds"), 8));
         code = Aseba::UTF8ToWString("onevent ProxVLeds call leds.prox.v(event.args[0],event.args[1])\n onevent ProxHLeds call leds.prox.h(event.args[0],event.args[1],event.args[2],event.args[3],event.args[4],event.args[5],event.args[6],event.args[7])");
         if (compileAndSendCode(code, nodeId, nodeName))
-            std::cout<<"Couln't send this command!";
+            std::cout<<"Couln't send this command!" << std::endl;
 
 
 
@@ -612,8 +612,8 @@ int main()
 
 
 
-    interface->setVariable("thymio-II","motor.left.target",{0});
-    interface->setVariable("thymio-II","motor.right.target",{0});
+    interface->setVariable("thymio-II","motor.left.target",{128});
+    interface->setVariable("thymio-II","motor.right.target",{128});
     ThymioInterface::Values accelerometer;
 
     j = 0;

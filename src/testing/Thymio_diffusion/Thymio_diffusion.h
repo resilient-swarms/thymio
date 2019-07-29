@@ -78,7 +78,7 @@ private:
    /* Pointer to the range and bearing sensor */
    CCI_RangeAndBearingSensor* m_pcRABS;
 
-
+   bool RangeAndBearing = true;
 
    /*
     * The following variables are used as parameters for the

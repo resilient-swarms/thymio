@@ -52,8 +52,14 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node)
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
    m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity");
    m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
-   m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
-   m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );
+   try {
+      m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
+      m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );
+      RangeAndBearing = true;
+   } catch (CARGoSException& ex) {
+      std::cout << "RAB NOT found. Continuing without RAB." << std::endl;
+      RangeAndBearing = false;
+   }
    /*
     *
     * The user defines this part. Here, the algorithm accepts three
@@ -71,9 +77,12 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node)
 
 void CThymioDiffusion::ControlStep()
 {
-    m_pcRABA->ClearData(); // clear the channel at the start of each control cycle
+   if (RangeAndBearing)
+   {
+      m_pcRABA->ClearData(); // clear the channel at the start of each control cycle
 
-    m_pcRABA->SetData(0, 100); // send test-value of 100 on RAB medium
+      m_pcRABA->SetData(0, 100); // send test-value of 100 on RAB medium
+   }
 
    /* Get readings from proximity sensor */
    const CCI_ThymioProximitySensor::TReadings& tProxReads = m_pcProximity->GetReadings();
@@ -127,13 +136,16 @@ void CThymioDiffusion::ControlStep()
       }
    }
 
-   CCI_RangeAndBearingSensor::TReadings sensor_readings = m_pcRABS->GetReadings();
-   std::cout << "Robots in RAB range of " << GetId() << " is " << sensor_readings.size() << std::endl;
-   for(size_t i = 0; i < sensor_readings.size(); ++i)
+   if (RangeAndBearing)
    {
-       std::cout << "RAB range " << sensor_readings[i].Range << " Bearing "  << sensor_readings[i].HorizontalBearing << " Message size " << sensor_readings[i].Data.Size() << std::endl;
-       for(size_t j = 0; j < sensor_readings[i].Data.Size(); ++j)
-           std::cout << "Data-Packet at index " << j << " is " << sensor_readings[i].Data[j] << std::endl;
+      CCI_RangeAndBearingSensor::TReadings sensor_readings = m_pcRABS->GetReadings();
+      std::cout << "Robots in RAB range of " << GetId() << " is " << sensor_readings.size() << std::endl;
+      for(size_t i = 0; i < sensor_readings.size(); ++i)
+      {
+         std::cout << "RAB range " << sensor_readings[i].Range << " Bearing "  << sensor_readings[i].HorizontalBearing << " Message size " << sensor_readings[i].Data.Size() << std::endl;
+         for(size_t j = 0; j < sensor_readings[i].Data.Size(); ++j)
+            std::cout << "Data-Packet at index " << j << " is " << sensor_readings[i].Data[j] << std::endl;
+      }
    }
 }
 

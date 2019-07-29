@@ -1,4 +1,4 @@
-#include "real_Thymio_battery_sensor.h"
+#include "real_thymio_battery_sensor.h"
 
 /****************************************/
 /****************************************/

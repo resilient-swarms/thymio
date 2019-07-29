@@ -4,9 +4,9 @@
 #include <argos3/core/utility/math/angles.h>
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
-#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_leds_actuator.h>
-#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_proximity_sensor.h>
-#include <argos3/plugins/robots/Thymio/control_interface/ci_Thymio_ground_sensor.h>
+#include <argos3/plugins/robots/thymio/control_interface/ci_thymio_leds_actuator.h>
+#include <argos3/plugins/robots/thymio/control_interface/ci_thymio_proximity_sensor.h>
+#include <argos3/plugins/robots/thymio/control_interface/ci_thymio_ground_sensor.h>
 #include <argos3/core/utility/logging/argos_log.h>
 
 #include <iostream>

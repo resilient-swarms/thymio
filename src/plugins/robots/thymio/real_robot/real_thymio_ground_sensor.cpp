@@ -1,4 +1,4 @@
-#include "real_Thymio_ground_sensor.h"
+#include "real_thymio_ground_sensor.h"
 
 /****************************************/
 /****************************************/

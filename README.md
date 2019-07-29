@@ -93,7 +93,7 @@ Change directory to the cloned repository and create a build_thymio directory:
 
 Execute cmake using following options:
 
-    cmake –DARGOS_BUILD_FOR=thymio ../src 
+    cmake -DARGOS_BUILD_FOR=thymio -DARGOS_DYNAMIC_LIBRARY_LOADING=OFF -DARGOS_DOCUMENTATION=OFF../src 
 
 Then build and install ARGoS. This will only compile and build necessary libraries for the execution of the controller codes.
 
@@ -103,9 +103,15 @@ First clone this repository:
 
 	git clone https://github.com/resilient-swarms/thymio
 
-Change directory to the cloned directory and create a build_thymio directory there. Then run cmake with the following options:
+Change directory to the cloned directory and create a build_asebacppapi directory there. Then run cmake with the folloing options:
 
-    Cmake –DARGOS_BUILD_FOR=Thymio –Dthymio_LIBS=<Path to the build_thymio directory inside the ARGoS repository> ../src
+    cmake -DLIB_INSTALL_DIR=<Path to the install location of the aseba libraries> ../thymiointerface/NewInterface/
+
+Then build and install the asebacppapi.
+
+Change the current directory to the cloned directory again and create a build_thymio directory there. Then run cmake with the following options:
+
+    Cmake -DARGOS_BUILD_FOR=thymio -DThymio_LIBS=<Path to the build_thymio directory inside the ARGoS repository> ../src
 
 Then build and install Thymio.
 
@@ -115,9 +121,9 @@ IMPORTANT: character encoding must be changed to US-UTF8 using [raspi-config](ht
 
 To run Thymio_diffusion example or any other example follow the following procedure.
 
-make sure you are in the build/testing/Thymio_diffusion directory and the executable file is available then execute it using:
+Make sure you are in the build/testing/Thymio_diffusion directory and the executable file is available then execute it using:
 
-    sudo ./Thymio_diffusion -c "/home/pi/Thymio/src/testing/Thymio_diffusion/testexperiment.argos" -i thymio
+    sudo ./Thymio_diffusion -c "/home/pi/Thymio/src/testing/Thymio_diffusion/realtestexperiment.argos" -i thymio
 
 The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/Thymio/blob/6ab255c84a1a258e4a0cf1bd8c7dead4feb64bf1/src/testing/Thymio_diffusion/testexperiment.argos#L19).
 

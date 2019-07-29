@@ -1,7 +1,7 @@
 #include <argos3/core/utility/configuration/argos_configuration.h>
 #include <argos3/core/utility/configuration/command_line_arg_parser.h>
 #include <argos3/core/utility/logging/argos_log.h>
-#include "real_Thymio.h"
+#include "real_thymio.h"
 
 using namespace argos;
 
@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
       "the id of the controller to run",
       strControllerId);
 
-   std::cout<< "executed the code";
+   std::cout<< "executed the code" << std::endl;
    try {
       cCLAP.Parse(argc, argv);
    }
@@ -44,6 +44,7 @@ int main(int argc, char* argv[]) {
         */
        pcRobot->Execute();
    } catch (CARGoSException& ex) {
+      std::cout << "Couldn't init robot! Cause: " << ex.what() << std::endl;
        LOGERR << "Couln't Init Robot!" << std::endl;
        return 1;
    }

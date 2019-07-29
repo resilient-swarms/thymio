@@ -1,4 +1,4 @@
-#include "real_Thymio_acc_sensor.h"
+#include "real_thymio_acc_sensor.h"
 
 /****************************************/
 /****************************************/
