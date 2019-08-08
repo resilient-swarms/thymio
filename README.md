@@ -1,6 +1,6 @@
 # Thymio
 
-Is an open source simulator based on ARGoS framework for Thymio robotic platform. It uses an [Interface](https://github.com/daneshtarapore/AsebaCppInterface), which is developed using core libraries from ASEBA and DaSHEL.
+Is an open source simulator based on ARGoS framework for Thymio robotic platform. It uses an interface, which is developed using core libraries from ASEBA and DaSHEL.
 
 ## Installing Thymio on a desktop computer:
 This version of Thymio on a desktop computer is mainly used for simulation.
@@ -45,40 +45,14 @@ First you should prepare the environment. You need internet connection and to co
 First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba) and [DaSHEL](https://github.com/aseba-community/dashel):
 
 	sudo apt-get install
-                            cmake\
-                            libfreeimage-dev\
-                            libfreeimageplus-dev \
-                            qt5-default\
-                            freeglut3-dev\
-                            libxi-dev\
-                            libxmu-dev\
-                            liblua5.2-dev\
-                            lua5.2\
-                            doxygen\
-                            graphviz\
-                            graphviz-dev\
-                            asciidoc\
-                            qttools5-dev-tools \
-                            qtbase5-dev \
-                            qt5-qmake \
-                            libqt5opengl5-dev \
-                            libqt5svg5-dev \
-                            libqt5x11extras5-dev \
-                            libqwt-qt5-dev \
-                            libudev-dev \
+                            cmake\ 
                             libxml2-dev \
-                            libsdl2-dev \
-                            libavahi-compat-libdnssd-dev \
                             g++ \
                             git \
                             make \
                             libenki-dev \
                             libdashel-dev \
                             aseba 
-
-Remember when building ASEBA, disable Enki from the cmake file by commenting [this](https://github.com/aseba-community/aseba/blob/85c2b3a679cb4137e24afaf88c55067c0f65eac7/CMakeLists.txt#L22) line out:
-
-    include(CMakeModules/enki.cmake)
 
 To build ARGoS on Raspberry Pi specifically for Thymio:
 
