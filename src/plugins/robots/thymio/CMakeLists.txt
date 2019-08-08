@@ -31,7 +31,6 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
       real_robot/real_thymio_ground_sensor.h
       real_robot/real_thymio_proximity_sensor.h
       real_robot/real_thymio_acc_sensor.h
-#      real_robot/dbusinterface.h
 #      real_robot/real_robot.h
       )
 endif(ARGOS_BUILD_FOR STREQUAL "thymio") #endif(ARGOS_BUILD_FOR STREQUAL "thymio"s)
@@ -88,7 +87,6 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
       real_robot/real_thymio_ground_sensor.cpp
       real_robot/real_thymio_proximity_sensor.cpp
       real_robot/real_thymio_acc_sensor.cpp
-#      real_robot/dbusinterface.cpp
 #      real_robot/real_robot.cpp
 #      real_robot/thymio_interface.cpp
       )

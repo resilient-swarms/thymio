@@ -9,10 +9,10 @@
 /****************************************/
 
 CThymioDiffusion::CThymioDiffusion() :
+   m_pcLeds(NULL),
    m_pcWheels(NULL),
    m_pcProximity(NULL),
    m_pcGround(NULL),
-   m_pcLeds(NULL),
    m_pcRABA(NULL),
    m_pcRABS(NULL),
    m_cAlpha(10.0f),
@@ -99,7 +99,7 @@ void CThymioDiffusion::ControlStep()
 
 
    /* Sum them together */
-   CVector2 cAccumulator;
+   CVector2 cAccumulator = new CVector2(0, 0, 0);
    for(size_t i = 0; i < tProxReads.size(); ++i)
    {
       cAccumulator += CVector2(tProxReads[i].Value, tProxReads[i].Angle);
