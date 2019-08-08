@@ -1,5 +1,5 @@
 find_library(asebacppapi_LIBRARY NAMES asebacppapi HINTS /usr/local/lib)
-include_directories(${LIBXML2_INCLUDE_DIR})
+#include_directories(${LIBXML2_INCLUDE_DIR})
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
    add_library(
