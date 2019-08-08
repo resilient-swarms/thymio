@@ -17,7 +17,7 @@
   <controllers>
 
     <Thymio_diffusion_controller id="thymio"
-                               library="build/testing/Thymio_diffusion/libThymio_diffusion">
+                               library="build/src/testing/Thymio_diffusion/libThymio_diffusion">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
@@ -36,7 +36,7 @@
   <!-- ****************** -->
   <!-- * Loop functions * -->
   <!-- ****************** -->
-  <loop_functions library="build/testing/Thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
+  <loop_functions library="build/src/testing/Thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
                   label="trajectory_loop_functions" />
 
   <!-- *********************** -->

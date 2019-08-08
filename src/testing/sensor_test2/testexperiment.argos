@@ -17,7 +17,7 @@
   <controllers>
 
     <sensor_test2_controller id="sensor_test2"
-                               library="build/testing/sensor_test2/libsensor_test2">
+                               library="build/src/testing/sensor_test2/libsensor_test2">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>

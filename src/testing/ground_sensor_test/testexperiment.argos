@@ -17,7 +17,7 @@
   <controllers>
 
     <ground_sensor_test_controller id="thymio"
-                               library="build/testing/ground_sensor_test/libground_sensor_test">
+                               library="build/src/testing/ground_sensor_test/libground_sensor_test">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
