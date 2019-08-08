@@ -99,7 +99,7 @@ void CThymioDiffusion::ControlStep()
 
 
    /* Sum them together */
-   CVector2 cAccumulator = new CVector2(0, 0, 0);
+   CVector2 cAccumulator;
    for(size_t i = 0; i < tProxReads.size(); ++i)
    {
       cAccumulator += CVector2(tProxReads[i].Value, tProxReads[i].Angle);

@@ -18,7 +18,7 @@ Then move to this directory:
     
 Now execute:
 
-    cmake -DCMAKE_BUILD_TYPE=Release ../src
+    cmake -DCMAKE_BUILD_TYPE=Release ..
     
 Now compile the code using:
 
@@ -67,7 +67,7 @@ Change directory to the cloned repository and create a build_thymio directory:
 
 Execute cmake using following options:
 
-    cmake -DARGOS_BUILD_FOR=thymio -DARGOS_DYNAMIC_LIBRARY_LOADING=OFF -DARGOS_DOCUMENTATION=OFF../src 
+    cmake -DARGOS_BUILD_FOR=thymio -DARGOS_DYNAMIC_LIBRARY_LOADING=OFF -DARGOS_DOCUMENTATION=OFF ../src 
 
 Then build and install ARGoS. This will only compile and build necessary libraries for the execution of the controller codes.
 
@@ -77,15 +77,9 @@ First clone this repository:
 
 	git clone https://github.com/resilient-swarms/thymio
 
-Change directory to the cloned directory and create a build_asebacppapi directory there. Then run cmake with the folloing options:
-
-    cmake -DLIB_INSTALL_DIR=<Path to the install location of the aseba libraries> ../thymiointerface/NewInterface/
-
-Then build and install the asebacppapi.
-
 Change the current directory to the cloned directory again and create a build_thymio directory there. Then run cmake with the following options:
 
-    Cmake -DARGOS_BUILD_FOR=thymio -DThymio_LIBS=<Path to the build_thymio directory inside the ARGoS repository> ../src
+    cmake -DARGOS_BUILD_FOR=thymio -DThymio_LIBS=<Path to the build_thymio directory inside the ARGoS repository> ..
 
 Then build and install Thymio.
 

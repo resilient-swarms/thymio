@@ -103,12 +103,7 @@ target_link_libraries(
   argos3plugin_${ARGOS_BUILD_FOR}_thymio
   argos3plugin_${ARGOS_BUILD_FOR}_genericrobot)
 
-if(ARGOS_BUILD_FOR STREQUAL "thymio")
-  find_package(LibXml2)
-  if (LIBXML2_FOUND)
-    include_directories(${LIBXML2_INCLUDE_DIR})
-  endif (LIBXML2_FOUND)
-endif(ARGOS_BUILD_FOR STREQUAL "thymio")
+
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(
