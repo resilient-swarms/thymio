@@ -35,7 +35,7 @@ endif()
 add_executable(Thymio_NN
 		  Thymio_NN.h
 		  Thymio_NN.cpp
-  	${CMAKE_SOURCE_DIR}/plugins/robots/thymio/real_robot/main.cpp
+  	${CMAKE_SOURCE_DIR}/src/plugins/robots/thymio/real_robot/main.cpp
 		${SFERES}
   	)
 
