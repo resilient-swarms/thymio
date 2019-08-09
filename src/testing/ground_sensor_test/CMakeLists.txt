@@ -13,7 +13,7 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
   add_executable( ground_sensor_test
   	ground_sensor_test.h
   	ground_sensor_test.cpp
-  	${CMAKE_SOURCE_DIR}/plugins/robots/thymio/real_robot/main.cpp
+  	${CMAKE_SOURCE_DIR}/src/plugins/robots/thymio/real_robot/main.cpp
   	)
 
 endif(ARGOS_BUILD_FOR STREQUAL "thymio")

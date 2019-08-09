@@ -63,7 +63,7 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
     messaga(FATAL_ERROR "LibXml2 not found")
   else()
     include_directories(${LIBXML2_INCLUDE_DIR})
-  endif (LIBXML2_FOUND)
+  endif (NOT LIBXML2_FOUND)
 endif(ARGOS_BUILD_FOR STREQUAL "thymio")
 
 

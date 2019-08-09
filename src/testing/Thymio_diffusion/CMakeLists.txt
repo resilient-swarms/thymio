@@ -14,13 +14,16 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
 		   argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
 		   ${LIBXML2_LIBRARIES}
 		   )
+
+   add_subdirectory(loop_functions)
+   add_subdirectory(trajectory_loop_functions)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
 if(ARGOS_BUILD_FOR STREQUAL "thymio")
   add_executable(Thymio_diffusion
   	Thymio_diffusion.h
   	Thymio_diffusion.cpp
-  	${CMAKE_SOURCE_DIR}/plugins/robots/thymio/real_robot/main.cpp
+  	${CMAKE_SOURCE_DIR}/src/plugins/robots/thymio/real_robot/main.cpp
   	)
 
   target_link_libraries(Thymio_diffusion
@@ -31,8 +34,3 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
 		  ${LIBXML2_LIBRARIES}
 		  )
 endif(ARGOS_BUILD_FOR STREQUAL "thymio")
-
-
-
-add_subdirectory(loop_functions)
-add_subdirectory(trajectory_loop_functions)

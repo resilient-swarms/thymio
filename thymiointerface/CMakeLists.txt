@@ -1,11 +1,12 @@
 include(CPack)
 
-find_package(aseba)
-if (NOT ASEBA_FOUND)
-    message(FATAL_ERROR "aseba package not found")
-else()
-    include_directories(${ASEBA_INCLUDE_DIR})
-endif (ASEBA_FOUND)
+set(ASEBA $ENV{ASEBA}) # location of Thymio plugin installation -- include and libs
+IF( NOT ASEBA )
+    MESSAGE( FATAL_ERROR "Please point the environment variable ASEBA to the location of the aseba installation (include and libs)")
+ELSE()
+    include_directories(${ASEBA}/include)
+    link_directories(${ASEBA}/lib)
+ENDIF()
 
 #set(CMAKE_AUTOMOC ON)
 
@@ -21,8 +22,8 @@ target_link_libraries(aseba_cpp_api asebadashelplugins asebacompiler ${LIBXML2_L
 add_library(asebacppapi SHARED ${aseba_cpp_api_SRCS})
 target_link_libraries(asebacppapi asebadashelplugins asebacompiler ${LIBXML2_LIBRARIES} asebacommon dashel)
 install(TARGETS asebacppapi
-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+        LIBRARY DESTINATION ${ASEBA}/lib
+        ARCHIVE DESTINATION ${ASEBA}/lib
         )
 
 set(asebacppapi
