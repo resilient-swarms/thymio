@@ -1,4 +1,4 @@
-find_library(asebacppapi_LIBRARY NAMES asebacppapi HINTS /usr/local/lib)
+#find_library(asebacppapi_LIBRARY NAMES asebacppapi HINTS /usr/local/lib)
 include_directories(${LIBXML2_INCLUDE_DIR})
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
@@ -21,7 +21,7 @@ target_link_libraries(accelerometer_test
         argos3core_${ARGOS_BUILD_FOR}
         argos3plugin_${ARGOS_BUILD_FOR}_thymio
         argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
-        ${asebacppapi_LIBRARY}
+        ${asebacppapi}
         ${LIBXML2_LIBRARIES}
         )
 
