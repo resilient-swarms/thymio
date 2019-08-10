@@ -70,7 +70,7 @@ change to the cloned repository
 
 Create the build directory:
 
-	mkdir build_aseba\
+	mkdir build_aseba
 	cd build_aseba
 
 Execute cmake:
@@ -93,8 +93,8 @@ First clone ARGoS from its repository:
 
 Change directory to the cloned repository and create a build_thymio directory:
 
-	cd argos3 \
-	mkdir build_thymio\
+	cd argos3
+	mkdir build_thymio
 	cd build_thymio
 
 Execute cmake using following options:
@@ -105,16 +105,31 @@ Then build and install ARGoS. This will only compile and build necessary librari
 
 	sudo make install
 
-
 For Thymio:
 First clone this repository:
 
 	git clone -b nn_controller --single-branch https://github.com/resilient-swarms/thymio
 
-Change the current directory to the cloned directory again and create a build_thymio directory there.
+Change the current directory to the cloned directory.
 
-	cd thymio /
-	mkdir build_thymio /
+	cd thymio
+
+Now download sferes2 which won't need compilation:
+
+    git clone https://github.com/sferes2/sferes2.git
+
+Now download the neural network module for sferes in the modules directory:
+
+	cd sferes2/modules
+	git clone https://github.com/sferes2/nn2.git
+
+Now return to the root of the thymio repository:
+
+	cd ~/thymio
+
+create a build_thymio directory there:
+
+	mkdir build_thymio
 	cd build_thymio
 
 Now run cmake with the following options:
