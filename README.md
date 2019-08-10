@@ -42,6 +42,8 @@ Or any other example present inside the testing directory.
 ## For A Raspberry Pi :
 First you should prepare the environment. You need internet connection and to configure WLAN use information from the [official documentation](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
 
+IMPORTANT: character encoding must be US-UTF8. Can be changed using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
+
 First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba):
 
 	sudo apt-get install
@@ -53,11 +55,11 @@ First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [
                             libudev-dev \
                             libdashel-dev \
 
-It is necessary to build Aseba from on Rasberry Pi (on Debian it is sufficient to do sudo apt-get install aseba)
+It is necessary to build Aseba from source on Rasberry Pi (on Debian it is sufficient to do sudo apt-get install aseba)
 
 First clone the 1.6.x Aseba release:
 
-	git clone -b release-1.6.x --single-branch https://github.com/aseba-community/aseba.gi
+	git clone -b release-1.6.x --single-branch https://github.com/aseba-community/aseba.git
 
 change to the cloned repository
 
@@ -119,8 +121,6 @@ Now run cmake with the following options:
 Then build and install Thymio.
 
 	sudo make install
-
-IMPORTANT: character encoding must be changed to US-UTF8 using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
 
 ## Running Experiments on the Raspberry Pi:
 
