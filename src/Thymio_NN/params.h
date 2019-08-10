@@ -16,7 +16,7 @@ struct ParamsDnn
     /* use only the proximity sensors */
     struct dnn
     {
-        static constexpr size_t nb_inputs = 9; // ! 7 ir sensors + 1 ground sensor + bias input at +1
+        static constexpr size_t nb_inputs = 10; // ! 7 ir sensors + 2 ground sensor + bias input at +1
         static constexpr size_t nb_outputs = 2; // 2 motors: left and right wheel
 
         static constexpr int io_param_evolving = true;

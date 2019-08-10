@@ -27,10 +27,10 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
   	)
 
   target_link_libraries(Thymio_diffusion
+		  asebacppapi
 		  argos3core_${ARGOS_BUILD_FOR}
 		  argos3plugin_${ARGOS_BUILD_FOR}_thymio
 		  argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
-		  ${asebacppapi}
 		  ${LIBXML2_LIBRARIES}
 		  )
 endif(ARGOS_BUILD_FOR STREQUAL "thymio")

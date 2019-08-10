@@ -48,6 +48,7 @@ void CThymioNN::Init(TConfigurationNode& t_node)
     m_sWheelTurningParams.Init(GetNode(t_node, "wheel_turning"));
 
     nn = nn_loader::Load();
+    nn.init();
 }
 
 /****************************************/

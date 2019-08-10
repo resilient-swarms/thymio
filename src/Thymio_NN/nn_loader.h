@@ -5,7 +5,7 @@
 #ifndef THYMIO_NN_LOADER_H
 #define THYMIO_NN_LOADER_H
 
-#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 #include <fstream>
 #include "params.h"
 
@@ -22,9 +22,8 @@ namespace nn_loader {
         gen_t loaded_ind;
 
         std::ifstream ifs(savefile);
-        binary_iarchive ia(ifs);
-        ReadStat_f<binary_iarchive> readStatF = ReadStat_f<binary_iarchive>(ia);
-        readStatF(loaded_ind);
+        text_iarchive ia(ifs);
+        ia >> BOOST_SERIALIZATION_NVP(loaded_ind);
 
         // develop the parameters
         BGL_FORALL_VERTICES_T(v, loaded_ind.get_graph(),

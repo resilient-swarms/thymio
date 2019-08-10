@@ -1,17 +1,33 @@
+project(asebacppapi)
 include(CPack)
 
-set(ASEBA $ENV{ASEBA}) # location of aseba plugin installation -- include and libs
-#IF( NOT ASEBA )
-#    MESSAGE( FATAL_ERROR "Please point the environment variable ASEBA to the location of the aseba installation (include and libs)")
-#ELSE()
-#    include_directories(${ASEBA}/include)
-#    #link_directories(${ASEBA}/lib)
-#ENDIF()
+find_library(asebacommon asebacommon)
+if(NOT asebacommon)
+  message(FATAL_ERROR "asebacommon not found")
+else()
+  message(STATUS "asebacommon found at ${asebacommon}")
+endif()
 
-find_library(asebacommon asebacommon HINTS ${ASEBA})
-find_library(asebadashelplugins asebadashelplugins HINTS ${ASEBA})
-find_library(asebacompiler asebacompiler HINTS ${ASEBA})
-find_library(dashel dashel HINTS ${ASEBA})
+find_library(asebadashelplugins asebadashelplugins)
+if(NOT asebadashelplugins)
+  message(FATAL_ERROR "asebadashelplugins not found")
+else()
+  message(STATUS "asebadashelplugins found at ${asebadashelplugins}")
+endif()
+
+find_library(asebacompiler asebacompiler)
+if(NOT asebacompiler)
+  message(FATAL_ERROR "asebacompiler not found")
+else()
+  message(STATUS "asebacompiler found at ${asebacompiler}")
+endif()
+
+find_library(dashel dashel)
+if(NOT dashel)
+  message(FATAL_ERROR "dashel not found")
+else()
+  message(STATUS "dashel found at ${dashel}")
+endif()
 
 set(thymio_interface
         thymio_interface.cpp
@@ -21,20 +37,22 @@ set(thymio_interface
 
 add_library(asebacppapi SHARED ${thymio_interface})
 target_link_libraries(asebacppapi 
-	${asebadashelplugins}
-	${asebacompiler}
+	asebadashelplugins
+	asebacompiler
 	${LIBXML2_LIBRARIES} 
-	${asebacommon}
-	${dashel}
+	asebacommon
+	dashel
+	udev
 	)
+
 install(TARGETS asebacppapi
-        LIBRARY DESTINATION ${ASEBA}/lib
-        ARCHIVE DESTINATION ${ASEBA}/lib
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
         )
 
-set(asebacppapi
+set(asebacppapi_header
         thymio_interface.h
         )
-install(FILES ${asebacppapi}
+install(FILES ${asebacppapi_header}
         DESTINATION include/aseba/switches/asebacppapi
         )
