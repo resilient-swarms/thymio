@@ -42,17 +42,45 @@ Or any other example present inside the testing directory.
 ## For A Raspberry Pi :
 First you should prepare the environment. You need internet connection and to configure WLAN use information from the [official documentation](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
 
-First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba) and [DaSHEL](https://github.com/aseba-community/dashel):
+IMPORTANT: character encoding must be US-UTF8. Can be changed using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
+
+First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba):
 
 	sudo apt-get install
-                            cmake\ 
-                            libxml2-dev \
+                            cmake\
                             g++ \
                             git \
                             make \
-                            libenki-dev \
+                            libxml2-dev \
+                            libudev-dev \
                             libdashel-dev \
-                            aseba 
+
+It is necessary to build Aseba from source on Rasberry Pi (on Debian it is sufficient to do sudo apt-get install aseba)
+
+First clone the 1.6.x Aseba release:
+
+	git clone -b release-1.6.x --single-branch https://github.com/aseba-community/aseba.git
+
+change to the cloned repository
+
+	cd aseba
+
+Create the build directory:
+
+	mkdir build_aseba\
+	cd build_aseba
+
+Execute cmake:
+
+	cmake ..
+
+Then make and install:
+
+	sudo make install
+
+Aseba is now installed on the Raspberry Pi
+
+
 
 To build ARGoS on Raspberry Pi specifically for Thymio:
 
@@ -62,14 +90,17 @@ First clone ARGoS from its repository:
 
 Change directory to the cloned repository and create a build_thymio directory:
 
+	cd argos3 \
 	mkdir build_thymio\
 	cd build_thymio
 
 Execute cmake using following options:
 
-    cmake -DARGOS_BUILD_FOR=thymio -DARGOS_DYNAMIC_LIBRARY_LOADING=OFF -DARGOS_DOCUMENTATION=OFF ../src 
+	cmake -DARGOS_BUILD_FOR=thymio -DARGOS_DYNAMIC_LIBRARY_LOADING=OFF -DARGOS_DOCUMENTATION=OFF ../src 
 
 Then build and install ARGoS. This will only compile and build necessary libraries for the execution of the controller codes.
+
+	sudo make install
 
 
 For Thymio:
@@ -77,21 +108,27 @@ First clone this repository:
 
 	git clone https://github.com/resilient-swarms/thymio
 
-Change the current directory to the cloned directory again and create a build_thymio directory there. Then run cmake with the following options:
+Change the current directory to the cloned directory again and create a build_thymio directory there.
 
-    cmake -DARGOS_BUILD_FOR=thymio -DThymio_LIBS=<Path to the build_thymio directory inside the ARGoS repository> ..
+	cd thymio /
+	mkdir build_thymio /
+	cd build_thymio
+
+Now run cmake with the following options:
+
+	cmake -DARGOS_BUILD_FOR=thymio -DThymio_LIBS=<Path to the build_thymio directory inside the ARGoS repository> ..
 
 Then build and install Thymio.
 
-IMPORTANT: character encoding must be changed to US-UTF8 using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
+	sudo make install
 
 ## Running Experiments on the Raspberry Pi:
 
 To run Thymio_diffusion example or any other example follow the following procedure.
 
-Make sure you are in the build/testing/Thymio_diffusion directory and the executable file is available then execute it using:
+Make sure you are in the thymio directory then execute it using:
 
-    sudo ./Thymio_diffusion -c "/home/pi/Thymio/src/testing/Thymio_diffusion/realtestexperiment.argos" -i thymio
+    build/src/testing/Thymio_diffusion/Thymio_diffusion -c src/testing/Thymio_diffusion/realtestexperiment.argos -i thymio
 
-The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/Thymio/blob/6ab255c84a1a258e4a0cf1bd8c7dead4feb64bf1/src/testing/Thymio_diffusion/testexperiment.argos#L19).
+The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/Thymio/src/testing/Thymio_diffusion/realtestexperiment.argos#L19).
 
