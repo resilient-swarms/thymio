@@ -67,7 +67,7 @@ change to the cloned repository
 
 Create the build directory:
 
-	mkdir build_aseba\
+	mkdir build_aseba
 	cd build_aseba
 
 Execute cmake:
@@ -90,8 +90,8 @@ First clone ARGoS from its repository:
 
 Change directory to the cloned repository and create a build_thymio directory:
 
-	cd argos3 \
-	mkdir build_thymio\
+	cd argos3
+	mkdir build_thymio
 	cd build_thymio
 
 Execute cmake using following options:
@@ -110,8 +110,8 @@ First clone this repository:
 
 Change the current directory to the cloned directory again and create a build_thymio directory there.
 
-	cd thymio /
-	mkdir build_thymio /
+	cd thymio
+	mkdir build_thymio
 	cd build_thymio
 
 Now run cmake with the following options:
