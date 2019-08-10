@@ -27,7 +27,7 @@ void CTrajectoryLoopFunctions::Init(TConfigurationNode& t_tree)
     try
     {
         robots.open("s");
-    } catch (std::exception e)
+    } catch (std::exception& e)
     {
         e.what();
     }

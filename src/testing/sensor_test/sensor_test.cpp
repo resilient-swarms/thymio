@@ -26,15 +26,15 @@ void CSensorTest::Init(TConfigurationNode& t_node) {
 
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
-   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("thymio_proximity"     );
+   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("thymio_ground");
    m_tick        = 0;
 
    GetNodeAttributeOrDefault(t_node, "velocity", m_fWheelVelocity, m_fWheelVelocity);
 
    try {
        sensor_readings.open("sensor_readings.csv");
-   } catch (std::exception e) {
+   } catch (std::exception& e) {
        std::cout << e.what();
    }
 
@@ -67,7 +67,7 @@ void CSensorTest::ControlStep() {
 CSensorTest::~CSensorTest(){
     try {
         sensor_readings.close();
-    } catch (std::exception e) {
+    } catch (std::exception& e) {
         std::cout << e.what();
     }
     m_pcWheels->SetLinearVelocity(0.0f, 0.0f);

@@ -16,25 +16,27 @@
   <!-- *************** -->
   <controllers>
 
-    <Thymio_diffusion_controller id="thymio"
-                               library="build/src/testing/Thymio_diffusion/libThymio_diffusion">
+    <thymio_diffusion_controller id="thymio"
+                               library="build/src/testing/thymio_diffusion/libthymio_diffusion">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
+        <range_and_bearing implementation="default"/>
       </actuators>
       <sensors>
-        <Thymio_proximity implementation="default" show_rays="false" range="0.5" />
-	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
+        <thymio_proximity implementation="default" show_rays="false" range="0.5" />
+	<thymio_ground implementation="rot_z_only" show_rays="false"/>
+        <range_and_bearing implementation="medium" medium="rab" show_rays="true"/>
       </sensors>
       <params alpha="0" delta="0.4" velocity="3" />
 
-    </Thymio_diffusion_controller>
+    </thymio_diffusion_controller>
 
   </controllers>
   <!-- ****************** -->
   <!-- * Loop functions * -->
   <!-- ****************** -->
-  <loop_functions library="build/src/testing/Thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
+  <loop_functions library="build/src/testing/thymio_diffusion/trajectory_loop_functions/libtrajectory_loop_functions"
                   label="trajectory_loop_functions" />
 
   <!-- *********************** -->
@@ -45,7 +47,7 @@
 	<!--
 		is necessary for the ground sensors
 	!-->
-    <!-- <floor id="floor" source="image" path="src/testing/Thymio_diffusion/desk.jpg"/>  -->
+    <!-- <floor id="floor" source="image" path="src/testing/thymio_diffusion/desk.jpg"/>  -->
 
     <floor id="floor"
            source="loop_functions"
@@ -123,6 +125,7 @@
   <!-- ********* -->
   <media>
     <led id="leds" />
+    <range_and_bearing id="rab" />
   </media>
 
   <!-- ****************** -->

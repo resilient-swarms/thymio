@@ -3,12 +3,12 @@
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
    add_library(
-        Thymio_diffusion MODULE
-        Thymio_diffusion.h
-        Thymio_diffusion.cpp
+        thymio_diffusion MODULE
+		   thymio_diffusion.h
+		   thymio_diffusion.cpp
         )
 
-   target_link_libraries(Thymio_diffusion
+   target_link_libraries(thymio_diffusion
 		   argos3core_${ARGOS_BUILD_FOR}
 		   argos3plugin_${ARGOS_BUILD_FOR}_thymio
 		   argos3plugin_${ARGOS_BUILD_FOR}_genericrobot
@@ -20,13 +20,13 @@ if(ARGOS_BUILD_FOR_SIMULATOR)
 endif(ARGOS_BUILD_FOR_SIMULATOR)
 
 if(ARGOS_BUILD_FOR STREQUAL "thymio")
-  add_executable(Thymio_diffusion
-  	Thymio_diffusion.h
-  	Thymio_diffusion.cpp
+  add_executable(thymio_diffusion
+		  thymio_diffusion.h
+		  thymio_diffusion.cpp
   	${CMAKE_SOURCE_DIR}/src/plugins/robots/thymio/real_robot/main.cpp
   	)
 
-  target_link_libraries(Thymio_diffusion
+  target_link_libraries(thymio_diffusion
 		  asebacppapi
 		  argos3core_${ARGOS_BUILD_FOR}
 		  argos3plugin_${ARGOS_BUILD_FOR}_thymio

@@ -1,5 +1,5 @@
 /* Include the controller definition */
-#include "Thymio_diffusion.h"
+#include "thymio_diffusion.h"
 /* Function definitions for XML parsing */
 #include <argos3/core/utility/configuration/argos_configuration.h>
 /* 2D vector definition */
@@ -43,15 +43,15 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node)
     *
     * NOTE: ARGoS creates and initializes actuators and sensors
     * internally, on the basis of the lists provided the configuration
-    * file at the <controllers><Thymio_diffusion><actuators> and
-    * <controllers><Thymio_diffusion><sensors> sections. If you forgot to
+    * file at the <controllers><thymio_diffusion><actuators> and
+    * <controllers><thymio_diffusion><sensors> sections. If you forgot to
     * list a device in the XML and then you request it here, an error
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity");
-   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("thymio_proximity");
+   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("thymio_ground");
    try {
       m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
       m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );
@@ -106,7 +106,7 @@ void CThymioDiffusion::ControlStep()
    }
    cAccumulator /= tProxReads.size();
 
-   short cground = 0;
+   double cground = 0;
    for(size_t i = 0; i < tGroundReads.size(); ++i)
    {
       cground += tGroundReads[i].Value;
@@ -167,4 +167,4 @@ CThymioDiffusion::~CThymioDiffusion()
  * controller class to instantiate.
  * See also the configuration files for an example of how this is used.
  */
-REGISTER_CONTROLLER(CThymioDiffusion, "Thymio_diffusion_controller")
+REGISTER_CONTROLLER(CThymioDiffusion, "thymio_diffusion_controller")
