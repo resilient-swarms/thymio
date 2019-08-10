@@ -1,5 +1,5 @@
 /* Include the controller definition */
-#include "Thymio_NN.h"
+#include "thymio_nn.h"
 /* Function definitions for XML parsing */
 #include <argos3/core/utility/configuration/argos_configuration.h>
 /* 2D vector definition */
@@ -9,11 +9,11 @@
 /****************************************/
 
 CThymioNN::CThymioNN() :
+   m_sWheelTurningParams(),
    m_pcLeds(NULL),
    m_pcWheels(NULL),
    m_pcProximity(NULL),
    m_pcGround(NULL),
-   m_sWheelTurningParams(),
    m_fLeftSpeed(0.0f),
    m_fRightSpeed(0.0f)
    {
@@ -29,7 +29,7 @@ void CThymioNN::SWheelTurningParams::Init(TConfigurationNode &t_node)
         GetNodeAttribute(t_node, "max_speed", MaxSpeed);
     }
     catch(CARGoSException& ex)
-        THROW_ARGOSEXCEPTION_NESTED("Error initializing controller wheel turning parameters.", ex);
+        THROW_ARGOSEXCEPTION_NESTED("Error initializing controller wheel turning parameters.", ex)
 }
 
 /****************************************/
@@ -107,4 +107,4 @@ std::vector<Real> CThymioNN::GetNormalizedSensorReadings()
 /****************************************/
 /****************************************/
 
-REGISTER_CONTROLLER(CThymioNN, "Thymio_NN_controller")
+REGISTER_CONTROLLER(CThymioNN, "thymio_nn_controller")

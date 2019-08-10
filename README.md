@@ -44,7 +44,7 @@ First you should prepare the environment. You need internet connection and to co
 
 IMPORTANT: character encoding must be US-UTF8. Can be changed using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
 
-First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba):
+First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba) and [SFERES NN](https://github.com/sferes2/nn2):
 
 	sudo apt-get install
                             cmake\
@@ -54,6 +54,9 @@ First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [
                             libxml2-dev \
                             libudev-dev \
                             libdashel-dev \
+                            libboost-serialization-dev \
+                            libboost-graph-dev
+                            libeigen3-dev \
 
 It is necessary to build Aseba from source on Rasberry Pi (on Debian it is sufficient to do sudo apt-get install aseba)
 
@@ -106,7 +109,7 @@ Then build and install ARGoS. This will only compile and build necessary librari
 For Thymio:
 First clone this repository:
 
-	git clone https://github.com/resilient-swarms/thymio
+	git clone -b nn_controller --single-branch https://github.com/resilient-swarms/thymio
 
 Change the current directory to the cloned directory again and create a build_thymio directory there.
 
@@ -124,11 +127,17 @@ Then build and install Thymio.
 
 ## Running Experiments on the Raspberry Pi:
 
-To run Thymio_diffusion example or any other example follow the following procedure.
+To run thymio_diffusion example or any other example follow the following procedure.
 
 Make sure you are in the thymio directory then execute it using:
 
-    build/src/testing/Thymio_diffusion/Thymio_diffusion -c src/testing/Thymio_diffusion/realtestexperiment.argos -i thymio
+    build/src/testing/thymio_diffusion/thymio_diffusion -c src/testing/thymio_diffusion/realtestexperiment.argos -i thymio
 
-The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/Thymio/src/testing/Thymio_diffusion/realtestexperiment.argos#L19).
+The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/thymio/src/testing/thymio_diffusion/realtestexperiment.argos#L19).
+
+If a neural network is available to load it can be run using:
+
+    bash run_thymio.sh
+
+The neural network must be a text archive called BOOST_SERIALIZATION_NVP which can be created and transmitted to a thymio over a network with the [real thymio experiment](https://github.com/resilient-swarms/real-thymio-exp) repository.
 

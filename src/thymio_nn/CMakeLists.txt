@@ -32,14 +32,14 @@ else(NOT Boost_FOUND)
 	message(FATAL_ERROR "Unable to continue without BOOST")
 endif()
 
-add_executable(Thymio_NN
-		  Thymio_NN.h
-		  Thymio_NN.cpp
+add_executable(thymio_nn
+        thymio_nn.h
+        thymio_nn.cpp
   	${CMAKE_SOURCE_DIR}/src/plugins/robots/thymio/real_robot/main.cpp
 		${SFERES}
   	)
 
-  target_link_libraries(Thymio_NN
+  target_link_libraries(thymio_nn
 		  argos3core_${ARGOS_BUILD_FOR}
 		  argos3plugin_${ARGOS_BUILD_FOR}_thymio
 		  argos3plugin_${ARGOS_BUILD_FOR}_genericrobot

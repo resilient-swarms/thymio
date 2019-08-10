@@ -16,21 +16,21 @@
   <!-- *************** -->
   <controllers>
 
-    <Thymio_NN_controller id="thymio"
-                               library="build/src/Thymio_NN/libThymio_NN">
+    <thymio_nn_controller id="thymio"
+                               library="build/src/thymio_nn/libthymio_nn">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
       </actuators>
       <sensors>
-        <Thymio_proximity implementation="default" show_rays="false" range="0.5" />
-	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
+        <thymio_proximity implementation="default" show_rays="false" range="0.5" />
+	<thymio_ground implementation="rot_z_only" show_rays="false"/>
       </sensors>
       <params>
         <wheel_turning max_speed="10"/>
       </params>
 
-    </Thymio_NN_controller>
+    </thymio_nn_controller>
 
   </controllers>
   <!-- ****************** -->
@@ -45,7 +45,7 @@
 	<!--
 		is necessary for the ground sensors
 	!-->
-    <!-- <floor id="floor" source="image" path="src/testing/Thymio_diffusion/desk.jpg"/>  -->
+    <!-- <floor id="floor" source="image" path="src/testing/thymio_diffusion/desk.jpg"/>  -->
 
     <floor id="floor"
            source="loop_functions"
