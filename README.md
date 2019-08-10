@@ -124,11 +124,11 @@ Then build and install Thymio.
 
 ## Running Experiments on the Raspberry Pi:
 
-To run Thymio_diffusion example or any other example follow the following procedure.
+To run thymio_diffusion example or any other example follow the following procedure.
 
 Make sure you are in the thymio directory then execute it using:
 
-    build/src/testing/Thymio_diffusion/Thymio_diffusion -c src/testing/Thymio_diffusion/realtestexperiment.argos -i thymio
+    build/src/testing/thymio_diffusion/thymio_diffusion -c src/testing/thymio_diffusion/realtestexperiment.argos -i thymio
 
-The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/Thymio/src/testing/Thymio_diffusion/realtestexperiment.argos#L19).
+The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/thymio/src/testing/thymio_diffusion/realtestexperiment.argos#L19).
 
