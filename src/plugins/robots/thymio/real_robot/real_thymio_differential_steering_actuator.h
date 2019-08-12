@@ -2,7 +2,7 @@
 #define REAL_Thymio_DIFFERENTIAL_STEERING_ACTUATOR_H
 
 #include <argos3/plugins/robots/generic/control_interface/ci_differential_steering_actuator.h>
-#include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
+#include <argos3/plugins/robots/thymio/real_robot/real_thymio_device.h>
 #include <aseba/switches/asebacppapi/thymio_interface.h>
 
 using namespace argos;

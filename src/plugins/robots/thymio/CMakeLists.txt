@@ -31,7 +31,6 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
       real_robot/real_thymio_ground_sensor.h
       real_robot/real_thymio_proximity_sensor.h
       real_robot/real_thymio_acc_sensor.h
-#      real_robot/dbusinterface.h
 #      real_robot/real_robot.h
       )
 endif(ARGOS_BUILD_FOR STREQUAL "thymio") #endif(ARGOS_BUILD_FOR STREQUAL "thymio"s)
@@ -88,7 +87,6 @@ if(ARGOS_BUILD_FOR STREQUAL "thymio")
       real_robot/real_thymio_ground_sensor.cpp
       real_robot/real_thymio_proximity_sensor.cpp
       real_robot/real_thymio_acc_sensor.cpp
-#      real_robot/dbusinterface.cpp
 #      real_robot/real_robot.cpp
 #      real_robot/thymio_interface.cpp
       )
@@ -104,6 +102,13 @@ add_library(
 target_link_libraries(
   argos3plugin_${ARGOS_BUILD_FOR}_thymio
   argos3plugin_${ARGOS_BUILD_FOR}_genericrobot)
+
+if(ARGOS_BUILD_FOR STREQUAL "thymio")
+  target_link_libraries (
+    argos3plugin_${ARGOS_BUILD_FOR}_thymio
+    asebacppapi
+  )
+endif(ARGOS_BUILD_FOR STREQUAL "thymio")
 
 if(ARGOS_BUILD_FOR_SIMULATOR)
   target_link_libraries(

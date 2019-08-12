@@ -34,15 +34,15 @@ void CGroundSensorTest::Init(TConfigurationNode& t_node) {
 
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity"     );
-   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("thymio_proximity"     );
+   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("thymio_ground");
    m_tick        = 0;
 
 
    timer = 0;
    try {
        sensor_readings.open("ground_sensor_readings.csv");
-   } catch (std::exception e) {
+   } catch (std::exception& e) {
        std::cout << e.what();
    }
    m_pcLeds->SetProxVIntensity({0,0});
@@ -107,7 +107,7 @@ CGroundSensorTest::~CGroundSensorTest(){
     try {
         sensor_readings.flush();
         sensor_readings.close();
-    } catch (std::exception e) {
+    } catch (std::exception& e) {
         std::cout << e.what();
     }
     m_pcLeds->SetProxHIntensity({0,0,0,0,0,0,0,0});

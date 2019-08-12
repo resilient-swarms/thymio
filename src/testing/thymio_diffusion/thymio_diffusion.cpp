@@ -1,5 +1,5 @@
 /* Include the controller definition */
-#include "Thymio_diffusion.h"
+#include "thymio_diffusion.h"
 /* Function definitions for XML parsing */
 #include <argos3/core/utility/configuration/argos_configuration.h>
 /* 2D vector definition */
@@ -9,10 +9,10 @@
 /****************************************/
 
 CThymioDiffusion::CThymioDiffusion() :
+   m_pcLeds(NULL),
    m_pcWheels(NULL),
    m_pcProximity(NULL),
    m_pcGround(NULL),
-   m_pcLeds(NULL),
    m_pcRABA(NULL),
    m_pcRABS(NULL),
    m_cAlpha(10.0f),
@@ -43,17 +43,23 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node)
     *
     * NOTE: ARGoS creates and initializes actuators and sensors
     * internally, on the basis of the lists provided the configuration
-    * file at the <controllers><Thymio_diffusion><actuators> and
-    * <controllers><Thymio_diffusion><sensors> sections. If you forgot to
+    * file at the <controllers><thymio_diffusion><actuators> and
+    * <controllers><thymio_diffusion><sensors> sections. If you forgot to
     * list a device in the XML and then you request it here, an error
     * occurs.
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity");
-   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
-   m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
-   m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("thymio_proximity");
+   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("thymio_ground");
+   try {
+      m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
+      m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );
+      RangeAndBearing = true;
+   } catch (CARGoSException& ex) {
+      std::cout << "RAB NOT found. Continuing without RAB." << std::endl;
+      RangeAndBearing = false;
+   }
    /*
     *
     * The user defines this part. Here, the algorithm accepts three
@@ -71,9 +77,12 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node)
 
 void CThymioDiffusion::ControlStep()
 {
-    m_pcRABA->ClearData(); // clear the channel at the start of each control cycle
+   if (RangeAndBearing)
+   {
+      m_pcRABA->ClearData(); // clear the channel at the start of each control cycle
 
-    m_pcRABA->SetData(0, 100); // send test-value of 100 on RAB medium
+      m_pcRABA->SetData(0, 100); // send test-value of 100 on RAB medium
+   }
 
    /* Get readings from proximity sensor */
    const CCI_ThymioProximitySensor::TReadings& tProxReads = m_pcProximity->GetReadings();
@@ -97,7 +106,7 @@ void CThymioDiffusion::ControlStep()
    }
    cAccumulator /= tProxReads.size();
 
-   short cground = 0;
+   double cground = 0;
    for(size_t i = 0; i < tGroundReads.size(); ++i)
    {
       cground += tGroundReads[i].Value;
@@ -127,13 +136,16 @@ void CThymioDiffusion::ControlStep()
       }
    }
 
-   CCI_RangeAndBearingSensor::TReadings sensor_readings = m_pcRABS->GetReadings();
-   std::cout << "Robots in RAB range of " << GetId() << " is " << sensor_readings.size() << std::endl;
-   for(size_t i = 0; i < sensor_readings.size(); ++i)
+   if (RangeAndBearing)
    {
-       std::cout << "RAB range " << sensor_readings[i].Range << " Bearing "  << sensor_readings[i].HorizontalBearing << " Message size " << sensor_readings[i].Data.Size() << std::endl;
-       for(size_t j = 0; j < sensor_readings[i].Data.Size(); ++j)
-           std::cout << "Data-Packet at index " << j << " is " << sensor_readings[i].Data[j] << std::endl;
+      CCI_RangeAndBearingSensor::TReadings sensor_readings = m_pcRABS->GetReadings();
+      std::cout << "Robots in RAB range of " << GetId() << " is " << sensor_readings.size() << std::endl;
+      for(size_t i = 0; i < sensor_readings.size(); ++i)
+      {
+         std::cout << "RAB range " << sensor_readings[i].Range << " Bearing "  << sensor_readings[i].HorizontalBearing << " Message size " << sensor_readings[i].Data.Size() << std::endl;
+         for(size_t j = 0; j < sensor_readings[i].Data.Size(); ++j)
+            std::cout << "Data-Packet at index " << j << " is " << sensor_readings[i].Data[j] << std::endl;
+      }
    }
 }
 
@@ -155,4 +167,4 @@ CThymioDiffusion::~CThymioDiffusion()
  * controller class to instantiate.
  * See also the configuration files for an example of how this is used.
  */
-REGISTER_CONTROLLER(CThymioDiffusion, "Thymio_diffusion_controller")
+REGISTER_CONTROLLER(CThymioDiffusion, "thymio_diffusion_controller")

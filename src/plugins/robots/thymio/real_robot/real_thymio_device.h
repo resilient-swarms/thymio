@@ -1,7 +1,7 @@
 #ifndef REAL_Thymio_DEVICE_H
 #define REAL_Thymio_DEVICE_H
 
-//#include <argos3/plugins/robots/Thymio/real_robot/real_Thymio_device.h>
+//#include <argos3/plugins/robots/thymio/real_robot/real_thymio_device.h>
 //#include <argos3/core/utility/logging/argos_log.h>
 
 #include <aseba/switches/asebacppapi/thymio_interface.h>

@@ -1,9 +1,9 @@
-#include "real_Thymio.h"
-#include "real_Thymio_differential_steering_actuator.h"
-#include "real_Thymio_leds_actuator.h"
-#include "real_Thymio_ground_sensor.h"
-#include "real_Thymio_proximity_sensor.h"
-#include "real_Thymio_acc_sensor.h"
+#include "real_thymio.h"
+#include "real_thymio_differential_steering_actuator.h"
+#include "real_thymio_leds_actuator.h"
+#include "real_thymio_ground_sensor.h"
+#include "real_thymio_proximity_sensor.h"
+#include "real_thymio_acc_sensor.h"
 
 /****************************************/
 /****************************************/

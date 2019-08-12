@@ -32,16 +32,19 @@ using namespace Aseba;
 
 // code of the shell
 
-ThymioInterface::ThymioInterface(const char* target):
+ThymioInterface::ThymioInterface(const std::string& target):
     targetStream(connect(target))
 {
+        Dashel::initPlugins();
         values = new Values();
         map = new MessageMap();
         if(targetStream->failed())
         {
-            std::cout << targetStream->getFailReason();
+            std::cout << targetStream->getFailReason() << std::endl;
         }
         this->pingNetwork();
+        this->wait();
+        this->listNodes();
         this->wait();
 }
 
@@ -242,7 +245,7 @@ ThymioInterface::Values ThymioInterface::getVariable(const std::string& nodeName
     return v;
 }
 
-void ThymioInterface::setVariable(const string& nodeName, const string& varName, const strings& data)
+void ThymioInterface::setVariable(const string& nodeName, const string& varName, const VariablesDataVector data)
 {
     // get node id, variable position and length
     unsigned nodeId, pos;
@@ -251,16 +254,13 @@ void ThymioInterface::setVariable(const string& nodeName, const string& varName,
         return;
 
     // send the message
-    VariablesDataVector sdata;
-    for (size_t i=0; i<data.size(); ++i)
-        sdata.push_back(atoi(data[i].c_str()));
-    SetVariables setVariables(nodeId, pos, sdata);
+    SetVariables setVariables(nodeId, pos, data);
     setVariables.serialize(targetStream);
     targetStream->flush();
     this->wait();
 }
 
-void ThymioInterface::sendEventName(const string& eventName, const strings& data)
+void ThymioInterface::sendEventName(const string& eventName, const VariablesDataVector data)
 {
 
 	size_t pos;
@@ -271,10 +271,10 @@ void ThymioInterface::sendEventName(const string& eventName, const strings& data
 	}
 
 	// build event and emit
-    VariablesDataVector sdata;
-    for (size_t i=0; i<data.size(); ++i)
-        sdata.push_back(atoi(data[i].c_str()));
-    UserMessage userMessage(pos, sdata);
+//    VariablesDataVector sdata;
+//    for (size_t i=0; i<data.size(); ++i)
+//        sdata.push_back(atoi(data[i].c_str()));
+    UserMessage userMessage(pos, data);
 	userMessage.serialize(targetStream);
 	targetStream->flush();
 }
@@ -295,6 +295,7 @@ void ThymioInterface::load(const string& filePath)
 	commonDefinitions.events.clear();
 	commonDefinitions.constants.clear();
 	allVariables.clear();
+
 
 	// load new data
 	int noNodeCount(0);
@@ -525,10 +526,35 @@ bool ThymioInterface::getNodeAndVarPos(const string& nodeName, const string& var
 	return true;
 }
 
+bool ThymioInterface::setup(const string& nodeName){
+    // clear existing data
+    commonDefinitions.events.clear();
+    commonDefinitions.constants.clear();
+    allVariables.clear();
+
+    commonDefinitions.events.push_back(NamedValue(UTF8ToWString("thymioevents"), 2));
+    std::wstring code;
+    bool ok;
+    unsigned nodeId(getNodeId(Aseba::UTF8ToWString(nodeName), 0, &ok));
+    if (ok){
+
+        commonDefinitions.events.push_back(NamedValue(UTF8ToWString("ProxVLeds"), 2));
+        //The whole code for both events should be compiled together
+        commonDefinitions.events.push_back(NamedValue(UTF8ToWString("ProxHLeds"), 8));
+        code = Aseba::UTF8ToWString("onevent ProxVLeds call leds.prox.v(event.args[0],event.args[1])\n onevent ProxHLeds call leds.prox.h(event.args[0],event.args[1],event.args[2],event.args[3],event.args[4],event.args[5],event.args[6],event.args[7])");
+        if (compileAndSendCode(code, nodeId, nodeName))
+            std::cout<<"Couln't send this command!" << std::endl;
+
+
+
+    }
+    return false;
+
+}
 int main()
 {
     // initialize Dashel plugins
-    Dashel::initPlugins();
+
     const char* target = "ser:name=Thymio-II";
 
     // create the interface
@@ -538,14 +564,10 @@ int main()
     interface->listNodes();
     interface->wait();
 
-    interface->load("../../ScriptDBusThymio.aesl");
+//    interface->load("/home/sina/Desktop/aseba/examples/clients/cpp-api/ScriptDBusThymio.aesl");
+    interface->setup("thymio-II");
     interface->wait();
 
-//    interface->listVariables("thymio-II");
-//    interface->wait();
-
-//        shell->setVariable("thymio-II","motor.left.target",{"0"});
-//        shell->wait();
 
     int j = 0;
     int k = 0;
@@ -571,28 +593,27 @@ int main()
         }
         std::printf("\n");
 
-        if(proximity_h[2]>2000)
-            interface->setVariable("thymio-II","motor.left.target",{"25"});
-        else
-            interface->setVariable("thymio-II","motor.left.target",{"0"});
+//        if(proximity_h[2]>2000)
+//            interface->setVariable("thymio-II","motor.left.target",{25});
+//        else
+//            interface->setVariable("thymio-II","motor.left.target",{0});
 
         j++;
     }
     while(j<=10);
 
-
-    interface->sendEventName("ProxHLeds",{"32","32","32","32","32","32","32","32"});
-    interface->sendEventName("ProxVLeds",{"32","32"});
+    interface->sendEventName("ProxHLeds",{32,32,32,32,32,32,32,32});
+    interface->sendEventName("ProxVLeds",{32,32});
 
     interface->wait(1000);
 
-    interface->sendEventName("ProxHLeds",{"0","0","0","0","0","0","0","0"});
-    interface->sendEventName("ProxVLeds",{"0","0"});
+    interface->sendEventName("ProxHLeds",{0,0,0,0,0,0,0,0});
+    interface->sendEventName("ProxVLeds",{0,0});
 
 
 
-    interface->setVariable("thymio-II","motor.left.target",{"0"});
-    interface->setVariable("thymio-II","motor.right.target",{"0"});
+    interface->setVariable("thymio-II","motor.left.target",{128});
+    interface->setVariable("thymio-II","motor.right.target",{128});
     ThymioInterface::Values accelerometer;
 
     j = 0;
@@ -608,8 +629,8 @@ int main()
     }
     while(j<=100);
 
-    interface->setVariable("thymio-II","motor.left.target",{"0"});
-    interface->setVariable("thymio-II","motor.right.target",{"0"});
+    interface->setVariable("thymio-II","motor.left.target",{0});
+    interface->setVariable("thymio-II","motor.right.target",{0});
 
 	return 0;
 }

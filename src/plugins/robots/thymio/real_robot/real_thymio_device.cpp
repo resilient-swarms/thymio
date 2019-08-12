@@ -1,4 +1,4 @@
-#include "real_Thymio_device.h"
+#include "real_thymio_device.h"
 
 
 /****************************************/

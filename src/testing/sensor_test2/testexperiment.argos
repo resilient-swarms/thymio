@@ -17,15 +17,15 @@
   <controllers>
 
     <sensor_test2_controller id="sensor_test2"
-                               library="build/testing/sensor_test2/libsensor_test2">
+                               library="build/src/testing/sensor_test2/libsensor_test2">
       <actuators>
         <differential_steering implementation="default" />
 	<thymio_led            implementation="default" medium="leds"/>
       </actuators>
 
       <sensors>
-        <Thymio_proximity implementation="default" show_rays="true" />
-	<Thymio_ground implementation="rot_z_only" show_rays="false"/>
+        <thymio_proximity implementation="default" show_rays="true" />
+	<thymio_ground implementation="rot_z_only" show_rays="false"/>
       </sensors>
 
       <params alpha="0" delta="0.4" velocity="1" />
