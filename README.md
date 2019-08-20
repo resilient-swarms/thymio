@@ -1,116 +1,40 @@
 # Thymio
 
-Is an open source simulator based on ARGoS framework for Thymio robotic platform. It uses an interface, which is developed using core libraries from ASEBA and DaSHEL.
-
-## Installing Thymio on a desktop computer:
-This version of Thymio on a desktop computer is mainly used for simulation.
-First clone this repository:
-
-	git clone https://github.com/resilient-swarms/thymio
-
-Then change directory to the repository you have cloned and create "build" directory using:
-
-    mkdir build
-    
-Then move to this directory:
-
-    cd build
-    
-Now execute:
-
-    cmake -DCMAKE_BUILD_TYPE=Release ..
-    
-Now compile the code using:
-
-    make
-    
-Now install from binaries using:
-
-    sudo make install
-    
-You have now installed Thymio's simulator
-
-To execute the examples:
-Go to the parent directory of "build".
-
-execute:
-
-    argos3 -c src/testing/Thymio_diffusion/testexperiment.argos
-
-Or any other example present inside the testing directory.
+This branch makes a Neural Network controller available for the Raspberry Pi installation. This branch identical to the master branch when using it with ARGoS simulations, so it is recommended to use that branch when simulating.
 
 ## For A Raspberry Pi :
-First you should prepare the environment. You need internet connection and to configure WLAN use information from the [official documentation](https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md)
+This readme assumes you've already followed the steps for installing this repository on a Raspberry Pi in the master branch [here](https://github.com/resilient-swarms/thymio/blob/master/README.md)
 
-IMPORTANT: character encoding must be US-UTF8. Can be changed using [raspi-config](https://www.raspberrypi.org/documentation/configuration/raspi-config.md).
-
-First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba):
+First install all dependencies for [SFERES NN](https://github.com/sferes2/nn2):
 
 	sudo apt-get install
-                            cmake\
-                            g++ \
-                            git \
-                            make \
-                            libxml2-dev \
-                            libudev-dev \
-                            libdashel-dev \
+                            libboost-serialization-dev \
+                            libboost-graph-dev
+                            libeigen3-dev \
 
-It is necessary to build Aseba from source on Rasberry Pi (on Debian it is sufficient to do sudo apt-get install aseba)
+Change the current directory to the root of the thymio repository i.e.
 
-First clone the 1.6.x Aseba release:
+	cd ~/thymio
+	
+Now change the repository to be on the nn_controller branch
 
-	git clone -b release-1.6.x --single-branch https://github.com/aseba-community/aseba.git
+	git checkout nn_controller
 
-change to the cloned repository
+Now download sferes2 which won't need compilation:
 
-	cd aseba
+    	git clone https://github.com/sferes2/sferes2.git
 
-Create the build directory:
+Now download the neural network module for sferes in the modules directory:
 
-	mkdir build_aseba
-	cd build_aseba
+	cd sferes2/modules
+	git clone https://github.com/sferes2/nn2.git
 
-Execute cmake:
+Now return to the root of the thymio repository:
 
-	cmake ..
+	cd ~/thymio
 
-Then make and install:
+create a build_thymio directory there. If you already have a build_thymio directory after following the master branch instructions it is recommended to delete that build_thymio directory first:
 
-	sudo make install
-
-Aseba is now installed on the Raspberry Pi
-
-
-
-To build ARGoS on Raspberry Pi specifically for Thymio:
-
-First clone ARGoS from its repository:
-
-	git clone https://github.com/ilpincy/argos3
-
-Change directory to the cloned repository and create a build_thymio directory:
-
-	cd argos3
-	mkdir build_thymio
-	cd build_thymio
-
-Execute cmake using following options:
-
-	cmake -DARGOS_BUILD_FOR=thymio -DARGOS_DYNAMIC_LIBRARY_LOADING=OFF -DARGOS_DOCUMENTATION=OFF ../src 
-
-Then build and install ARGoS. This will only compile and build necessary libraries for the execution of the controller codes.
-
-	sudo make install
-
-
-For Thymio:
-First clone this repository:
-
-	git clone https://github.com/resilient-swarms/thymio
-
-Change the current directory to the cloned directory again and create a build_thymio directory there.
-
-	cd thymio
 	mkdir build_thymio
 	cd build_thymio
 
@@ -130,5 +54,11 @@ Make sure you are in the thymio directory then execute it using:
 
     build_thymio/src/testing/thymio_diffusion/thymio_diffusion -c src/testing/thymio_diffusion/realtestexperiment.argos -i thymio
 
-The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/daneshtarapore/thymio/src/testing/thymio_diffusion/realtestexperiment.argos#L19).
+The first argument is the path to the experiment's configuration file (.argos). The second argument is the controller's name, which is specified as a tag in the [configuration file](https://github.com/resilient-swarms/thymio/blob/master/src/testing/thymio_diffusion/realtestexperiment.argos#L19).
+
+If a neural network is available to load it can be run using:
+
+    bash run_thymio.sh
+
+The neural network must be a text archive called BOOST_SERIALIZATION_NVP which can be created and transmitted to a thymio over a network with the [real thymio experiment](https://github.com/resilient-swarms/real-thymio-exp) repository.
 

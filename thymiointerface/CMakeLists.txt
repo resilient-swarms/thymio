@@ -36,10 +36,10 @@ set(thymio_interface
 
 
 add_library(asebacppapi SHARED ${thymio_interface})
-target_link_libraries(asebacppapi 
+target_link_libraries(asebacppapi
 	asebadashelplugins
 	asebacompiler
-	${LIBXML2_LIBRARIES} 
+	${LIBXML2_LIBRARIES}
 	asebacommon
 	dashel
 	udev
