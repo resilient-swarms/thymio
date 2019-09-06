@@ -39,8 +39,8 @@ void CThymioNN::Init(TConfigurationNode& t_node)
 {
     m_pcLeds = GetActuator<CCI_ThymioLedsActuator>("thymio_led");
     m_pcWheels = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
-    m_pcProximity = GetSensor<CCI_ThymioProximitySensor>("Thymio_proximity");
-    m_pcGround = GetSensor<CCI_ThymioGroundSensor>("Thymio_ground");
+    m_pcProximity = GetSensor<CCI_ThymioProximitySensor>("thymio_proximity");
+    m_pcGround = GetSensor<CCI_ThymioGroundSensor>("thymio_ground");
 
     Reset();
 
@@ -83,7 +83,7 @@ std::vector<float> CThymioNN::InputStep()
     std::vector<Real> readings = GetNormalizedSensorReadings();
     std::vector<float> in = std::vector<float>(readings.begin(), readings.end());
     in.push_back(+1.0); //Bias input
-
+    //std::cout << in.size() << std::endl;
     return in;
 }
 
@@ -98,9 +98,10 @@ std::vector<Real> CThymioNN::GetNormalizedSensorReadings()
 
     /* Get readings from ground sensor */
     const CCI_ThymioGroundSensor::TReadings& tGroundReads = m_pcGround->GetReadings();
-    for(UInt8 i = 0; i < tGroundReads.size(); ++i)
-        norm_readings.push_back((1.0f - tGroundReads[i].Value) * 2.0f - 1.0f);
-
+    for(UInt8 i = 0; i < tGroundReads.size(); ++i) {
+        norm_readings.push_back((tGroundReads[i].Value/1000) * 2.0f - 1.0f);
+	//std::cout << (tGroundReads[i].Value/1000) *2.0f -1.0f<< std::endl;
+    }
     return norm_readings;
 }
 

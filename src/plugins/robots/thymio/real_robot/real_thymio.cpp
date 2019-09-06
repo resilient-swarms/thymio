@@ -104,11 +104,11 @@ CCI_Actuator* CRealThymio::MakeActuator(const std::string& str_name) {
 
 CCI_Sensor* CRealThymio::MakeSensor(const std::string& str_name) {
    MAKE_SENSOR(CRealThymioGroundSensor,
-                "Thymio_ground");
+                "thymio_ground");
    MAKE_SENSOR(CRealThymioProximitySensor,
-               "Thymio_proximity");
+               "thymio_proximity");
    MAKE_SENSOR(CRealThymioAccSensor,
-               "Thymio_accelerometer");
+               "thymio_accelerometer");
    return NULL;
 }
 
