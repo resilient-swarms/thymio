@@ -50,8 +50,8 @@ void CThymioDiffusion::Init(TConfigurationNode& t_node)
     */
    m_pcWheels    = GetActuator<CCI_DifferentialSteeringActuator>("differential_steering");
    m_pcLeds      = GetActuator<CCI_ThymioLedsActuator          >("thymio_led");
-   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("thymio_proximity");
-   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("thymio_ground");
+   m_pcProximity = GetSensor  <CCI_ThymioProximitySensor       >("Thymio_proximity");
+   m_pcGround    = GetSensor  <CCI_ThymioGroundSensor          >("Thymio_ground");
    try {
       m_pcRABA      = GetActuator<CCI_RangeAndBearingActuator     >("range_and_bearing" );
       m_pcRABS      = GetSensor <CCI_RangeAndBearingSensor        >("range_and_bearing" );

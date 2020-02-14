@@ -35,7 +35,7 @@ Go to the parent directory of "build".
 
 execute:
 
-    argos3 -c src/testing/Thymio_diffusion/testexperiment.argos
+    argos3 -c src/testing/thymio_diffusion/testexperiment.argos
 
 Or any other example present inside the testing directory.
 

@@ -18,12 +18,12 @@ endif(ARGOS_BUILD_FOR_SIMULATOR)
 #
 # Find Lua
 #
-find_package(Lua52)
-if(LUA52_FOUND)
+find_package(Lua53)
+if(LUA53_FOUND)
   include_directories(${LUA_INCLUDE_DIR})
-else(LUA52_FOUND)
+else(LUA53_FOUND)
   MESSAGE( "Please point the environment variable LUA_DIR to your Lua installation -- include and lib.")
-ENDIF(LUA52_FOUND)
+ENDIF(LUA53_FOUND)
 
 #find_package(Buzz)
 #if(BUZZ_FOUND)
