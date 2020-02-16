@@ -47,7 +47,7 @@ namespace argos {
       if(! t_readings.empty()) {
          c_os << "{ " << t_readings[0].Value << " }";
          for(UInt32 i = 1; i < t_readings.size(); ++i) {
-            c_os << " { " << t_readings[0].Value << " }";
+            c_os << " { " << t_readings[1].Value << " }";
          }
          c_os << std::endl;
       }
