@@ -23,6 +23,8 @@ if(LUA53_FOUND)
   include_directories(${LUA_INCLUDE_DIR})
 else(LUA53_FOUND)
   MESSAGE( "Please point the environment variable LUA_DIR to your Lua installation -- include and lib.")
+  MESSAGE("Will try to add include directory for Lua manually based on your LUA_DIR environment variable")
+  include_directories($ENV{LUA_DIR}/include)
 ENDIF(LUA53_FOUND)
 
 #find_package(Buzz)
