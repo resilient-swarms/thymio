@@ -46,8 +46,7 @@ IMPORTANT: character encoding must be US-UTF8. Can be changed using [raspi-confi
 
 First install all dependencies for [ARGoS](https://github.com/ilpincy/argos3), [ASEBA](https://github.com/aseba-community/aseba):
 
-	sudo apt-get install
-                            cmake\
+	sudo apt-get install cmake\
                             g++ \
                             git \
                             make \
@@ -86,7 +85,8 @@ To build ARGoS on Raspberry Pi specifically for Thymio:
 
 First clone ARGoS from its repository:
 
-	git clone https://github.com/ilpincy/argos3
+	git clone -b 3.0.0-beta54 --single-branch https://github.com/ilpincy/argos3
+
 
 Change directory to the cloned repository and create a build_thymio directory:
 
