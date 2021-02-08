@@ -20,6 +20,10 @@ Now execute:
 
     cmake -DCMAKE_BUILD_TYPE=Release ..
     
+If cmake cannot find your lua includes, please set the environment variable:
+
+    export LUA_DIR=<your lua include directory>
+    
 Now compile the code using:
 
     make
