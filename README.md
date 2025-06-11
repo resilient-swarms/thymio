@@ -1,5 +1,7 @@
 # Thymio
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Is an open source simulator based on ARGoS framework for Thymio robotic platform. It uses an interface, which is developed using core libraries from ASEBA and DaSHEL.
 
 ## Installing Thymio on a desktop computer:
